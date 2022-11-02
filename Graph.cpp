@@ -34,15 +34,15 @@ int main() {
     ifstream routes("routes.dat");
     string line;
     map<string, int> iataToID;
-    int skippedAirport = 0;
-    int skippedRoute = 0;
+    int skippedAirports = 0;
+    int skippedRoutes = 0;
 
     while (getline(airports, line)) {
         stringstream ss(line);
         vector<string> fields = readline(ss);
         if (fields.size() != 14) {
             //cout << "row has " << fields.size() << " fields; skipping" << endl;
-            skippedAirport++;
+            skippedAirports++;
             continue;
         }
         int id = stoi(fields[0]);
@@ -60,7 +60,7 @@ int main() {
         vector<string> fields = readline(ss);
         if (fields.size() != 9) {
             //cout << "row has " << fields.size() << " fields; skipping" << endl;
-            skippedRoute++;
+            skippedRoutes++;
             continue;
         }
         int id1, id2;
@@ -69,7 +69,7 @@ int main() {
                 id1 = iataToID[fields[2]];
             } else {
                 //cout << "skipping route from " << fields[2] << " to " << fields[4] << endl;
-                skippedRoute++;
+                skippedRoutes++;
                 continue;
             }
         } else {
@@ -80,7 +80,7 @@ int main() {
                 id2 = iataToID[fields[4]];
             } else {
                 //cout << "skipping route from " << fields[2] << " to " << fields[4] << endl;
-                skippedRoute++;
+                skippedRoutes++;
                 continue;
             }
         } else {
@@ -88,13 +88,13 @@ int main() {
         }
         if (!g.connect(id1, id2)) {
             //cout << "couldn't connect " << fields[2] << " to " << fields[4] << endl;
-            skippedRoute++;
+            skippedRoutes++;
         }
     }
     routes.close();
 
     cout << g.size() << " airports added" << endl;
-    cout << skippedAirport << " airports skipped" << endl;
+    cout << skippedAirports << " airports skipped" << endl;
     cout << g.connections() << " routes added" << endl;
-    cout << skippedRoute << " routes skipped" << endl;
+    cout << skippedRoutes << " routes skipped" << endl;
 }
