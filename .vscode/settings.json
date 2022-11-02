@@ -3,6 +3,7 @@
         "*.txt": "bat",
         "iosfwd": "cpp",
         "vector": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "ostream": "cpp"
     }
 }

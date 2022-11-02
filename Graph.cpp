@@ -2,6 +2,7 @@
 #include "readdat.h"
 #include <cmath>
 #include <iostream>
+#include <map>
 
 using namespace std;
 
@@ -23,7 +24,6 @@ bool Graph::connect(int id1, int id2) {
     GraphNode * node1 = nodes[id1];
     GraphNode * node2 = nodes[id2];
     node1->neighbors.push_back(node2);
-    node2->neighbors.push_back(node1);
     numConnections++;
     return true;
 }
@@ -32,31 +32,66 @@ int main() {
     Graph g;
     ifstream airports("airports.dat");
     string line;
+    map<string, int> iataToID;
+    int skippedAirport;
     while (getline(airports, line)) {
         stringstream ss(line);
         vector<string> fields = readline(ss);
+        if (fields.size() != 14) {
+            cout << "row has " << fields.size() << " fields; skipping" << endl;
+            skippedAirport++;
+            continue;
+        }
         int id = stoi(fields[0]);
         string name = fields[1];
+        string iata = fields[4];
         double latitude = stod(fields[6]);
         double longitude = stod(fields[7]);
+        iataToID[iata] = id;
         g.addNode(id, name, latitude, longitude);
     }
     airports.close();
-    cout << g.size() << endl;
     ifstream routes("routes.dat");
-    int count = 0;
+    int skippedRoute = 0;
     while (getline(routes, line)) {
         stringstream ss(line);
         vector<string> fields = readline(ss);
-        if (fields[3] == "\\N" || fields[5] == "\\N") {
-            cout << "skipping " << fields[2] << " to " << fields[4] << endl;
+        if (fields.size() != 9) {
+            cout << "row has " << fields.size() << " fields; skipping" << endl;
+            skippedRoute++;
             continue;
         }
-        int id1 = stoi(fields[3]);
-        int id2 = stoi(fields[5]);
-        g.connect(id1, id2);
-        count++;
+        int id1, id2;
+        if (fields[3] == "\\N") {
+            if (iataToID.find(fields[2]) != iataToID.end()) {
+                id1 = iataToID[fields[2]];
+            } else {
+                //cout << "skipping route from " << fields[2] << " to " << fields[4] << endl;
+                skippedRoute++;
+                continue;
+            }
+        } else {
+            id1 = stoi(fields[3]);
+        }
+        if (fields[5] == "\\N") {
+            if (iataToID.find(fields[4]) != iataToID.end()) {
+                id2 = iataToID[fields[4]];
+            } else {
+                //cout << "skipping route from " << fields[2] << " to " << fields[4] << endl;
+                skippedRoute++;
+                continue;
+            }
+        } else {
+            id2 = stoi(fields[5]);
+        }
+        if (!g.connect(id1, id2)) {
+            //cout << "couldn't connect " << fields[2] << " to " << fields[4] << endl;
+            skippedRoute++;
+        }
     }
     routes.close();
-    cout << g.connections() << endl;
+    cout << g.size() << " airports added" << endl;
+    cout << skippedAirport << " airports skipped" << endl;
+    cout << g.connections() << " routes added" << endl;
+    cout << skippedRoute << " routes skipped" << endl;
 }
