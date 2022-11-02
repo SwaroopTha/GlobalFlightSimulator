@@ -2,6 +2,7 @@
     "files.associations": {
         "*.txt": "bat",
         "iosfwd": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "xstring": "cpp"
     }
 }

@@ -13,10 +13,13 @@ private:
             name(name_), latitude(lat_), longitude(long_) {}
     };
 public:
+    Graph() : numConnections(0) {}
     void addNode(int id, std::string name, double latitude, double longitude);
     bool connect(int id1, int id2);
-    int getSize() const { return nodes.size(); }
+    int size() const { return nodes.size(); }
+    int connections() const { return numConnections; }
     double distance(GraphNode * a, GraphNode * b) const;
 private:
+    int numConnections;
     std::map<int, GraphNode*> nodes;
 };

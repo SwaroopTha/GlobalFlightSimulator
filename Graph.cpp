@@ -1,8 +1,7 @@
 #include "Graph.h"
+#include "readdat.h"
 #include <cmath>
-#include <fstream>
 #include <iostream>
-#include <sstream>
 
 using namespace std;
 
@@ -25,10 +24,39 @@ bool Graph::connect(int id1, int id2) {
     GraphNode * node2 = nodes[id2];
     node1->neighbors.push_back(node2);
     node2->neighbors.push_back(node1);
+    numConnections++;
     return true;
 }
 
 int main() {
     Graph g;
-    ifstream airports("airports.txt");
+    ifstream airports("airports.dat");
+    string line;
+    while (getline(airports, line)) {
+        stringstream ss(line);
+        vector<string> fields = readline(ss);
+        int id = stoi(fields[0]);
+        string name = fields[1];
+        double latitude = stod(fields[6]);
+        double longitude = stod(fields[7]);
+        g.addNode(id, name, latitude, longitude);
+    }
+    airports.close();
+    cout << g.size() << endl;
+    ifstream routes("routes.dat");
+    int count = 0;
+    while (getline(routes, line)) {
+        stringstream ss(line);
+        vector<string> fields = readline(ss);
+        if (fields[3] == "\\N" || fields[5] == "\\N") {
+            cout << "skipping " << fields[2] << " to " << fields[4] << endl;
+            continue;
+        }
+        int id1 = stoi(fields[3]);
+        int id2 = stoi(fields[5]);
+        g.connect(id1, id2);
+        count++;
+    }
+    routes.close();
+    cout << g.connections() << endl;
 }
