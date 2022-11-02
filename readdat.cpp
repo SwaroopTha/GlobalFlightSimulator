@@ -20,3 +20,24 @@ vector<string> readline(stringstream & ss, char delim) {
     fields.push_back(field);
     return fields;
 }
+
+bool validID(int id) {
+    return id > 0;
+}
+
+bool validIATA(std::string iata) {
+    for (char c : iata) {
+        if (!isalpha(c)) {
+            return false;
+        }
+    }
+    return iata.length() == 3;
+}
+
+bool validLatitude(double latitude) {
+    return latitude >= -90 && latitude <= 90;
+}
+
+bool validLongitude(double longitude) {
+    return longitude >= -180 && longitude <= 180;
+}

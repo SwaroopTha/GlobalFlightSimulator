@@ -6,7 +6,9 @@
 
 using namespace std;
 
+//EDITS NEEDED
 double Graph::distance(GraphNode * a, GraphNode * b) const {
+    //SHOULD BE EDITED TO RETURN GEODESIC DISTANCE
     double deltax = a->longitude - b->longitude;
     double deltay = a->latitude - b->latitude;
     return sqrt(deltax * deltax + deltay * deltay);
@@ -41,7 +43,6 @@ int main() {
         stringstream ss(line);
         vector<string> fields = readline(ss);
         if (fields.size() != 14) {
-            //cout << "row has " << fields.size() << " fields; skipping" << endl;
             skippedAirports++;
             continue;
         }
@@ -50,8 +51,14 @@ int main() {
         string iata = fields[4];
         double latitude = stod(fields[6]);
         double longitude = stod(fields[7]);
-        iataToID[iata] = id;
-        g.addNode(id, name, latitude, longitude);
+        if (validID(id) && validIATA(iata)) {
+            iataToID[iata] = id;
+        }
+        if (validID(id) && validLatitude(latitude) && validLongitude(longitude)) {
+            g.addNode(id, name, latitude, longitude);
+        } else {
+            skippedAirports++;
+        }
     }
     airports.close();
 
@@ -59,7 +66,6 @@ int main() {
         stringstream ss(line);
         vector<string> fields = readline(ss);
         if (fields.size() != 9) {
-            //cout << "row has " << fields.size() << " fields; skipping" << endl;
             skippedRoutes++;
             continue;
         }
@@ -68,7 +74,6 @@ int main() {
             if (iataToID.find(fields[2]) != iataToID.end()) {
                 id1 = iataToID[fields[2]];
             } else {
-                //cout << "skipping route from " << fields[2] << " to " << fields[4] << endl;
                 skippedRoutes++;
                 continue;
             }
@@ -79,15 +84,17 @@ int main() {
             if (iataToID.find(fields[4]) != iataToID.end()) {
                 id2 = iataToID[fields[4]];
             } else {
-                //cout << "skipping route from " << fields[2] << " to " << fields[4] << endl;
                 skippedRoutes++;
                 continue;
             }
         } else {
             id2 = stoi(fields[5]);
         }
+        if (!(validID(id1) && validID(id2))) {
+            skippedRoutes++;
+            continue;
+        }
         if (!g.connect(id1, id2)) {
-            //cout << "couldn't connect " << fields[2] << " to " << fields[4] << endl;
             skippedRoutes++;
         }
     }
