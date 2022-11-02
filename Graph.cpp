@@ -31,14 +31,17 @@ bool Graph::connect(int id1, int id2) {
 int main() {
     Graph g;
     ifstream airports("airports.dat");
+    ifstream routes("routes.dat");
     string line;
     map<string, int> iataToID;
-    int skippedAirport;
+    int skippedAirport = 0;
+    int skippedRoute = 0;
+
     while (getline(airports, line)) {
         stringstream ss(line);
         vector<string> fields = readline(ss);
         if (fields.size() != 14) {
-            cout << "row has " << fields.size() << " fields; skipping" << endl;
+            //cout << "row has " << fields.size() << " fields; skipping" << endl;
             skippedAirport++;
             continue;
         }
@@ -51,13 +54,12 @@ int main() {
         g.addNode(id, name, latitude, longitude);
     }
     airports.close();
-    ifstream routes("routes.dat");
-    int skippedRoute = 0;
+
     while (getline(routes, line)) {
         stringstream ss(line);
         vector<string> fields = readline(ss);
         if (fields.size() != 9) {
-            cout << "row has " << fields.size() << " fields; skipping" << endl;
+            //cout << "row has " << fields.size() << " fields; skipping" << endl;
             skippedRoute++;
             continue;
         }
@@ -90,6 +92,7 @@ int main() {
         }
     }
     routes.close();
+
     cout << g.size() << " airports added" << endl;
     cout << skippedAirport << " airports skipped" << endl;
     cout << g.connections() << " routes added" << endl;
