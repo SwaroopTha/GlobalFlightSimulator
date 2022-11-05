@@ -30,6 +30,7 @@ bool Graph::connect(int id1, int id2) {
     return true;
 }
 
+
 int main() {
     Graph g;
     ifstream airports("airports.dat");
@@ -38,6 +39,7 @@ int main() {
     map<string, int> iataToID;
     int skippedAirports = 0;
     int skippedRoutes = 0;
+    int fixedRoutes = 0;
 
     while (getline(airports, line)) {
         stringstream ss(line);
@@ -70,9 +72,11 @@ int main() {
             continue;
         }
         int id1, id2;
+        bool fixed = false;
         if (fields[3] == "\\N") {
             if (iataToID.find(fields[2]) != iataToID.end()) {
                 id1 = iataToID[fields[2]];
+                fixed = true;
             } else {
                 skippedRoutes++;
                 continue;
@@ -83,6 +87,7 @@ int main() {
         if (fields[5] == "\\N") {
             if (iataToID.find(fields[4]) != iataToID.end()) {
                 id2 = iataToID[fields[4]];
+                fixed = true;
             } else {
                 skippedRoutes++;
                 continue;
@@ -97,11 +102,14 @@ int main() {
         if (!g.connect(id1, id2)) {
             skippedRoutes++;
         }
+        if (fixed) {
+            fixedRoutes++;
+        }
     }
     routes.close();
 
     cout << g.size() << " airports added" << endl;
     cout << skippedAirports << " airports skipped" << endl;
-    cout << g.connections() << " routes added" << endl;
+    cout << g.connections() << " routes added, " << fixedRoutes << " of which were fixed" << endl;
     cout << skippedRoutes << " routes skipped" << endl;
 }
