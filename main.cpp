@@ -6,8 +6,8 @@ using namespace std;
 
 int main() {
     Graph g;
-    ifstream airports("airports.dat");
-    ifstream routes("routes.dat");
+    ifstream airports("Data/airports.dat");
+    ifstream routes("Data/routes.dat");
     string line;
     //map from IATA to ID to fix issues later on
     map<string, int> iataToID;
