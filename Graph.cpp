@@ -32,3 +32,12 @@ bool Graph::connect(int id1, int id2) {
     numConnections++;
     return true;
 }
+
+vector<int> Graph::getIDs() {
+    vector<int> ids;
+    map<int, GraphNode*>::iterator it;
+    for (it == nodes.begin(); it != nodes.end(); it++) {
+        ids.push_back(it->first);
+    }
+    return ids;
+}

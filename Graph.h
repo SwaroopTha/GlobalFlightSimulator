@@ -73,7 +73,19 @@ public:
      * @return double The distance between the airports, accounting for the Earth's curvature
      */
     double distance(GraphNode * a, GraphNode * b) const;
+    /**
+     * @brief getNode
+     * Get the airport GraphNode for the given ID
+     * @param id the ID
+     * @return GraphNode* the airport's GraphNode
+     */
     GraphNode* getNode(int id) {return nodes[id];}
+    /**
+     * @brief getIDs
+     * Gets the IDs of all airports that were added
+     * @return vector<int> A vector contains all airport IDs
+     */
+    std::vector<int> getIDs();
 private:
     /**
      * @brief numConnections
