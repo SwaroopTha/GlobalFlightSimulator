@@ -23,6 +23,7 @@ void Graph::addNode(int id, string name, double latitude, double longitude) {
 
 bool Graph::connect(int id1, int id2) {
     if (nodes.find(id1) == nodes.end() || nodes.find(id2) == nodes.end()) {
+        //if either node doesn't exist
         return false;
     }
     GraphNode * node1 = nodes[id1];
