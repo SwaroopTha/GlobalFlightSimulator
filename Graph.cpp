@@ -28,7 +28,8 @@ bool Graph::connect(int id1, int id2) {
     }
     GraphNode * node1 = nodes[id1];
     GraphNode * node2 = nodes[id2];
-    node1->neighbors.push_back(node2);
+    pair<GraphNode*, double> p = pair(node2, distance(node1, node2));
+    node1->connections.push_back(p);
     numConnections++;
     return true;
 }

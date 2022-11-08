@@ -2,6 +2,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <utility>
 
 /**
  * Graph class
@@ -18,9 +19,11 @@ private:
         double latitude, longitude;
         /**
          * @brief neighbors
-         * A vector of the GraphNodes for airports that are connected to this
+         * A vector of the pairs representing connections
+         * The first element in the pair is the destination GraphNode
+         * The second element is the distance between this GraphNode and the destination
          */
-        std::vector<GraphNode*> neighbors;
+        std::vector<std::pair<GraphNode*, double>> connections;
         /**
          * @brief Construct a new GraphNode object with the given specifications
          * @param name_ The name of the airport
