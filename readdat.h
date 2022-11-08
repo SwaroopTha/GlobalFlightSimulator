@@ -15,9 +15,9 @@ std::vector<std::string> readline(std::stringstream & ss, char delim = ',');
 
 /**
  * @brief validID
- * Determines if an ID is valid (i.e. )
- * @param id 
- * @return bool
+ * Determines if an ID is valid (i.e. greater than 0)
+ * @param id the ID
+ * @return bool Whether the ID is valid
  */
 bool validID(int id);
 bool validIATA(std::string iata);

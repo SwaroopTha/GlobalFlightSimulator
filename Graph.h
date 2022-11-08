@@ -73,7 +73,7 @@ public:
      * @return double The distance between the airports, accounting for the Earth's curvature
      */
     double distance(GraphNode * a, GraphNode * b) const;
-    std::map<int, GraphNode*> getNodes() {return nodes;}
+    GraphNode* getNode(int id) {return nodes[id];}
 private:
     /**
      * @brief numConnections
