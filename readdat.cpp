@@ -6,12 +6,16 @@ vector<string> readline(stringstream & ss, char delim) {
     vector<string> fields;
     string field = "";
     char c;
+    //this is needed so commas in quotes aren't used
     bool inQuote = false;
     while (ss.get(c)) {
         if (c == '"') {
+            //quote either starts or ends when a " is found
             inQuote = !inQuote;
         } else if (c == delim && !inQuote) {
+            //adds the field to the list
             fields.push_back(field);
+            //gets started on the new field
             field = "";
         } else {
             field += c;
