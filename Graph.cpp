@@ -6,12 +6,16 @@
 
 using namespace std;
 
-//EDITS NEEDED
 double Graph::distance(GraphNode * a, GraphNode * b) const {
-    //SHOULD BE EDITED TO RETURN GEODESIC DISTANCE
-    double deltax = a->longitude - b->longitude;
-    double deltay = a->latitude - b->latitude;
-    return sqrt(deltax * deltax + deltay * deltay);
+    //uses haversine formula
+    double EARTH_RADIUS = 6378.1;
+    double lat1 = a->latitude;
+    double lat2 = b->latitude;
+    double deltalat = b - a;
+    double deltalong = b->longitude - a->longitude;
+    double haversine1 = pow(sin(deltalat/2),2)+cos(lat1)*cos(lat2)*pow(sin(deltalong/2),2);
+    double haversine2 = 2*atan2(sqrt(haversine1), sqrt(1-haversine1));
+    return haversine2 * EARTH_RADIUS;
 }
 
 void Graph::addNode(int id, string name, double latitude, double longitude) {
@@ -29,7 +33,6 @@ bool Graph::connect(int id1, int id2) {
     numConnections++;
     return true;
 }
-
 
 int main() {
     Graph g;
