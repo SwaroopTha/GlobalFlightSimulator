@@ -14,7 +14,7 @@ all : $(EXENAME)
 exec: bin/exec
 
 bin/exec: Graph.cpp Graph.h main.cpp readdat.cpp readdat.h Algorithms/bet_cent.cpp Algorithms/bet_cent.h Algorithms/bfs.cpp Algorithms/bfs.h Algorithms/dijkstra.cpp Algorithms/dijkstra.h
-	${CXX} ${CXX_FLAGS} main.cpp Graph.cpp Algorithms/bfs.cpp Algorithms/dijkstra.cpp Algorithms/bet_cent.cpp -o bin/exec
+	${CXX} ${CXX_FLAGS} main.cpp Graph.cpp readdat.cpp Algorithms/bfs.cpp Algorithms/dijkstra.cpp Algorithms/bet_cent.cpp -o bin/exec
 
 $(EXENAME) : $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
