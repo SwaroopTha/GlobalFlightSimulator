@@ -104,8 +104,10 @@ int main() {
     cout << skippedRoutes << " routes skipped" << endl;
 
     Dijkstras dij;
-    auto vec = dij.getPath(g, 1, 2);
-    std::cout << vec.size() << std::endl;
+    // auto vec = dij.getPath(g, 1, 2);
+    auto vec1 = dij.getPath(g, 4049, 2997);
+
+    // std::cout << vec.size() << std::endl;
 
 
 
