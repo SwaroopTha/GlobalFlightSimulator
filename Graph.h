@@ -15,6 +15,7 @@ private:
     * Stores the data of an airport and its connections
     */
     struct GraphNode {
+        int id;
         std::string name;
         double latitude, longitude;
         /**
@@ -27,11 +28,12 @@ private:
         /**
          * @brief Constructs a new GraphNode object with the given specifications
          * 
+         * @param id_ The airport's ID
          * @param name_ The name of the airport
          * @param lat_ The latitude of the airport
          * @param long_ The longitude of the airport
          */
-        GraphNode(std::string name_, double lat_, double long_) :
+        GraphNode(int id_, std::string name_, double lat_, double long_) : id(id_),
             name(name_), latitude(lat_), longitude(long_) {}
         // std::vector<std::pair<GraphNode*, double> > getNeighbors() const;
     };

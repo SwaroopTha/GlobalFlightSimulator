@@ -17,7 +17,7 @@ double Graph::distance(GraphNode * a, GraphNode * b) const {
 }
 
 void Graph::addNode(int id, string name, double latitude, double longitude) {
-    GraphNode * node = new GraphNode(name, latitude, longitude);
+    GraphNode * node = new GraphNode(id, name, latitude, longitude);
     nodes[id] = node;
 }
 
