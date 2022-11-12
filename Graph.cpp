@@ -34,10 +34,11 @@ bool Graph::connect(int id1, int id2) {
     return true;
 }
 
-vector<int> Graph::getIDs() {
+vector<int> Graph::getIDs() const {
     vector<int> ids;
-    map<int, GraphNode*>::iterator it;
-    for (it = nodes.begin(); it != nodes.end(); it++) {
+    // map<int, GraphNode*>::iterator it;
+    // auto it
+    for (auto it = nodes.begin(); it != nodes.end(); it++) {
         ids.push_back(it->first);
     }
     return ids;

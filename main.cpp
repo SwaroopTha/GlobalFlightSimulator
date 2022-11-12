@@ -1,6 +1,7 @@
 #include "Graph.h"
 #include "readdat.h"
 #include <iostream>
+#include "Algorithms/dijkstra.h"
 
 using namespace std;
 
@@ -101,4 +102,11 @@ int main() {
     cout << skippedAirports << " airports skipped" << endl;
     cout << g.connections() << " routes added, " << fixedRoutes << " of which were fixed" << endl;
     cout << skippedRoutes << " routes skipped" << endl;
+
+    Dijkstras dij;
+    auto vec = dij.getPath(g, 1, 2);
+    std::cout << vec.size() << std::endl;
+
+
+
 }

@@ -32,4 +32,4 @@ tests.o : tests/test-graph.cpp tests/test-readdat.cpp Graph.cpp Graph.h
 	$(CXX) $(CXXFLAGS) test-graph.cpp
 
 clean :
-	-rm -f *.o $(EXENAME) test
+	rm -f *.o $(EXENAME) test bin/*.o bin/exec

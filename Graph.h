@@ -23,7 +23,7 @@ private:
          * The first element in the pair is the destination GraphNode
          * The second element is the distance between this GraphNode and the destination
          */
-        std::vector<std::pair<GraphNode*, double>> connections;
+        std::vector<std::pair<GraphNode*, double> > connections;
         /**
          * @brief Constructs a new GraphNode object with the given specifications
          * 
@@ -33,6 +33,7 @@ private:
          */
         GraphNode(std::string name_, double lat_, double long_) :
             name(name_), latitude(lat_), longitude(long_) {}
+        // std::vector<std::pair<GraphNode*, double> > getNeighbors() const;
     };
 public:
     /**
@@ -83,13 +84,13 @@ public:
      * @param id the ID
      * @return GraphNode* the airport's GraphNode
      */
-    GraphNode* getNode(int id) {return nodes[id];}
+    GraphNode* getNode(int id) const {return nodes.at(id);}
     /**
      * @brief Gets the IDs of all airports that were added
      * 
      * @return vector<int> A vector contains all airport IDs
      */
-    std::vector<int> getIDs();
+    std::vector<int> getIDs() const; 
 private:
     /**
      * @brief Stores the number of connections made in the graph
