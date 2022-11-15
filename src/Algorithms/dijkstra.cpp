@@ -5,7 +5,7 @@
 
 using namespace std;
 
-/*
+
 vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
     vector<int> ports = g.getIDs();
     auto comp = [](DijNode a, DijNode b) {
@@ -75,7 +75,6 @@ vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
     // target++;
     return vector<int>();
 }
-*/
 
 // double Dijkstras::NearestAirport(int start, int airport) {
 

@@ -34,6 +34,9 @@ bool validIATA(std::string iata) {
         if (!isalpha(c)) {
             return false;
         }
+        if (!isupper(c)) {
+            return false;
+        }
     }
     return iata.length() == 3;
 }

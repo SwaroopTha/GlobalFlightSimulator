@@ -16,6 +16,12 @@ double Graph::distance(GraphNode * a, GraphNode * b) const {
     return haversine2 * EARTH_RADIUS;
 }
 
+double Graph::distance(int id1, int id2) const {
+    GraphNode * a = getNode(id1);
+    GraphNode * b = getNode(id2);
+    return distance(a, b);
+}
+
 void Graph::addNode(int id, string name, double latitude, double longitude) {
     GraphNode * node = new GraphNode(id, name, latitude, longitude);
     nodes[id] = node;

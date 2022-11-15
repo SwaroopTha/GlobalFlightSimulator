@@ -22,7 +22,7 @@ std::vector<std::string> readline(std::stringstream & ss, char delim = ',');
 bool validID(int id);
 /**
  * @brief Determines if an International Air Transport Association code is valid
- * The IATA code is valid if it consists of three letters
+ * The IATA code is valid if it consists of three capital letters
  * 
  * @param iata the IATA code
  * @return bool Whether the IATA code is valid

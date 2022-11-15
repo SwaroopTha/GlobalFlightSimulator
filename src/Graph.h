@@ -10,7 +10,7 @@
  * Stores all airports and their connections
  */
 class Graph {
-private:
+public:
     /**
     * GraphNode struct
     * Stores the data of an airport and its connections
@@ -38,7 +38,6 @@ private:
             name(name_), latitude(lat_), longitude(long_) {}
         // std::vector<std::pair<GraphNode*, double> > getNeighbors() const;
     };
-public:
     /**
      * @brief Constructs a new Graph object with no airports or connections
      */
@@ -81,6 +80,14 @@ public:
      * @return double The distance between the airports, accounting for the Earth's curvature
      */
     double distance(GraphNode * a, GraphNode * b) const;
+    /**
+     * @brief Does the same as the above distance function but for two ids
+     *
+     * @param a the first airport's ID
+     * @param b the second airport's ID
+     * @return double The distance between the airports, accounting for the Earth's curvature
+    */
+    double distance(int id1, int id2) const;
     /**
      * @brief Gets the airport GraphNode for the given ID
      * 
