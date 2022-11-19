@@ -105,7 +105,7 @@ int main() {
 
     Dijkstras dij;
     //auto vec = dij.getPath(g, 1, 2);
-    auto vec1 = dij.getPath(g, 4049, 2997);
+    //auto vec1 = dij.getPath(g, 4049, 2997);
 
     // std::cout << vec.size() << std::endl;
 

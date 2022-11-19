@@ -5,7 +5,7 @@
 
 using namespace std;
 
-
+/*
 vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
     vector<int> ports = g.getIDs();
     auto comp = [](DijNode a, DijNode b) {
@@ -84,3 +84,4 @@ vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
 // bool Dijkstras::exists(int airport) {
 
 // }
+*/

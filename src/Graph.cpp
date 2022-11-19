@@ -17,8 +17,8 @@ double Graph::distance(GraphNode * a, GraphNode * b) const {
 }
 
 double Graph::distance(int id1, int id2) const {
-    GraphNode * a = getNode(id1);
-    GraphNode * b = getNode(id2);
+    GraphNode * a = nodes.at(id1);
+    GraphNode * b = nodes.at(id2);
     return distance(a, b);
 }
 
@@ -32,19 +32,23 @@ bool Graph::connect(int id1, int id2) {
         //if either node doesn't exist
         return false;
     }
-    GraphNode * node1 = nodes[id1];
-    GraphNode * node2 = nodes[id2];
-    pair<GraphNode*, double> p = make_pair(node2, distance(node1, node2));
-    node1->connections.push_back(p);
+    nodes[id1]->connections[id2] = distance(id1, id2);
     numConnections++;
     return true;
 }
 
 vector<int> Graph::getIDs() const {
     vector<int> ids;
-    // map<int, GraphNode*>::iterator it;
-    // auto it
     for (auto it = nodes.begin(); it != nodes.end(); it++) {
+        ids.push_back(it->first);
+    }
+    return ids;
+}
+
+vector<int> Graph::getConnections(int id) const {
+    vector<int> ids;
+    GraphNode * gn = nodes.at(id);
+    for (auto it = gn->connections.begin(); it != gn->connections.end(); it++) {
         ids.push_back(it->first);
     }
     return ids;

@@ -24,20 +24,6 @@ TEST_CASE("adding and getting nodes") {
     REQUIRE(g.size() == 2);
     vector<int> expected = {12, 24};
     REQUIRE(g.getIDs() == expected);
-
-    Graph::GraphNode * gn1 = g.getNode(12);
-    REQUIRE(gn1->id == 12);
-    REQUIRE(gn1->name == "idk");
-    REQUIRE(gn1->latitude == 30);
-    REQUIRE(gn1->longitude == -30);
-    REQUIRE(gn1->connections == vector<pair<Graph::GraphNode*, double>>());
-
-    Graph::GraphNode * gn2 = g.getNode(24);
-    REQUIRE(gn2->id == 24);
-    REQUIRE(gn2->name == "smth");
-    REQUIRE(gn2->latitude == 25);
-    REQUIRE(gn2->longitude == -35);
-    REQUIRE(gn2->connections == vector<pair<Graph::GraphNode*, double>>());
 }
 
 TEST_CASE("connecting nodes") {
@@ -48,20 +34,4 @@ TEST_CASE("connecting nodes") {
     Graph::GraphNode * gn2 = g.getNode(24);
 
     double dist = g.distance(12, 24);
-
-    vector<pair<Graph::GraphNode*, double>> gn1connections = {make_pair(gn2, dist)};
-    vector<pair<Graph::GraphNode*, double>> gn2connections = {make_pair(gn1, dist)};
-    
-    REQUIRE(gn1->connections == vector<pair<Graph::GraphNode*, double>>());
-    REQUIRE(gn2->connections == vector<pair<Graph::GraphNode*, double>>());
-
-    g.connect(12, 24);
-
-    REQUIRE(gn1->connections == gn1connections);
-    REQUIRE(gn2->connections == vector<pair<Graph::GraphNode*, double>>());
-
-    g.connect(24, 12);
-
-    REQUIRE(gn1->connections == gn1connections);
-    REQUIRE(gn2->connections == gn2connections);
 }
