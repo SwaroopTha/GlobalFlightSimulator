@@ -155,7 +155,7 @@ public:
     */
     double getLongitude(int id) const {return nodes.at(id)->longitude;}
     // TO BE REMOVED
-    GraphNode * getNode(int id) {return nodes[id];}
+    GraphNode * getNode(int id) const {return nodes.at(id);}
 private:
     /**
      * @brief Stores the number of connections made in the graph
