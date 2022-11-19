@@ -2,4 +2,3 @@ bin/
 a.out
 exec
 .vscode
-build/
