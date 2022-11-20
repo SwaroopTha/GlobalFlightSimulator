@@ -2,28 +2,29 @@
 #include <queue>
 #include <iostream>
 #include <set>
+#include <limits>
 
 using namespace std;
 
-/*
+
 vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
-    vector<int> ports = g.getIDs();
+    vector<int> airports = g.getIDs();
     auto comp = [](DijNode a, DijNode b) {
         return a.distance > b.distance;
     };
-    std::priority_queue<DijNode, vector<DijNode>, decltype(comp)> qu;
-    map<int, double> nodes;
+    std::priority_queue<DijNode, vector<DijNode>, decltype(comp)> qu(comp);
+    map<int, double> ports;
     map<int, int> prev;
 
-    for (int id : ports) {
+    for (int id : airports) {
         if (source == id) {
             DijNode node(id, 0);
             qu.push(node);
-            nodes[id] = 0;
+            ports[id] = 0;
         } else {
             DijNode node(id, std::numeric_limits<double>::infinity());
             qu.push(node);
-            nodes[id] = std::numeric_limits<double>::infinity();
+            ports[id] = std::numeric_limits<double>::infinity();
         }
         prev[id] = -1;
     }
@@ -41,10 +42,10 @@ vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
         auto neighbors = g.getNode(node.id)->connections;
         for (auto adj : neighbors) {
             double alt = node.distance + adj.second;
-            if (alt < nodes.at(adj.first->id)) {
-                nodes[adj.first->id] = alt;
-                prev[adj.first->id] = node.id;
-                qu.push(DijNode(adj.first->id, alt));
+            if (alt < ports.at(adj.first)) {
+                ports[adj.first] = alt;
+                prev[adj.first] = node.id;
+                qu.push(DijNode(adj.first, alt)); // removed a bunch of adj.first->id
             }
         }
     }
@@ -70,9 +71,10 @@ vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
         cout << g.getNode(i)->name << "-->" << std::endl;
     }
     std::cout << g.getNode(target)->name << std::endl;
-    std::cout << nodes[target] << std::endl;
+    std::cout << ports[target] << std::endl;
 
     // target++;
+    // std::cout << ports[target] << std::endl;
     return vector<int>();
 }
 
@@ -84,4 +86,4 @@ vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
 // bool Dijkstras::exists(int airport) {
 
 // }
-*/
+
