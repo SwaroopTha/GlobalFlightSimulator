@@ -20,7 +20,6 @@ class Dijkstras {
         vector<int> getPath(const Graph& g, int source, int target);
         double shortestDistance(const Graph& g, int source, int target);
         bool exists(int airport);
-        Graph generator() const;
 
     private:
         // vector<int> path_;

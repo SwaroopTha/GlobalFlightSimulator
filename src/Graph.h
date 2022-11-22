@@ -4,6 +4,7 @@
 #include <string>
 #include <utility>
 #include <iostream>
+#include <limits>
 
 /**
  * Graph class
@@ -49,11 +50,11 @@ public:
         *
         * @param id The ID it's connected to
         */
-        double connectionWeight(int id) {
+        double connectionDistance(int id) {
             if (connectedTo(id)) {
                 return connections[id];
             }
-            return 0;
+            return std::numeric_limits<double>::infinity();
         }
     };
     /**
@@ -84,7 +85,7 @@ public:
      */
     int size() const { return nodes.size(); }
     /**
-     * @brief Gets the number of connections in the graph
+     * @brief Gets the number of connections in the graph (one-directional)
      * 
      * @return int The number of connections in the graph
      */
@@ -121,8 +122,8 @@ public:
     * @param id2 The second airport's ID
     * @return double The weight
     */
-    double getConnectionWeight(int id1, int id2) const {
-        return nodes.at(id1)->connectionWeight(id2);
+    double getDistance(int id1, int id2) const {
+        return nodes.at(id1)->connectionDistance(id2);
     }
 
     /**

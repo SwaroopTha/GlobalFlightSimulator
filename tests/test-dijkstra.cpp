@@ -1,12 +1,8 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include "Graph.h"
+#include "readdat.h"
 
 #include <iostream>
-
-#include "Algorithms/dijkstra.h"
-
-#include <ostream>
 
 #include "Algorithms/dijkstra.h"
 
@@ -34,7 +30,7 @@ TEST_CASE("Dijkstra Airport Simple") {
 
     Dijkstras canvas;
 
-    Graph g = canvas.generator();
+    Graph g = readData();
 
     cout << g.size() << " airports added" << endl;
 
@@ -55,7 +51,7 @@ TEST_CASE("Dijkstra Airport Simple") {
 
 TEST_CASE("Dijkstra Airport Complex") {
     Dijkstras canvas;
-    Graph g = canvas.generator();
+    Graph g = readData();
     Dijkstras dij;
     vector<int> vec1 = dij.getPath(g, 4049, 3830);
 

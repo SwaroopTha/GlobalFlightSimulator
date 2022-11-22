@@ -1,4 +1,5 @@
 #pragma once
+#include "Graph.h"
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -42,3 +43,10 @@ bool validLatitude(double latitude);
  * @return bool Whether the longitude is valid
  */
 bool validLongitude(double longitude);
+
+/**
+* @brief Reads in the data from the Data folder
+*
+* @return Graph A graph of the data
+*/
+Graph readData();
