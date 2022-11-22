@@ -246,6 +246,7 @@ CMakeFiles/test.dir/tests/test-dijkstra.cpp.o: ../tests/test-dijkstra.cpp \
   /usr/include/catch2/internal/catch_test_registry.hpp \
   /usr/include/catch2/interfaces/catch_interfaces_testcase.hpp \
   /usr/include/catch2/internal/catch_preprocessor_remove_parens.hpp \
+  ../src/readdat.h \
   ../src/Graph.h \
   /usr/include/c++/11/map \
   /usr/include/c++/11/bits/stl_tree.h \
@@ -264,6 +265,13 @@ CMakeFiles/test.dir/tests/test-dijkstra.cpp.o: ../tests/test-dijkstra.cpp \
   /usr/include/c++/11/iostream \
   /usr/include/c++/11/istream \
   /usr/include/c++/11/bits/istream.tcc \
+  /usr/include/c++/11/fstream \
+  /usr/include/c++/11/bits/codecvt.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+  /usr/include/c++/11/bits/fstream.tcc \
+  /usr/include/c++/11/sstream \
+  /usr/include/c++/11/bits/sstream.tcc \
   ../src/Algorithms/dijkstra.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -286,15 +294,7 @@ CMakeFiles/test.dir/tests/test-dijkstra.cpp.o: ../tests/test-dijkstra.cpp \
   /usr/include/c++/11/debug/safe_unordered_container.tcc \
   /usr/include/c++/11/debug/safe_local_iterator.h \
   /usr/include/c++/11/debug/safe_local_iterator.tcc \
-  /usr/include/c++/11/pstl/execution_defs.h \
-  ../src/readdat.h \
-  /usr/include/c++/11/fstream \
-  /usr/include/c++/11/bits/codecvt.h \
-  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
-  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
-  /usr/include/c++/11/bits/fstream.tcc \
-  /usr/include/c++/11/sstream \
-  /usr/include/c++/11/bits/sstream.tcc
+  /usr/include/c++/11/pstl/execution_defs.h
 
 CMakeFiles/test.dir/tests/test-graph.cpp.o: ../tests/test-graph.cpp \
   /usr/include/catch2/catch_test_macros.hpp \
@@ -806,9 +806,25 @@ CMakeFiles/test.dir/tests/test-readdat.cpp.o: ../tests/test-readdat.cpp \
   /usr/include/catch2/interfaces/catch_interfaces_testcase.hpp \
   /usr/include/catch2/internal/catch_preprocessor_remove_parens.hpp \
   ../src/readdat.h \
-  /usr/include/c++/11/fstream \
+  ../src/Graph.h \
+  /usr/include/c++/11/map \
+  /usr/include/c++/11/bits/stl_tree.h \
+  /usr/include/c++/11/ext/aligned_buffer.h \
+  /usr/include/c++/11/bits/node_handle.h \
+  /usr/include/c++/11/bits/stl_map.h \
+  /usr/include/c++/11/tuple \
+  /usr/include/c++/11/array \
+  /usr/include/c++/11/bits/uses_allocator.h \
+  /usr/include/c++/11/bits/invoke.h \
+  /usr/include/c++/11/bits/stl_multimap.h \
+  /usr/include/c++/11/bits/erase_if.h \
+  /usr/include/c++/11/debug/map \
+  /usr/include/c++/11/debug/map.h \
+  /usr/include/c++/11/debug/multimap.h \
+  /usr/include/c++/11/iostream \
   /usr/include/c++/11/istream \
   /usr/include/c++/11/bits/istream.tcc \
+  /usr/include/c++/11/fstream \
   /usr/include/c++/11/bits/codecvt.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
@@ -817,21 +833,11 @@ CMakeFiles/test.dir/tests/test-readdat.cpp.o: ../tests/test-readdat.cpp \
   /usr/include/c++/11/bits/sstream.tcc
 
 
-/usr/include/c++/11/sstream:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h:
-
-../src/readdat.h:
-
 /usr/include/c++/11/debug/safe_local_iterator.tcc:
 
 /usr/include/c++/11/debug/safe_local_iterator.h:
 
 /usr/include/c++/11/debug/safe_unordered_container.tcc:
-
-/usr/include/c++/11/fstream:
-
-/usr/include/c++/11/debug/safe_unordered_container.h:
 
 /usr/include/c++/11/debug/unordered_map:
 
@@ -855,9 +861,17 @@ CMakeFiles/test.dir/tests/test-readdat.cpp.o: ../tests/test-readdat.cpp \
 
 /usr/include/c++/11/bits/stl_algo.h:
 
-/usr/include/c++/11/bits/fstream.tcc:
+/usr/include/c++/11/sstream:
 
 ../src/Algorithms/dijkstra.h:
+
+/usr/include/c++/11/bits/fstream.tcc:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h:
+
+/usr/include/c++/11/debug/safe_unordered_container.h:
+
+/usr/include/c++/11/fstream:
 
 /usr/include/c++/11/bits/istream.tcc:
 
@@ -955,9 +969,9 @@ CMakeFiles/test.dir/tests/test-readdat.cpp.o: ../tests/test-readdat.cpp \
 
 /usr/include/c++/11/debug/functions.h:
 
-/usr/include/c++/11/bits/codecvt.h:
-
 /usr/include/c++/11/bits/enable_special_members.h:
+
+/usr/include/c++/11/bits/codecvt.h:
 
 /usr/include/c++/11/bits/basic_ios.tcc:
 
@@ -1233,6 +1247,14 @@ CMakeFiles/test.dir/tests/test-readdat.cpp.o: ../tests/test-readdat.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
+/usr/include/c++/11/bits/erase_if.h:
+
+/usr/include/c++/11/bits/ptr_traits.h:
+
+/usr/include/stdint.h:
+
+/usr/include/endian.h:
+
 /usr/include/x86_64-linux-gnu/sys/types.h:
 
 /usr/include/c++/11/ext/aligned_buffer.h:
@@ -1399,14 +1421,8 @@ CMakeFiles/test.dir/tests/test-readdat.cpp.o: ../tests/test-readdat.cpp \
 
 /usr/include/catch2/internal/catch_preprocessor_remove_parens.hpp:
 
-/usr/include/c++/11/bits/stl_map.h:
+../src/readdat.h:
 
 /usr/include/c++/11/bits/uses_allocator.h:
 
-/usr/include/c++/11/bits/ptr_traits.h:
-
-/usr/include/stdint.h:
-
-/usr/include/endian.h:
-
-/usr/include/c++/11/bits/erase_if.h:
+/usr/include/c++/11/bits/stl_map.h:

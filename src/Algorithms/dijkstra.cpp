@@ -39,7 +39,7 @@ vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
             qu.pop();
         }
         seen.insert(node.id);
-        auto neighbors = g.getNode(node.id)->connections;
+        auto neighbors = g.getNode(node.id).connections;
         for (auto adj : neighbors) {
             double alt = node.distance + adj.second;
             if (alt < ports.at(adj.first)) {
@@ -111,7 +111,7 @@ double Dijkstras::shortestDistance(const Graph &g, int start, int airport) {
             qu.pop();
         }
         seen.insert(node.id);
-        auto neighbors = g.getNode(node.id)->connections;
+        auto neighbors = g.getNode(node.id).connections;
         for (auto adj : neighbors) {
             double alt = node.distance + adj.second;
             if (alt < ports.at(adj.first)) {
