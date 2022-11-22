@@ -25,14 +25,13 @@ class Dijkstras {
         // vector<int> path_;
         // map<int, double> dist_;
         // map<int, int> prev_;
-
+        /*
         struct DijNode
         {
             int id;
             double distance;
             DijNode(int id, double distance) : id(id), distance(distance) { }
         };
-
-
+        */
       
 };
