@@ -11,6 +11,6 @@ class BetweenessCentrality {
          
 
     private:
-        vector<pair<Graph::GraphNode, double>> score_;
+        vector<pair<int, double>> score_;
 };
 

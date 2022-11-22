@@ -11,7 +11,7 @@
  * Stores all airports and their connections
  */
 class Graph {
-public:
+private:
     /**
     * GraphNode struct
     * Stores the data of an airport and its connections
@@ -58,6 +58,7 @@ public:
             return std::numeric_limits<double>::infinity();
         }
     };
+public:
     /**
      * @brief Constructs a new Graph object with no airports or connections
      */

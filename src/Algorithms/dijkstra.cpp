@@ -41,13 +41,13 @@ vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
             qu.pop();
         }
         seen.insert(node.first);
-        auto neighbors = g.getNode(node.first).connections;
-        for (auto adj : neighbors) {
-            double alt = node.second + adj.second;
-            if (alt < ports.at(adj.first)) {
-                ports[adj.first] = alt;
-                prev[adj.first] = node.first;
-                qu.push(DijNode(adj.first, alt)); // removed a bunch of adj.first->id
+        vector<int> neighbors = g.getConnections(node.first);
+        for (int adj : neighbors) {
+            double alt = node.second + g.getDistance(node.first, adj);
+            if (alt < ports.at(adj)) {
+                ports[adj] = alt;
+                prev[adj] = node.first;
+                qu.push(DijNode(adj, alt)); // removed a bunch of adj.first->id
             }
         }
     }
@@ -113,13 +113,13 @@ double Dijkstras::shortestDistance(const Graph &g, int start, int airport) {
             qu.pop();
         }
         seen.insert(node.first);
-        auto neighbors = g.getNode(node.first).connections;
-        for (auto adj : neighbors) {
-            double alt = node.second + adj.second;
-            if (alt < ports.at(adj.first)) {
-                ports[adj.first] = alt;
-                prev[adj.first] = node.first;
-                qu.push(DijNode(adj.first, alt)); // removed a bunch of adj.first->id
+        vector<int> neighbors = g.getConnections(node.first);
+        for (int adj : neighbors) {
+            double alt = node.second + g.getDistance(node.first, adj);
+            if (alt < ports.at(adj)) {
+                ports[adj] = alt;
+                prev[adj] = node.first;
+                qu.push(DijNode(adj, alt)); // removed a bunch of adj.first->id
             }
         }
     }
