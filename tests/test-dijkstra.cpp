@@ -52,3 +52,38 @@ TEST_CASE("Dijkstra Airport Simple") {
     REQUIRE(minDist == expec1);
 
 }
+
+TEST_CASE("Dijkstra Airport Complex") {
+    Dijkstras canvas;
+    Graph g = canvas.generator();
+    Dijkstras dij;
+    vector<int> vec1 = dij.getPath(g, 4049, 3830);
+
+
+
+    vector<int> journey = dij.getPath(g, 4049, 3077);
+
+    double real = g.distance(4049, 3830);
+    real += g.distance(3830, 3077);
+
+
+
+    double actual = g.distance(4049, 3670);
+    actual += g.distance(3670, 3690);
+    actual += g.distance(3690, 193);
+    actual += g.distance(193, 1382);
+    actual += g.distance(1382, 3077);
+
+    // cout << real << endl;
+    // cout << actual;
+
+    REQUIRE(actual > real);
+    // vector<int> expected = {-1, 4049, 3670, 3690, 193, 1382, 3077};
+
+    vector<int> expected = {-1, 4049, 3830, 3077};
+
+    // vector<int> expected = {-1};
+
+
+    REQUIRE(journey == expected);
+}
