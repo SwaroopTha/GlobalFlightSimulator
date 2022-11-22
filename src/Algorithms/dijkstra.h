@@ -7,6 +7,10 @@
 #include <utility>
 #include <algorithm>
 
+#include "readdat.h"
+
+#include <fstream>
+
 using namespace std;
 
 class Dijkstras {
@@ -14,8 +18,9 @@ class Dijkstras {
         
         // Dijkstras(Graph g, int source, int target);
         vector<int> getPath(const Graph& g, int source, int target);
-        double NearestAirport(int start, int airport);
+        double shortestDistance(const Graph& g, int source, int target);
         bool exists(int airport);
+        Graph generator() const;
 
     private:
         // vector<int> path_;
@@ -28,6 +33,7 @@ class Dijkstras {
             double distance;
             DijNode(int id, double distance) : id(id), distance(distance) { }
         };
+
 
       
 };
