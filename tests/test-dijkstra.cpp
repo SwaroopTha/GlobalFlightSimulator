@@ -8,7 +8,7 @@
 
 #include <ostream>
 
-#include "/workspaces/WBLR-CS-225-Project-7/src/Algorithms/dijkstra.h"
+#include "Algorithms/dijkstra.h"
 
 using namespace std;
 

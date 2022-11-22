@@ -60,7 +60,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /workspaces/WBLR-CS-225-Project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /workspaces/WBLR-CS-225-Project/build
+CMAKE_BINARY_DIR = /workspaces/WBLR-CS-225-Project/build_pc
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/WBLR-CS-225-Project/build/CMakeFiles /workspaces/WBLR-CS-225-Project/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/WBLR-CS-225-Project/build_pc/CMakeFiles /workspaces/WBLR-CS-225-Project/build_pc//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/WBLR-CS-225-Project/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/WBLR-CS-225-Project/build_pc/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -113,7 +113,7 @@ preinstall/fast:
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -P /workspaces/WBLR-CS-225-Project/build/CMakeFiles/VerifyGlobs.cmake
+	$(CMAKE_COMMAND) -P /workspaces/WBLR-CS-225-Project/build_pc/CMakeFiles/VerifyGlobs.cmake
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
@@ -206,6 +206,30 @@ entry/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/entry/main.cpp.s
 .PHONY : entry/main.cpp.s
 
+tests/test-dijkstra.o: tests/test-dijkstra.cpp.o
+.PHONY : tests/test-dijkstra.o
+
+# target to build an object file
+tests/test-dijkstra.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/tests/test-dijkstra.cpp.o
+.PHONY : tests/test-dijkstra.cpp.o
+
+tests/test-dijkstra.i: tests/test-dijkstra.cpp.i
+.PHONY : tests/test-dijkstra.i
+
+# target to preprocess a source file
+tests/test-dijkstra.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/tests/test-dijkstra.cpp.i
+.PHONY : tests/test-dijkstra.cpp.i
+
+tests/test-dijkstra.s: tests/test-dijkstra.cpp.s
+.PHONY : tests/test-dijkstra.s
+
+# target to generate assembly for a file
+tests/test-dijkstra.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/tests/test-dijkstra.cpp.s
+.PHONY : tests/test-dijkstra.cpp.s
+
 tests/test-graph.o: tests/test-graph.cpp.o
 .PHONY : tests/test-graph.o
 
@@ -270,6 +294,9 @@ help:
 	@echo "... entry/main.o"
 	@echo "... entry/main.i"
 	@echo "... entry/main.s"
+	@echo "... tests/test-dijkstra.o"
+	@echo "... tests/test-dijkstra.i"
+	@echo "... tests/test-dijkstra.s"
 	@echo "... tests/test-graph.o"
 	@echo "... tests/test-graph.i"
 	@echo "... tests/test-graph.s"
@@ -287,7 +314,7 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -P /workspaces/WBLR-CS-225-Project/build/CMakeFiles/VerifyGlobs.cmake
+	$(CMAKE_COMMAND) -P /workspaces/WBLR-CS-225-Project/build_pc/CMakeFiles/VerifyGlobs.cmake
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -10,7 +10,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/workspaces/WBLR-CS-225-Project/build/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/workspaces/WBLR-CS-225-Project/build_pc/CMakeFiles/cmake.verify_globs")
 endif()
 
 # lodepng_sources at lib/CMakeLists.txt:6 (file)
@@ -20,7 +20,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/workspaces/WBLR-CS-225-Project/build/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/workspaces/WBLR-CS-225-Project/build_pc/CMakeFiles/cmake.verify_globs")
 endif()
 
 # lodepng_sources at lib/CMakeLists.txt:6 (file)
@@ -30,7 +30,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/workspaces/WBLR-CS-225-Project/build/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/workspaces/WBLR-CS-225-Project/build_pc/CMakeFiles/cmake.verify_globs")
 endif()
 
 # src_sources at src/CMakeLists.txt:5 (file)
@@ -44,16 +44,17 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/workspaces/WBLR-CS-225-Project/build/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/workspaces/WBLR-CS-225-Project/build_pc/CMakeFiles/cmake.verify_globs")
 endif()
 
 # tests_src at CMakeLists.txt:131 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/workspaces/WBLR-CS-225-Project/tests/*.cpp")
 set(OLD_GLOB
+  "/workspaces/WBLR-CS-225-Project/tests/test-dijkstra.cpp"
   "/workspaces/WBLR-CS-225-Project/tests/test-graph.cpp"
   "/workspaces/WBLR-CS-225-Project/tests/test-readdat.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/workspaces/WBLR-CS-225-Project/build/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/workspaces/WBLR-CS-225-Project/build_pc/CMakeFiles/cmake.verify_globs")
 endif()

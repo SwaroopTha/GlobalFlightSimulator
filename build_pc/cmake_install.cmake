@@ -44,8 +44,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/workspaces/WBLR-CS-225-Project/build/lib/cmake_install.cmake")
-  include("/workspaces/WBLR-CS-225-Project/build/src/cmake_install.cmake")
+  include("/workspaces/WBLR-CS-225-Project/build_pc/lib/cmake_install.cmake")
+  include("/workspaces/WBLR-CS-225-Project/build_pc/src/cmake_install.cmake")
 
 endif()
 
@@ -57,5 +57,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/workspaces/WBLR-CS-225-Project/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/workspaces/WBLR-CS-225-Project/build_pc/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

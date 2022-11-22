@@ -56,7 +56,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /workspaces/WBLR-CS-225-Project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /workspaces/WBLR-CS-225-Project/build
+CMAKE_BINARY_DIR = /workspaces/WBLR-CS-225-Project/build_pc
 
 # Include any dependencies generated for this target.
 include CMakeFiles/test.dir/depend.make
@@ -69,10 +69,24 @@ include CMakeFiles/test.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/test.dir/flags.make
 
+CMakeFiles/test.dir/tests/test-dijkstra.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/tests/test-dijkstra.cpp.o: ../tests/test-dijkstra.cpp
+CMakeFiles/test.dir/tests/test-dijkstra.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/workspaces/WBLR-CS-225-Project/build_pc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test.dir/tests/test-dijkstra.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/tests/test-dijkstra.cpp.o -MF CMakeFiles/test.dir/tests/test-dijkstra.cpp.o.d -o CMakeFiles/test.dir/tests/test-dijkstra.cpp.o -c /workspaces/WBLR-CS-225-Project/tests/test-dijkstra.cpp
+
+CMakeFiles/test.dir/tests/test-dijkstra.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/tests/test-dijkstra.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /workspaces/WBLR-CS-225-Project/tests/test-dijkstra.cpp > CMakeFiles/test.dir/tests/test-dijkstra.cpp.i
+
+CMakeFiles/test.dir/tests/test-dijkstra.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/tests/test-dijkstra.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /workspaces/WBLR-CS-225-Project/tests/test-dijkstra.cpp -o CMakeFiles/test.dir/tests/test-dijkstra.cpp.s
+
 CMakeFiles/test.dir/tests/test-graph.cpp.o: CMakeFiles/test.dir/flags.make
 CMakeFiles/test.dir/tests/test-graph.cpp.o: ../tests/test-graph.cpp
 CMakeFiles/test.dir/tests/test-graph.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/workspaces/WBLR-CS-225-Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test.dir/tests/test-graph.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/workspaces/WBLR-CS-225-Project/build_pc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test.dir/tests/test-graph.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/tests/test-graph.cpp.o -MF CMakeFiles/test.dir/tests/test-graph.cpp.o.d -o CMakeFiles/test.dir/tests/test-graph.cpp.o -c /workspaces/WBLR-CS-225-Project/tests/test-graph.cpp
 
 CMakeFiles/test.dir/tests/test-graph.cpp.i: cmake_force
@@ -86,7 +100,7 @@ CMakeFiles/test.dir/tests/test-graph.cpp.s: cmake_force
 CMakeFiles/test.dir/tests/test-readdat.cpp.o: CMakeFiles/test.dir/flags.make
 CMakeFiles/test.dir/tests/test-readdat.cpp.o: ../tests/test-readdat.cpp
 CMakeFiles/test.dir/tests/test-readdat.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/workspaces/WBLR-CS-225-Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test.dir/tests/test-readdat.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/workspaces/WBLR-CS-225-Project/build_pc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/test.dir/tests/test-readdat.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/tests/test-readdat.cpp.o -MF CMakeFiles/test.dir/tests/test-readdat.cpp.o.d -o CMakeFiles/test.dir/tests/test-readdat.cpp.o -c /workspaces/WBLR-CS-225-Project/tests/test-readdat.cpp
 
 CMakeFiles/test.dir/tests/test-readdat.cpp.i: cmake_force
@@ -99,12 +113,14 @@ CMakeFiles/test.dir/tests/test-readdat.cpp.s: cmake_force
 
 # Object files for target test
 test_OBJECTS = \
+"CMakeFiles/test.dir/tests/test-dijkstra.cpp.o" \
 "CMakeFiles/test.dir/tests/test-graph.cpp.o" \
 "CMakeFiles/test.dir/tests/test-readdat.cpp.o"
 
 # External object files for target test
 test_EXTERNAL_OBJECTS =
 
+test: CMakeFiles/test.dir/tests/test-dijkstra.cpp.o
 test: CMakeFiles/test.dir/tests/test-graph.cpp.o
 test: CMakeFiles/test.dir/tests/test-readdat.cpp.o
 test: CMakeFiles/test.dir/build.make
@@ -114,9 +130,9 @@ test: /usr/lib/libCatch2.a
 test: lib/libcs225.a
 test: lib/liblodepng.a
 test: CMakeFiles/test.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/workspaces/WBLR-CS-225-Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/workspaces/WBLR-CS-225-Project/build_pc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable test"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test.dir/link.txt --verbose=$(VERBOSE)
-	/usr/bin/cmake -D TEST_TARGET=test -D TEST_EXECUTABLE=/workspaces/WBLR-CS-225-Project/build/test -D TEST_EXECUTOR= -D TEST_WORKING_DIR=/workspaces/WBLR-CS-225-Project/build -D TEST_SPEC= -D TEST_EXTRA_ARGS= -D TEST_PROPERTIES= -D TEST_PREFIX= -D TEST_SUFFIX= -D TEST_LIST=test_TESTS -D TEST_REPORTER= -D TEST_OUTPUT_DIR= -D TEST_OUTPUT_PREFIX= -D TEST_OUTPUT_SUFFIX= -D TEST_DL_PATHS= -D CTEST_FILE=/workspaces/WBLR-CS-225-Project/build/test_tests-b12d07c.cmake -P /usr/lib/cmake/Catch2/CatchAddTests.cmake
+	/usr/bin/cmake -D TEST_TARGET=test -D TEST_EXECUTABLE=/workspaces/WBLR-CS-225-Project/build_pc/test -D TEST_EXECUTOR= -D TEST_WORKING_DIR=/workspaces/WBLR-CS-225-Project/build_pc -D TEST_SPEC= -D TEST_EXTRA_ARGS= -D TEST_PROPERTIES= -D TEST_PREFIX= -D TEST_SUFFIX= -D TEST_LIST=test_TESTS -D TEST_REPORTER= -D TEST_OUTPUT_DIR= -D TEST_OUTPUT_PREFIX= -D TEST_OUTPUT_SUFFIX= -D TEST_DL_PATHS= -D CTEST_FILE=/workspaces/WBLR-CS-225-Project/build_pc/test_tests-b12d07c.cmake -P /usr/lib/cmake/Catch2/CatchAddTests.cmake
 
 # Rule to build all files generated by this target.
 CMakeFiles/test.dir/build: test
@@ -127,6 +143,6 @@ CMakeFiles/test.dir/clean:
 .PHONY : CMakeFiles/test.dir/clean
 
 CMakeFiles/test.dir/depend:
-	cd /workspaces/WBLR-CS-225-Project/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /workspaces/WBLR-CS-225-Project /workspaces/WBLR-CS-225-Project /workspaces/WBLR-CS-225-Project/build /workspaces/WBLR-CS-225-Project/build /workspaces/WBLR-CS-225-Project/build/CMakeFiles/test.dir/DependInfo.cmake --color=$(COLOR)
+	cd /workspaces/WBLR-CS-225-Project/build_pc && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /workspaces/WBLR-CS-225-Project /workspaces/WBLR-CS-225-Project /workspaces/WBLR-CS-225-Project/build_pc /workspaces/WBLR-CS-225-Project/build_pc /workspaces/WBLR-CS-225-Project/build_pc/CMakeFiles/test.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/test.dir/depend
 
