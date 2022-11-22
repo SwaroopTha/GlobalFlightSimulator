@@ -3,14 +3,16 @@
 #include <iostream>
 #include <set>
 #include <limits>
+#include <utility>
 
 using namespace std;
 
+typedef pair<int, double> DijNode;
 
 vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
     vector<int> airports = g.getIDs();
     auto comp = [](DijNode a, DijNode b) {
-        return a.distance > b.distance;
+        return a.second > b.second;
     };
     std::priority_queue<DijNode, vector<DijNode>, decltype(comp)> qu(comp);
     map<int, double> ports;
@@ -34,17 +36,17 @@ vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
     while (!qu.empty()) {
         auto node = qu.top();
         qu.pop();
-        while (seen.find(node.id) != seen.end() && !qu.empty()) {
+        while (seen.find(node.first) != seen.end() && !qu.empty()) {
             node = qu.top();
             qu.pop();
         }
-        seen.insert(node.id);
-        auto neighbors = g.getNode(node.id).connections;
+        seen.insert(node.first);
+        auto neighbors = g.getNode(node.first).connections;
         for (auto adj : neighbors) {
-            double alt = node.distance + adj.second;
+            double alt = node.second + adj.second;
             if (alt < ports.at(adj.first)) {
                 ports[adj.first] = alt;
-                prev[adj.first] = node.id;
+                prev[adj.first] = node.first;
                 qu.push(DijNode(adj.first, alt)); // removed a bunch of adj.first->id
             }
         }
@@ -82,7 +84,7 @@ vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
 double Dijkstras::shortestDistance(const Graph &g, int start, int airport) {
     vector<int> airports = g.getIDs();
     auto comp = [](DijNode a, DijNode b) {
-        return a.distance > b.distance;
+        return a.second > b.second;
     };
     std::priority_queue<DijNode, vector<DijNode>, decltype(comp)> qu(comp);
     map<int, double> ports;
@@ -106,17 +108,17 @@ double Dijkstras::shortestDistance(const Graph &g, int start, int airport) {
     while (!qu.empty()) {
         auto node = qu.top();
         qu.pop();
-        while (seen.find(node.id) != seen.end() && !qu.empty()) {
+        while (seen.find(node.first) != seen.end() && !qu.empty()) {
             node = qu.top();
             qu.pop();
         }
-        seen.insert(node.id);
-        auto neighbors = g.getNode(node.id).connections;
+        seen.insert(node.first);
+        auto neighbors = g.getNode(node.first).connections;
         for (auto adj : neighbors) {
-            double alt = node.distance + adj.second;
+            double alt = node.second + adj.second;
             if (alt < ports.at(adj.first)) {
                 ports[adj.first] = alt;
-                prev[adj.first] = node.id;
+                prev[adj.first] = node.first;
                 qu.push(DijNode(adj.first, alt)); // removed a bunch of adj.first->id
             }
         }
