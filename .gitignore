@@ -2,6 +2,4 @@ bin/
 a.out
 exec
 .vscode
-build_pc/
-build_mac/
-build_mac_real/
+build_tyler/

@@ -1,2 +1,0 @@
-/usr/bin/ar qc libsrc.a CMakeFiles/src.dir/Algorithms/bet_cent.cpp.o CMakeFiles/src.dir/Algorithms/bfs.cpp.o CMakeFiles/src.dir/Algorithms/dijkstra.cpp.o CMakeFiles/src.dir/Graph.cpp.o CMakeFiles/src.dir/readdat.cpp.o
-/usr/bin/ranlib libsrc.a
