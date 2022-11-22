@@ -24,7 +24,27 @@ TEST_CASE("Simple Dijkstra") {
 
     REQUIRE(actual == expected);
 }
- 
+
+TEST_CASE("No Path") {
+    Graph g;
+
+    g.addNode(1, "one", 0, 1);
+    g.addNode(2, "two", 0, 2);
+    g.addNode(3, "three", 0, 3);
+    g.addNode(4, "four", 1, 2);
+    g.addNode(5, "five", 4, 4);
+
+    g.connect(1, 2);
+    g.connect(2, 3);
+    g.connect(4, 5);
+
+    Dijkstras dij;
+    vector<int> actual = dij.getPath(g, 1, 5);
+    vector<int> expected = {-1, 1, 2, 3};
+
+    REQUIRE(actual == vector<int>());
+    REQUIRE(dij.shortestDistance() == std::numeric_limits<double>::infinity());
+}
 
 TEST_CASE("Dijkstra Airport Simple") {
 
@@ -38,7 +58,7 @@ TEST_CASE("Dijkstra Airport Simple") {
     // auto vec = dij.getPath(g, 1, 2);
     vector<int> vec1 = dij.getPath(g, 4049, 3830);
 
-    double minDist = dij.shortestDistance(g, 4049, 3830);
+    double minDist = dij.shortestDistance();
     double expec1 = g.distance(4049, 3830);
 
     vector<int> expected = {-1, 4049, 3830};
