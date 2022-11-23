@@ -50,16 +50,32 @@ TEST_CASE("Dijkstra Airport Simple") {
 
     Dijkstras canvas;
 
+    
+
     Graph g = readData();
 
     cout << g.size() << " airports added" << endl;
 
     Dijkstras dij;
     // auto vec = dij.getPath(g, 1, 2);
-    vector<int> vec1 = dij.getPath(g, 4049, 3830);
+
+    cout << "starting journey from Champaign to O'Hare: " << endl;
+
+    int champ = 4049;
+    int ohare = 3830;
+
+
+    vector<int> vec1 = dij.getPath(g, champ, ohare);
 
     double minDist = dij.shortestDistance();
     double expec1 = g.distance(4049, 3830);
+
+    for (auto i : vec1) {
+        if (i == -1) continue;
+        cout << g.getNode(i).name << "-->" << std::endl;
+    }
+    std::cout << g.getNode(ohare).name << std::endl;
+    // std::cout << ports[target] << std::endl;
 
     vector<int> expected = {-1, 4049, 3830};
 
@@ -73,11 +89,12 @@ TEST_CASE("Dijkstra Airport Complex") {
     Dijkstras canvas;
     Graph g = readData();
     Dijkstras dij;
-    vector<int> vec1 = dij.getPath(g, 4049, 3830);
+    cout << "starting journey from Champaign to Hong Kong: " << endl;
 
+    int champ = 4049;
+    int hgk = 3077;
 
-
-    vector<int> journey = dij.getPath(g, 4049, 3077);
+    vector<int> journey = dij.getPath(g, champ, hgk);
 
     double real = g.distance(4049, 3830);
     real += g.distance(3830, 3077);
@@ -92,6 +109,12 @@ TEST_CASE("Dijkstra Airport Complex") {
 
     // cout << real << endl;
     // cout << actual;
+
+    for (auto i : journey) {
+        if (i == -1) continue;
+        cout << g.getNode(i).name << "-->" << std::endl;
+    }
+    // std::cout << g.getNode(hgk).name << std::endl;
 
     REQUIRE(actual > real);
     // vector<int> expected = {-1, 4049, 3670, 3690, 193, 1382, 3077};
