@@ -117,12 +117,12 @@ TEST_CASE("Dijkstra Airport Complex") {
     // std::cout << g.getNode(hgk).name << std::endl;
 
     REQUIRE(actual > real);
-    // vector<int> expected = {-1, 4049, 3670, 3690, 193, 1382, 3077};
+    vector<int> expected = {-1, 4049, 3670, 3690, 193, 1382, 3077};
 
-    vector<int> expected = {-1, 4049, 3830, 3077};
+    // vector<int> expected = {-1, 4049, 3830, 3077};
 
-    // vector<int> expected = {-1};
-
+    vector<int> expected = {-1};
 
     REQUIRE(journey == expected);
-}
+} 
+
