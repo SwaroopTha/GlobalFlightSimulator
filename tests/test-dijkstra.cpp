@@ -72,9 +72,8 @@ TEST_CASE("Dijkstra Airport Simple") {
 
     for (auto i : vec1) {
         if (i == -1) continue;
-        cout << g.getNode(i).name << "-->" << std::endl;
+        cout << g.getName(i) << "-->" << std::endl;
     }
-    std::cout << g.getNode(ohare).name << std::endl;
     // std::cout << ports[target] << std::endl;
 
     vector<int> expected = {-1, 4049, 3830};
@@ -112,16 +111,13 @@ TEST_CASE("Dijkstra Airport Complex") {
 
     for (auto i : journey) {
         if (i == -1) continue;
-        cout << g.getNode(i).name << "-->" << std::endl;
+        cout << g.getName(i) << "-->" << std::endl;
     }
     // std::cout << g.getNode(hgk).name << std::endl;
 
     REQUIRE(actual > real);
-    vector<int> expected = {-1, 4049, 3670, 3690, 193, 1382, 3077};
 
-    // vector<int> expected = {-1, 4049, 3830, 3077};
-
-    vector<int> expected = {-1};
+    vector<int> expected = {-1, 4049, 3830, 3077};
 
     REQUIRE(journey == expected);
 } 

@@ -11,8 +11,7 @@ vector<int> BFS::traversalOfBFS(const Graph& g, int startID, int endID) {
       if (present == endID) {
           return pathOfBFS;
       }
-      for (auto pair : g.getNode(present)->connections) {
-          int id = pair.first;
+      for (int id : g.getConnections(present)) {
           if (!visited[id]) {
               visited[id] = true;
               queued.push(id);
