@@ -11,7 +11,7 @@ class BetweenessCentrality {
         // BetweenessCentrality();
         void calculateScores();
         map<int, double> getAllScores();
-        vector<int> getAirportsMinScore(int min_score);
+        vector<int> getAirportsMinScore(double min_score);
 
     private:
         map<int, double> airport_scores_; // Maps all the airports (id - int) to their Betweeness Centrality Score
