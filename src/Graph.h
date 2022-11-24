@@ -93,15 +93,6 @@ public:
      */
     int connections() const { return numConnections_; }
     /**
-     * @brief Calculates the great circle distance between two airports using the haversine formula
-     * This technically assumes the Earth is a sphere but is easier to calculate
-     *
-     * @param a the first airport's ID
-     * @param b the second airport's ID
-     * @return double The distance between the airports, accounting for the Earth's curvature
-    */
-    double distance(int id1, int id2) const;
-    /**
      * @brief Gets the IDs of all airports that were added
      * 
      * @return vector<int> A vector contains all airport IDs
@@ -169,4 +160,13 @@ private:
      * @brief Maps each airport's ID to its GraphNode
      */
     std::map<int, GraphNode> nodes_;
+    /**
+     * @brief Calculates the great circle distance between two airports using the haversine formula
+     * This technically assumes the Earth is a sphere but is easier to calculate
+     *
+     * @param a the first airport's ID
+     * @param b the second airport's ID
+     * @return double The distance between the airports, accounting for the Earth's curvature
+    */
+    double _distance(int id1, int id2) const;
 };
