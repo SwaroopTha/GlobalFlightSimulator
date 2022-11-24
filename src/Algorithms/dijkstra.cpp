@@ -14,7 +14,6 @@ vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
     auto comp = [](DijNode a, DijNode b) {
         return a.second > b.second;
     };
-    // priority queue max heap
     std::priority_queue<DijNode, vector<DijNode>, decltype(comp)> qu(comp);
     map<int, double> ports_;
     map<int, int> prev_;
@@ -84,6 +83,7 @@ vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
     if (paths.at(1) != source) {
         return vector<int>();
     }
+    paths.erase(paths.begin());
     return paths;
 }
 

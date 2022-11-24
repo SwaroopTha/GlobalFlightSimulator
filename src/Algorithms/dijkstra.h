@@ -6,6 +6,7 @@
 #include <vector>
 #include <utility>
 #include <algorithm>
+#include <string>
 
 #include "readdat.h"
 
@@ -35,7 +36,7 @@ class Dijkstras {
         map<int, double> ports_; // maps source airport connections to its distances
         map<int, int> prev_; // maps airport's previous immediate source
 
-        
+
         double shortestDistance_; // shorteset distance for intended algorithm
       
 };
