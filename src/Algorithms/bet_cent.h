@@ -9,12 +9,14 @@ using namespace std;
 class BetweenessCentrality {
     public:
         // BetweenessCentrality();
-        void calculateScores();
-        map<int, double> getAllScores();
-        vector<int> getAirportsMinScore(double min_score);
+        void calculateScores(const Graph& graph);
+        map<int, int> getAllScores();
+        vector<int> getAirportsWithMinFrequency(int frequency);
 
     private:
-        map<int, double> airport_scores_; // Maps all the airports (id - int) to their Betweeness Centrality Score
+        vector<int> airport_ids_; // vector of all airport ids
+        
+        map<int, int> airport_scores_; // Maps all the airports (id - int) to their Betweeness Centrality Frequency
 
 };
 
