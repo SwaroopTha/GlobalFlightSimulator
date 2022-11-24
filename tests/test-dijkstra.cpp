@@ -111,7 +111,7 @@ TEST_CASE("Dijkstra Airport Nearby") {
     vector<int> vec1 = dij.getPath(g, champ, ohare);
 
     double minDist = dij.shortestDistance();
-    double expec1 = g.distance(4049, 3830);
+    double expec1 = g.getDistance(4049, 3830);
 
     for (auto i : vec1) {
         if (i == -1) continue;
@@ -148,16 +148,16 @@ TEST_CASE("Dijkstra Airport Complex") {
 
     vector<int> journey = dij.getPath(g, champ, hgk);
 
-    double real = g.distance(4049, 3830);
-    real += g.distance(3830, 3077);
+    double real = g.getDistance(4049, 3830);
+    real += g.getDistance(3830, 3077);
 
 
 
-    double actual = g.distance(4049, 3670);
-    actual += g.distance(3670, 3690);
-    actual += g.distance(3690, 193);
-    actual += g.distance(193, 1382);
-    actual += g.distance(1382, 3077);
+    double actual = g.getDistance(4049, 3670);
+    actual += g.getDistance(3670, 3690);
+    actual += g.getDistance(3690, 193);
+    actual += g.getDistance(193, 1382);
+    actual += g.getDistance(1382, 3077);
 
     // cout << real << endl;
     // cout << actual;

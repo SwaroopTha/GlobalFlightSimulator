@@ -5,12 +5,18 @@
 
 using namespace std;
 
+double inf = numeric_limits<double>::infinity();
+
 /**
-* @brief Determines if two distance are close enough to be considered equal (within 1%)
+* @brief Determines if two distance are close enough to be considered equal (within 2%)
 * This accounts for the ellipticity of the Earth 
+*
+* @param distance1 The first distance
+* @param distance2 The second distance
+* @return double Whether the distances are close enough
 */
 bool closeEnough(double distance1, double distance2) {
-    return max(distance1, distance2) / min(distance1, distance2) < 1.01;
+    return max(distance1, distance2) / min(distance1, distance2) < 1.02;
 }
 
 TEST_CASE("graph constructor") {
@@ -43,11 +49,13 @@ TEST_CASE("adding and accessing nodes") {
 TEST_CASE("connecting nodes") {
     Graph g;
     g.addNode(12, "idk", 30, -30);
-    g.addNode(24, "smth", 25, -35);
+    g.addNode(24, "smth", 26, -33);
 
     REQUIRE(g.connections() == 0);
     REQUIRE(g.getConnections(12).size() == 0);
     REQUIRE(g.getConnections(24).size() == 0);
+    REQUIRE(g.getDistance(12, 24) == inf);
+    REQUIRE(g.getDistance(24, 12) == inf);
     REQUIRE(g.connectedTo(12, 24) == false);
     REQUIRE(g.connectedTo(24, 12) == false);
     
@@ -56,8 +64,8 @@ TEST_CASE("connecting nodes") {
     REQUIRE(g.connections() == 1);
     REQUIRE(g.getConnections(12) == vector<int>(1,24));
     REQUIRE(g.getConnections(24).size() == 0);
-    REQUIRE(g.getDistance(12, 24) == g.distance(12, 24));
-    REQUIRE(g.getDistance(24, 12) == numeric_limits<double>::infinity());
+    REQUIRE(g.getDistance(12, 24) < inf);
+    REQUIRE(g.getDistance(24, 12) == inf);
     REQUIRE(g.connectedTo(12, 24) == true);
     REQUIRE(g.connectedTo(24, 12) == false);
 
@@ -66,8 +74,8 @@ TEST_CASE("connecting nodes") {
     REQUIRE(g.connections() == 2);
     REQUIRE(g.getConnections(12) == vector<int>(1,24));
     REQUIRE(g.getConnections(24) == vector<int>(1,12));
-    REQUIRE(g.getDistance(12, 24) == g.distance(12, 24));
-    REQUIRE(g.getDistance(24, 12) == g.distance(24, 12));
+    REQUIRE(g.getDistance(12, 24) < inf);
+    REQUIRE(g.getDistance(24, 12) < inf);
     REQUIRE(g.connectedTo(12, 24) == true);
     REQUIRE(g.connectedTo(24, 12) == true);
 
@@ -77,8 +85,14 @@ TEST_CASE("connecting nodes") {
 TEST_CASE("distance function") {
     Graph g = readData();
     // real-life distances are calculated beforehand
-    REQUIRE(closeEnough(g.distance(1, 2), 106.80));
-    REQUIRE(closeEnough(g.distance(26, 41), 560.91));
-    REQUIRE(closeEnough(g.distance(6332, 9751), 17742.30));
-    REQUIRE(g.distance(1, 1) == 0);
+    // some airports aren't automatically connected
+    REQUIRE(closeEnough(g.getDistance(1, 2), 106.80));
+    REQUIRE(g.getDistance(26, 41) == inf);
+    g.connect(26, 41);
+    REQUIRE(closeEnough(g.getDistance(26, 41), 560.91));
+    REQUIRE(g.getDistance(6332, 9751) == inf);
+    g.connect(6332, 9751);
+    REQUIRE(closeEnough(g.getDistance(6332, 9751), 17742.30));
+    g.connect(1, 1); // this is nonsensical but just used to test a distance of 0
+    REQUIRE(g.getDistance(1, 1) == 0);
 }

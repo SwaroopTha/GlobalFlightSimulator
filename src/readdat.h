@@ -47,6 +47,8 @@ bool validLongitude(double longitude);
 /**
 * @brief Reads in the data from the Data folder
 *
+* @param vertexFile A file of the graph vertices
+* @param edgeFile A file of the graph edges
 * @return Graph A graph of the data
 */
-Graph readData();
+Graph readData(std::string vertexFile = "../Data/airports.dat", std::string edgeFile = "../Data/routes.dat");
