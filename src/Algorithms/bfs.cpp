@@ -1,6 +1,6 @@
 #include "bfs.h"
 using namespace std;
-vector<int> BFS::traversalOfBFS(const Graph& g, int startID, int endID) {
+vector<int> BFS::traversalOfBFS(const Graph& g, int startID) {
   setAllFalse(g);
   queued.push(startID);
   visited[startID] = true;
@@ -8,9 +8,6 @@ vector<int> BFS::traversalOfBFS(const Graph& g, int startID, int endID) {
       int present = queued.front();
       queued.pop();
       pathOfBFS.push_back(present);
-      if (present == endID) {
-          return pathOfBFS;
-      }
       for (int id : g.getConnections(present)) {
           if (!visited[id]) {
               visited[id] = true;
@@ -27,4 +24,8 @@ void BFS::setAllFalse(const Graph& g) {
 }
 vector<int> BFS::getPath() {
   return pathOfBFS;
+}
+
+map<int, bool> BFS::getVisited() {
+  return visited;
 }

@@ -9,9 +9,10 @@ using namespace std;
 class BFS {
 public:
 //will return vectors of node IDs visiteds
-vector<int> traversalOfBFS(const Graph& g, int startID, int endID);
+vector<int> traversalOfBFS(const Graph& g, int startID);
 vector<int> getPath();
 void setAllFalse(const Graph& g);
+map<int, bool> getVisited();
 private:
 queue<int> queued;
 map<int, bool> visited;
