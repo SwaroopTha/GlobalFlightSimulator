@@ -19,7 +19,7 @@ cs225::PNG plotDijkstra(Graph g, int source, int target, double pointSize = 8, i
 *
 * @param worldMap The map to plot the point on
 * @param lat The point's latitude
-* @param long The point's longitude
+* @param lon The point's longitude
 * @param radius The radius of the point
 */
 void plotPoint(cs225::PNG & worldMap, double lat, double lon, double radius);
