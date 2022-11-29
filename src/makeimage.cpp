@@ -8,7 +8,7 @@ using cs225::HSLAPixel;
 PNG plotDijkstra(Graph g, int source, int target, double pointSize, int lineThickness) {
     PNG worldMap;
     Dijkstras dij;
-    worldMap.readFromFile("../Images/map.png");
+    worldMap.readFromFile("../Data/map.png");
     vector<int> path = dij.getPath(g, source, target);
     plotPath(worldMap, g, path, pointSize, lineThickness);
     return worldMap;
@@ -17,7 +17,7 @@ PNG plotDijkstra(Graph g, int source, int target, double pointSize, int lineThic
 PNG plotBFS(Graph g, int start, double pointSize, int lineThickness) {
     PNG worldMap;
     BFS bfs;
-    worldMap.readFromFile("../Images/map.png");
+    worldMap.readFromFile("../Data/map.png");
     vector<int> path = bfs.traversalOfBFS(g, start);
     plotPath(worldMap, g, path, pointSize, lineThickness);
     return worldMap;
@@ -26,7 +26,7 @@ PNG plotBFS(Graph g, int start, double pointSize, int lineThickness) {
 PNG plotBetweenness(Graph g, double maxRadius) {
     PNG worldMap;
     BetweenessCentrality bc;
-    worldMap.readFromFile("../Images/map.png");
+    worldMap.readFromFile("../Data/map.png");
     // currently the scores take too long to compute so here's an example
     map<int, int> scores = {{1,3},{200,2},{300,1}, {400, 4}};
     int max = 0;
