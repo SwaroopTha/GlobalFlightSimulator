@@ -6,6 +6,7 @@
  
 #include "Algorithms/bfs.h"
 
+
 TEST_CASE("Simple traversal") {
  
    Graph g;
@@ -14,21 +15,33 @@ TEST_CASE("Simple traversal") {
    g.addNode(2, "two", 0, 2);
    g.addNode(3, "three", 0, 3);
    g.addNode(4, "four", 1, 3);
+   g.addNode(5, "five", 1, 6);
    g.connect(1, 2);
+   g.connect(2, 1);
    g.connect(2, 4);
+   g.connect(4, 2);
    g.connect(1, 3);
+   g.connect(3, 1);
    g.connect(1, 4);
+   g.connect(4, 1);
    g.connect(3, 4);
+   g.connect(4, 3);
+   g.connect(3, 5);
+   g.connect(5, 3);
  
    BFS bfs;
    std::vector<int> actual = bfs.traversalOfBFS(g, 1);
-   std::vector<int> expected = {1, 2, 3, 4};
+   std::vector<int> expected = {1, 2, 3, 4, 5};
  
    REQUIRE(actual == expected);
+
+   actual = bfs.traversalOfBFS(g, 3);
+   expected = {3, 1, 4, 5, 2};
+   REQUIRE(actual == expected);
+
 }
 
-/*
-TEST_CASE("visited") {
+TEST_CASE("All set false") {
  
    Graph g;
  
@@ -36,20 +49,28 @@ TEST_CASE("visited") {
    g.addNode(2, "two", 0, 2);
    g.addNode(3, "three", 0, 3);
    g.addNode(4, "four", 1, 3);
-
+   g.addNode(5, "five", 1, 6);
+   g.addNode(6, "six", 1, 1);
    g.connect(1, 2);
    g.connect(2, 4);
    g.connect(1, 3);
    g.connect(1, 4);
    g.connect(3, 4);
-  
+   g.connect(3, 5);
  
    BFS bfs;
-   bfs.traversalOfBFS(g, 4);
-    std::map visit = bfs.getVisited();
-    for(std::map<int,bool>::iterator iter = visit.begin(); iter != visit.end(); ++iter) {
-        int key =  iter->first;
-        REQUIRE(visit[key] == true);
-    }
+   std::vector<int> actual = bfs.traversalOfBFS(g, 1);
+
+   std::vector<int> expected = {1, 2, 3, 4, 5};
+
+   REQUIRE(actual == expected);
+
+   g.connect(1, 6);
+
+   actual = bfs.traversalOfBFS(g, 1);
+
+   expected = {1, 2, 3, 4, 6, 5};
+ 
+   REQUIRE(actual == expected);
 }
-*/
+

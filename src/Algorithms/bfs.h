@@ -12,7 +12,6 @@ public:
 vector<int> traversalOfBFS(const Graph& g, int startID);
 vector<int> getPath();
 void setAllFalse(const Graph& g);
-map<int, bool> getVisited();
 private:
 queue<int> queued;
 map<int, bool> visited;
