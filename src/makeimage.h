@@ -1,6 +1,7 @@
 #pragma once
 #include "Algorithms/dijkstra.h"
 #include "Algorithms/bet_cent.h"
+#include "Algorithms/bfs.h"
 #include "../lib/cs225/png.h"
 
 /**
@@ -16,6 +17,17 @@
 cs225::PNG plotDijkstra(Graph g, int source, int target, double pointSize = 8, int lineThickness = 4);
 
 /**
+* @brief Plots the BFS traversal on a plate carrée map projection
+* Warning: this may look very messy
+*
+* @param g The graph on which to apply BFS
+* @param start The start of the BFS algorithm
+* @param pointSize The radius of the points, in pixels
+* @param lineThickness The thickness of the lines, in pixels
+*/
+cs225::PNG plotBFS(Graph g, int start, double pointSize = 6, int lineThickness = 2);
+
+/**
 * @brief Plots each airport on a plate carrée map projection
 * The size of the point is proportional to its betweenness centrality
 *
@@ -24,6 +36,16 @@ cs225::PNG plotDijkstra(Graph g, int source, int target, double pointSize = 8, i
 * @return PNG The map png
 */
 cs225::PNG plotBetweenness(Graph g, double maxRadius = 8);
+
+/**
+* @brief Plots a path on a world map
+* 
+* @param worldMap The map to plot the path on
+* @param g The graph the path is on
+* @param pointSize The radius of the points
+* @param lineThickness The radius of the lines
+*/
+void plotPath(cs225::PNG & worldMap, Graph g, vector<int> path, double pointSize, int lineThickness);
 
 /**
 * @brief Plots a red point on a map at a given latitude and longitude

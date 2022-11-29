@@ -10,18 +10,16 @@ PNG plotDijkstra(Graph g, int source, int target, double pointSize, int lineThic
     Dijkstras dij;
     worldMap.readFromFile("../Images/map.png");
     vector<int> path = dij.getPath(g, source, target);
-    // iterates over every airport in the path
-    for (size_t i = 0; i < path.size() - 1; i++) {
-        int id1 = path[i];
-        // draw a line between this airport and the next (excludes the last iteration)
-        // the routes dataset doesn't specify whether the flight is eastward or westward so
-        // it is assumed that the line doesn't wrap around the map
-        int id2 = path[i+1];
-        plotLine(worldMap, g.getLatitude(id1), g.getLongitude(id1), g.getLatitude(id2), g.getLongitude(id2), lineThickness);
-    }
-    for (int id : path) {
-        plotPoint(worldMap, g.getLatitude(id), g.getLongitude(id), pointSize);
-    }
+    plotPath(worldMap, g, path, pointSize, lineThickness);
+    return worldMap;
+}
+
+PNG plotBFS(Graph g, int start, double pointSize, int lineThickness) {
+    PNG worldMap;
+    BFS bfs;
+    worldMap.readFromFile("../Images/map.png");
+    vector<int> path = bfs.traversalOfBFS(g, start);
+    plotPath(worldMap, g, path, pointSize, lineThickness);
     return worldMap;
 }
 
@@ -42,6 +40,21 @@ PNG plotBetweenness(Graph g, double maxRadius) {
         plotPoint(worldMap, g.getLatitude(it->first), g.getLongitude(it->first), maxRadius * ratio);
     }
     return worldMap;
+}
+
+void plotPath(cs225::PNG & worldMap, Graph g, vector<int> path, double pointSize, int lineThickness) {
+    // iterates over every airport in the path
+    for (size_t i = 0; i < path.size() - 1; i++) {
+        int id1 = path[i];
+        // draw a line between this airport and the next (excludes the last iteration)
+        // the routes dataset doesn't specify whether the flight is eastward or westward so
+        // it is assumed that the line doesn't wrap around the map
+        int id2 = path[i+1];
+        plotLine(worldMap, g.getLatitude(id1), g.getLongitude(id1), g.getLatitude(id2), g.getLongitude(id2), lineThickness);
+    }
+    for (int id : path) {
+        plotPoint(worldMap, g.getLatitude(id), g.getLongitude(id), pointSize);
+    }
 }
 
 void plotPoint(PNG & worldMap, double lat, double lon, double radius) {
