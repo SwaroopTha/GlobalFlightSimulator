@@ -14,6 +14,8 @@ PNG plotDijkstra(Graph g, int source, int target, double pointSize, int lineThic
     for (size_t i = 0; i < path.size() - 1; i++) {
         int id1 = path[i];
         // draw a line between this airport and the next (excludes the last iteration)
+        // the routes dataset doesn't specify whether the flight is eastward or westward so
+        // it is assumed that the line doesn't wrap around the map
         int id2 = path[i+1];
         plotLine(worldMap, g.getLatitude(id1), g.getLongitude(id1), g.getLatitude(id2), g.getLongitude(id2), lineThickness);
     }
@@ -28,12 +30,15 @@ void plotPoint(PNG & worldMap, double lat, double lon, double radius) {
     int halfHeight = worldMap.height() / 2;
     int centerX = (halfWidth * lon / 180) + halfWidth;
     int centerY = (halfHeight * -lat / 90) + halfHeight;
+    // considers the square that circumscribes the point's circle
     for (int x = centerX - radius; x <= centerX + radius; x++) {
         for (int y = centerY - radius; y <= centerY + radius; y++) {
+            // out of bounds check
             if (x < 0 || y < 0 || x >= (int) worldMap.width() || y >= (int) worldMap.height()) {
                 continue;
             }
             int r2 = pow(x - centerX, 2) + pow(y - centerY, 2);
+            // draw if inside the radius
             if (r2 < pow(radius, 2)) {
                 worldMap.getPixel(x, y) = HSLAPixel(0, 1, 0.5, 1);
             }
@@ -70,7 +75,9 @@ void plotLine(PNG & worldMap, double lat1, double lon1, double lat2, double lon2
             int d = 2 * dy - dx;
             int y = y1;
             for (int x = x1; x != x2; x1 < x2 ? x++ : x--) {
-                worldMap.getPixel(x, y) = HSLAPixel(20, 1, 0.5, 1);
+                if (!(x < 0 || y < 0 || x >= (int) worldMap.width() || y >= (int) worldMap.height())) {
+                    worldMap.getPixel(x, y) = HSLAPixel(20, 1, 0.5, 1);
+                }
                 if (d > 0) {
                     y += yi;
                     d += 2 * (dy - dx);
@@ -95,7 +102,9 @@ void plotLine(PNG & worldMap, double lat1, double lon1, double lat2, double lon2
             int d = 2 * dx - dy;
             int x = x1;
             for (int y = y1; y != y2; y1 < y2 ? y++ : y--) {
-                worldMap.getPixel(x, y) = HSLAPixel(20, 1, 0.5, 1);
+                if (!(x < 0 || y < 0 || x >= (int) worldMap.width() || y >= (int) worldMap.height())) {
+                    worldMap.getPixel(x, y) = HSLAPixel(20, 1, 0.5, 1);
+                }
                 if (d > 0) {
                     x += xi;
                     d += 2 * (dx - dy);
