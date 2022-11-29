@@ -12,7 +12,6 @@ int main() {
 
     int source = 2;
     int target = 3995;
-    cs225::PNG output = plotDijkstra(g, source, target);
-    cout << g.getName(source) << " to " << g.getName(target) << endl;
+    cs225::PNG output = plotBetweenness(g);
     output.writeToFile("output.png");
 }

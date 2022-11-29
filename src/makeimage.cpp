@@ -25,6 +25,25 @@ PNG plotDijkstra(Graph g, int source, int target, double pointSize, int lineThic
     return worldMap;
 }
 
+PNG plotBetweenness(Graph g, double maxRadius) {
+    PNG worldMap;
+    BetweenessCentrality bc;
+    worldMap.readFromFile("../Images/map.png");
+    // currently the scores take too long to compute so here's an example
+    map<int, int> scores = {{1,3},{200,2},{300,1}, {400, 4}};
+    int max = 0;
+    for (auto it = scores.begin(); it != scores.end(); it++) {
+        if (it->second > max) {
+            max = it->second;
+        }
+    }
+    for (auto it = scores.begin(); it != scores.end(); it++) {
+        double ratio = (double) it->second / max;
+        plotPoint(worldMap, g.getLatitude(it->first), g.getLongitude(it->first), maxRadius * ratio);
+    }
+    return worldMap;
+}
+
 void plotPoint(PNG & worldMap, double lat, double lon, double radius) {
     int halfWidth = worldMap.width() / 2;
     int halfHeight = worldMap.height() / 2;

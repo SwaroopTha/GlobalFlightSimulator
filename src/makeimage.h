@@ -1,5 +1,6 @@
 #pragma once
 #include "Algorithms/dijkstra.h"
+#include "Algorithms/bet_cent.h"
 #include "../lib/cs225/png.h"
 
 /**
@@ -13,6 +14,16 @@
 * @return PNG The map png
 */
 cs225::PNG plotDijkstra(Graph g, int source, int target, double pointSize = 8, int lineThickness = 4);
+
+/**
+* @brief Plots each airport on a plate carrée map projection
+* The size of the point is proportional to its betweenness centrality
+*
+* @param g The graph on which to apply betweenness centrality
+* @param maxRadius The maximum radius of the points (the most central point will have this radius)
+* @return PNG The map png
+*/
+cs225::PNG plotBetweenness(Graph g, double maxRadius = 8);
 
 /**
 * @brief Plots a red point on a map at a given latitude and longitude
