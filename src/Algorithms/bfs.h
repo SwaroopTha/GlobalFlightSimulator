@@ -24,12 +24,7 @@ vector<int> traversalOfBFS(const Graph& g, int startID);
 */
 vector<int> getPath();
 
-/**
-* @brief a helper function to set all nodes as n ot visited
-*
-* @param g the given graph to set nodes for
-*/
-void setAllFalse(const Graph& g);
+
 private:
 
 /**
@@ -46,4 +41,11 @@ map<int, bool> visited_;
 * @brief stores the list of ids visited through BFS
 */
 vector<int> pathOfBFS_;
+
+/**
+* @brief a helper function to set all nodes as n ot visited
+*
+* @param g the given graph to set nodes for
+*/
+void setAllFalse(const Graph& g);
 };

@@ -1,28 +1,28 @@
 #include "bfs.h"
 using namespace std;
 vector<int> BFS::traversalOfBFS(const Graph& g, int startID) {
-  pathOfBFS.clear();
+  pathOfBFS_.clear();
   setAllFalse(g);
-  queued.push(startID);
-  visited[startID] = true;
-  while(!queued.empty()) {
-      int present = queued.front();
-      queued.pop();
-      pathOfBFS.push_back(present);
+  queued_.push(startID);
+  visited_[startID] = true;
+  while(!queued_.empty()) {
+      int present = queued_.front();
+      queued_.pop();
+      pathOfBFS_.push_back(present);
       for (int id : g.getConnections(present)) {
-          if (!visited[id]) {
-              visited[id] = true;
-              queued.push(id);
+          if (!visited_[id]) {
+              visited_[id] = true;
+              queued_.push(id);
           }
       }
   }
-  return pathOfBFS;
+  return pathOfBFS_;
 }
 void BFS::setAllFalse(const Graph& g) {
   for (int i : g.getIDs()) {
-      visited[i] = false;
+      visited_[i] = false;
   }
 }
 vector<int> BFS::getPath() {
-  return pathOfBFS;
+  return pathOfBFS_;
 }
