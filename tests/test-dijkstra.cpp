@@ -8,6 +8,9 @@
 
 using namespace std;
 
+cout << "Starting Dijkstra Test Cases" << endl;
+cout << "------------------------------------------------" << endl;
+
 TEST_CASE("Simple Dijkstra") {
 
     cout << "------------------------------------------------" << endl;
@@ -15,6 +18,14 @@ TEST_CASE("Simple Dijkstra") {
     cout << "starting [Simple Dijkstra]" << endl;
 
     Graph g;
+
+    /*
+                |4|
+
+    |1| ------- |2| ------- |3|
+
+
+    */
 
     g.addNode(1, "one", 0, 1);
     g.addNode(2, "two", 0, 2);
@@ -35,6 +46,20 @@ TEST_CASE("Simple Dijkstra") {
 TEST_CASE("Complex Dijkstra") {
 
     cout << "------------------------------------------------" << endl;
+
+    /*
+            |2| ----- |3|
+          /            |
+        /              |
+    |1|                | 
+        \              | 
+         \             |
+          |4| ------- |5|
+                       |
+                       |
+                       |
+                      |6|  
+    */
 
     cout << "starting [Complex Dijkstra]" << endl;
     Graph g;
@@ -65,6 +90,20 @@ TEST_CASE("No Path") {
 
 
     cout << "------------------------------------------------" << endl;
+
+    /*
+                      |5|  
+                     /                   
+                    /
+                   / 
+                  /  
+                |4|
+                
+
+    |1| ------- |2| ------- |3|
+
+
+    */
 
     cout << "starting [No Path]" << endl;
     Graph g;
@@ -100,13 +139,11 @@ TEST_CASE("Dijkstra Airport Nearby") {
     cout << g.size() << " airports added" << endl;
 
     Dijkstras dij;
-    // auto vec = dij.getPath(g, 1, 2);
 
     cout << "starting journey from Champaign to O'Hare: " << endl;
 
     int champ = 4049;
     int ohare = 3830;
-
 
     vector<int> vec1 = dij.getPath(g, champ, ohare);
 
@@ -118,7 +155,6 @@ TEST_CASE("Dijkstra Airport Nearby") {
         cout << g.getName(i) << " ---> ";
     }
     std::cout << "arrived to " << g.getName(ohare) << std::endl;
-    // std::cout << ports[target] << std::endl;
 
     vector<int> expected = {4049, 3830};
 
@@ -148,19 +184,15 @@ TEST_CASE("Dijkstra Airport Complex") {
 
     vector<int> journey = dij.getPath(g, champ, hgk);
 
-    double real = g.getDistance(4049, 3830);
-    real += g.getDistance(3830, 3077);
+    double shortest = g.getDistance(4049, 3830);
+    shortest += g.getDistance(3830, 3077);
 
 
-
-    double actual = g.getDistance(4049, 3670);
-    actual += g.getDistance(3670, 3690);
-    actual += g.getDistance(3690, 193);
-    actual += g.getDistance(193, 1382);
-    actual += g.getDistance(1382, 3077);
-
-    // cout << real << endl;
-    // cout << actual;
+    double alt_path = g.getDistance(4049, 3670); // Champaign to Dallas
+    alt_path += g.getDistance(3670, 3690);  // Dallas to Nashville
+    alt_path += g.getDistance(3690, 193);  // Nashville to Toronto
+    alt_path += g.getDistance(193, 1382);   // Toronto to Paris
+    alt_path += g.getDistance(1382, 3077);  // Paris to Hongkong
 
     for (auto i : journey) {
         if (i == -1) continue;
@@ -168,15 +200,13 @@ TEST_CASE("Dijkstra Airport Complex") {
     }
     std::cout << "arrived to " << g.getName(hgk) << std::endl;
 
-    REQUIRE(actual > real);
-    // vector<int> expected = {-1, 4049, 3670, 3690, 193, 1382, 3077};
+    REQUIRE(alt_path > shortest);
 
     vector<int> expected = {4049, 3830, 3077};
 
-    // vector<int> expected = {-1};
-
     cout << dij.shortestDistance() << endl;
 
+    REQUIRE(dij.shortestDistance() == shortest);
 
     REQUIRE(journey == expected);
 }

@@ -14,28 +14,46 @@
 
 using namespace std;
 
+/**
+ * Class for Dijktra Algorithm
+ * Generates an instance of shortest traversal between two points
+ */
 class Dijkstras {
     public:
+        /**
+        * @brief Generates a the shortest path of airports from source to target
+        * @param g network of all airports
+        * @param source the source airport ID
+        * @param b the target airport ID
+        * @return chronological vector of airport IDs from source to target
+        */
         vector<int> getPath(const Graph& g, int source, int target);
+
+        /**
+        * @brief shortest distance of the particular instance
+        * @return The distance between the airports, accounting for the Earth's curvature
+        */
         double shortestDistance() {
             return shortestDistance_;
         }
 
     private:
-        /*
-        struct DijNode
-        {
-            int id;
-            double distance;
-            DijNode(int id, double distance) : id(id), distance(distance) { }
-        };
+
+        /**
+        * @brief list of all airports
         */
-
-        vector<int> airports_; //list of all airports
-        map<int, double> ports_; // maps source airport connections to its distances
+        vector<int> airports_; 
+        /**
+        * @brief maps source airport connections to its distance
+        */
+        map<int, double> ports_;
+        /**
+        * @brief maps airport's previous airport
+        */
         map<int, int> prev_; // maps airport's previous immediate source
-
-
-        double shortestDistance_; // shorteset distance for intended algorithm
+        /**
+        * @brief shorteset distance for intended algorithm
+        */
+        double shortestDistance_;
       
 };
