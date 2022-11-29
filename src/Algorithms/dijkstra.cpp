@@ -52,34 +52,21 @@ vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
             }
         }
     }
-
-    // std::cout << nodes[target] << std::endl;
-    // for (auto it : nodes) {
-    //     if (it.second == std::numeric_limits<double>::infinity()) continue;
-    //     std::cout << it.first << " ";
-    //     std::cout << it.second << std::endl;
-    // }
-    // target++;
+    // adds previous paths to vector
     int temp = target;
     std::vector<int> paths;
     while (temp != -1) {
         paths.push_back(prev_[temp]);
         temp = prev_.at(temp);
     }
-    
- 
+
+    // reverses path to        
     std::reverse(paths.begin(), paths.end());
     paths.push_back(target);
-    // for (auto i : paths) {
-    //     if (i == -1) continue;
-    //     cout << g.getNode(i)->name << "-->" << std::endl;
-    // }
-    // std::cout << g.getNode(target)->name << std::endl;
-    // std::cout << ports[target] << std::endl;
 
     shortestDistance_ = ports_[target];
 
-    // target++;
+    // checks if no path exists
     if (paths.at(1) != source) {
         return vector<int>();
     }

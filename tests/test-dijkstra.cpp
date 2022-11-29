@@ -8,8 +8,6 @@
 
 using namespace std;
 
-cout << "Starting Dijkstra Test Cases" << endl;
-cout << "------------------------------------------------" << endl;
 
 TEST_CASE("Simple Dijkstra") {
 
@@ -98,7 +96,7 @@ TEST_CASE("No Path") {
                    / 
                   /  
                 |4|
-                
+
 
     |1| ------- |2| ------- |3|
 
