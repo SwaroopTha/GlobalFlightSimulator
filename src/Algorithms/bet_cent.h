@@ -25,6 +25,7 @@ class BetweenessCentrality {
         vector<int> getAirportsWithMinFrequency(int frequency);
 
         map<int, int> getAllScoresDijkstras(const Graph& graph);
+        vector<int> getAirportsWithMinFrequencyDijkstras(int frequency);
 
     private:
         vector<int> airport_ids_; // vector of all airport ids

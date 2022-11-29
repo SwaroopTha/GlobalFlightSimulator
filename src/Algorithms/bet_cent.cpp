@@ -133,3 +133,13 @@ vector<int> BetweenessCentrality::getAirportsWithMinFrequency(int frequency) {
     }
     return score_vector;
 }
+
+vector<int> BetweenessCentrality::getAirportsWithMinFrequencyDijkstras(int frequency) {
+    vector<int> score_vector;
+    for (auto i : airport_scores_dijkstras_) {
+        if (i.second >= frequency) {
+            score_vector.push_back(i.first);
+        }
+    }
+    return score_vector;
+}

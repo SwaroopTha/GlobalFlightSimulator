@@ -70,4 +70,30 @@ TEST_CASE("Betweenness Centrality Dijkstra Simple") {
 
     // REQUIRE(test == expected);
 
+    vector<int> all = betcent.getAirportsWithMinFrequencyDijkstras(0);
+    map<int, int> all_map;
+    int count = 1;
+    for (int i : all) {
+        if (all_map.find(i) != all_map.end()) all_map[i]++;
+        else all_map[i] = 1;
+
+        count++;
+    }
+    cout << "count: " << count << endl;
+    REQUIRE(all.size() == 3);
+    REQUIRE(all_map[0] == 2);
+    REQUIRE(all_map[2] == 1);
+
+    vector<int> only_2 = betcent.getAirportsWithMinFrequencyDijkstras(2);
+    map<int, int> map_2;
+    for (int i : only_2) {
+        if (map_2.find(i) != map_2.end()) map_2[i]++;
+        else map_2[i] = 1;
+    }
+    REQUIRE(all.size() == 1);
+    REQUIRE(all_map[2] == 1);
+
+    // REQUIRE(all == {0, 0, 2});
+    // REQUIRE(only_2 == {2});
+
 }
