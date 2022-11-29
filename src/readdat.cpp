@@ -50,7 +50,7 @@ bool validLongitude(double longitude) {
     return longitude >= -180 && longitude <= 180;
 }
 
-Graph readData() {
+Graph readData(std::string vertexFile, std::string edgeFile) {
     Graph g;
     ifstream airports("../Data/airports.dat");
     ifstream routes("../Data/routes.dat");

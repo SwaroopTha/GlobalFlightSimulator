@@ -83,6 +83,7 @@ vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
     if (paths.at(1) != source) {
         return vector<int>();
     }
+    paths.erase(paths.begin());
     return paths;
 }
 

@@ -1,6 +1,7 @@
 #include "Graph.h"
 #include "readdat.h"
 #include "Algorithms/dijkstra.h"
+#include "makeimage.h"
 
 using namespace std;
 
@@ -9,12 +10,8 @@ int main() {
 
     cout << g.size() << " airports and " << g.connections() << " connections" << endl;
 
-    Dijkstras dij;
-    //auto vec = dij.getPath(g, 1, 2);
-    //auto vec1 = dij.getPath(g, 4049, 2997);
-
-    // std::cout << vec.size() << std::endl;
-
-
-
+    int source = 2;
+    int target = 3995;
+    cs225::PNG output = plotBetweenness(g);
+    output.writeToFile("output.png");
 }

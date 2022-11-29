@@ -17,34 +17,34 @@ private:
     * Stores the data of an airport and its connections
     */
     struct GraphNode {
-        int id;
-        std::string name;
-        double latitude, longitude;
+        int id_;
+        std::string name_;
+        double latitude_, longitude_;
         /**
          * @brief A vector of the pairs representing connections
          * 
          * The first element in the pair is the destination ID
          * The second element is the distance between this GraphNode and the destination
          */
-        std::map<int, double> connections;
-        GraphNode() : id(0), name(""), latitude(0), longitude(0) {}
+        std::map<int, double> connections_;
+        GraphNode() : id_(0), name_(""), latitude_(0), longitude_(0) {}
         /**
          * @brief Constructs a new GraphNode object with the given specifications
          * 
-         * @param id_ The airport's ID
-         * @param name_ The name of the airport
-         * @param lat_ The latitude of the airport
-         * @param long_ The longitude of the airport
+         * @param id The airport's ID
+         * @param name The name of the airport
+         * @param lat The latitude of the airport
+         * @param long The longitude of the airport
          */
-        GraphNode(int id_, std::string name_, double lat_, double long_) : id(id_),
-            name(name_), latitude(lat_), longitude(long_) {}
+        GraphNode(int id, std::string name, double lat, double lon) : id_(id),
+            name_(name), latitude_(lat), longitude_(lon) {}
         /**
         * @brief Determines if this GraphNode is connected to another.
         *
         * @param id The ID to see if it's connected to
         * @return bool Whether there is a connection
         */
-        bool connectedTo(int id) const {return connections.find(id) != connections.end();}
+        bool connectedTo(int id) const {return connections_.find(id) != connections_.end();}
         /**
         * @brief Gets the connection weight between this and an ID
         * If not connected returns 0
@@ -53,7 +53,7 @@ private:
         */
         double connectionDistance(int id) const {
             if (connectedTo(id)) {
-                return connections.at(id);
+                return connections_.at(id);
             }
             return std::numeric_limits<double>::infinity();
         }
@@ -62,7 +62,7 @@ public:
     /**
      * @brief Constructs a new Graph object with no airports or connections
      */
-    Graph() : numConnections(0) {}
+    Graph() : numConnections_(0) {}
     /**
      * @brief Adds an airport to the graph without any connections
      * 
@@ -85,22 +85,13 @@ public:
      * 
      * @return int The number of airports in the graph
      */
-    int size() const { return nodes.size(); }
+    int size() const { return nodes_.size(); }
     /**
      * @brief Gets the number of connections in the graph (one-directional)
      * 
      * @return int The number of connections in the graph
      */
-    int connections() const { return numConnections; }
-    /**
-     * @brief Calculates the great circle distance between two airports using the haversine formula
-     * This technically assumes the Earth is a sphere but is easier to calculate
-     *
-     * @param a the first airport's ID
-     * @param b the second airport's ID
-     * @return double The distance between the airports, accounting for the Earth's curvature
-    */
-    double distance(int id1, int id2) const;
+    int connections() const { return numConnections_; }
     /**
      * @brief Gets the IDs of all airports that were added
      * 
@@ -115,8 +106,8 @@ public:
     * @return bool Whether there is a connection
     */
     bool connectedTo(int id1, int id2) const {
-        if (nodes.find(id1) != nodes.end() && nodes.find(id2) != nodes.end()) {
-            return nodes.at(id1).connectedTo(id2);
+        if (nodes_.find(id1) != nodes_.end() && nodes_.find(id2) != nodes_.end()) {
+            return nodes_.at(id1).connectedTo(id2);
         }
         return false;
     }
@@ -128,7 +119,7 @@ public:
     * @return double The weight
     */
     double getDistance(int id1, int id2) const {
-        return nodes.at(id1).connectionDistance(id2);
+        return nodes_.at(id1).connectionDistance(id2);
     }
 
     /**
@@ -145,28 +136,37 @@ public:
     * @param id The airport's ID
     * @return string The airport's name
     */
-    std::string getName(int id) const {return nodes.at(id).name;}
+    std::string getName(int id) const {return nodes_.at(id).name_;}
     /**
     * @brief: Gets the latitude of an airport from its ID
     *
     * @param id The airport's ID
     * @return string The airport's latitude
     */
-    double getLatitude(int id) const {return nodes.at(id).latitude;}
+    double getLatitude(int id) const {return nodes_.at(id).latitude_;}
     /**
     * @brief: Gets the longitude of an airport from its ID
     *
     * @param id The airport's ID
     * @return string The airport's longitude
     */
-    double getLongitude(int id) const {return nodes.at(id).longitude;}
+    double getLongitude(int id) const {return nodes_.at(id).longitude_;}
 private:
     /**
      * @brief Stores the number of connections made in the graph
      */
-    int numConnections;
+    int numConnections_;
     /**
      * @brief Maps each airport's ID to its GraphNode
      */
-    std::map<int, GraphNode> nodes;
+    std::map<int, GraphNode> nodes_;
+    /**
+     * @brief Calculates the great circle distance between two airports using the haversine formula
+     * This technically assumes the Earth is a sphere but is easier to calculate
+     *
+     * @param a the first airport's ID
+     * @param b the second airport's ID
+     * @return double The distance between the airports, accounting for the Earth's curvature
+    */
+    double _distance(int id1, int id2) const;
 };
