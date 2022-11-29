@@ -16,7 +16,6 @@ using namespace std;
 
 class Dijkstras {
     public:
-        
         vector<int> getPath(const Graph& g, int source, int target);
         double shortestDistance() {
             return shortestDistance_;
