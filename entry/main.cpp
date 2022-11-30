@@ -11,8 +11,8 @@ int main() {
 
     cout << g.size() << " airports and " << g.connections() << " connections" << endl;
 
-    int source = 2;
-    int target = 3995;
+    int source = 3319;
+    int target = 5554;
     cs225::PNG output = plotDijkstra(g, source, target);
     output.writeToFile("output.png");
 }

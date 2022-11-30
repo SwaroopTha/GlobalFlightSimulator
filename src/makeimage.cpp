@@ -44,7 +44,7 @@ PNG plotBetweenness(Graph g, double maxRadius) {
 
 void plotPath(cs225::PNG & worldMap, Graph g, vector<int> path, double pointSize, int lineThickness) {
     // iterates over every airport in the path
-    for (size_t i = 0; i < path.size() - 1; i++) {
+    for (int i = 0; i < (int) path.size() - 1; i++) {
         int id1 = path[i];
         // draw a line between this airport and the next (excludes the last iteration)
         // the routes dataset doesn't specify whether the flight is eastward or westward so
