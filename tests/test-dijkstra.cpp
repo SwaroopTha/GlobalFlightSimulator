@@ -209,3 +209,29 @@ TEST_CASE("Dijkstra Airport Complex") {
     REQUIRE(journey == expected);
 }
 
+
+TEST_CASE("Greenland to Kenya") {
+
+    cout << "------------------------------------------------" << endl;
+
+    cout << "starting [Greenland to Kenya]" << endl;
+
+
+    int source = 5438;
+    int target = 5695;
+    Graph g = readData();
+    Dijkstras dij;
+    auto path = dij.getPath(g, source, target);
+    auto distance = dij.shortestDistance();
+
+    for (auto i : path) {
+        if (i == -1) continue;
+        cout << g.getName(i) << " ---> ";
+    }
+    std::cout << "arrived to " << g.getName(target) << std::endl;
+
+    std::cout << distance << std::endl;
+
+
+    REQUIRE(distance < 13000);
+}

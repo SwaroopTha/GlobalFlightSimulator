@@ -11,6 +11,10 @@ typedef pair<int, double> DijNode;
 
 vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
     airports_ = g.getIDs();
+    // checks if source and targets are valid
+    if (!g.inGraph(source) || !g.inGraph(target)) {
+        return vector<int>();
+    }
     auto comp = [](DijNode a, DijNode b) {
         return a.second > b.second;
     };
