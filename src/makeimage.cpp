@@ -28,7 +28,7 @@ PNG plotBetweenness(Graph g, double maxRadius) {
     BetweenessCentrality bc;
     worldMap.readFromFile("../Data/map.png");
     // currently the scores take too long to compute so here's an example
-    map<int, int> scores = {{1,3},{200,2},{300,1}, {400, 4}};
+    map<int, int> scores = bc.getAllScoresDijkstrasProbabilistic(g, 100);
     int max = 0;
     for (auto it = scores.begin(); it != scores.end(); it++) {
         if (it->second > max) {

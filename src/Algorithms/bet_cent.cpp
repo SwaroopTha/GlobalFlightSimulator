@@ -129,12 +129,12 @@ map<int, int> BetweenessCentrality::getAllScoresDijkstrasProbabilistic(const Gra
     }
     int sampled = 0;
     default_random_engine generator;
-    uniform_int_distribution<int> distribution(0, graph.size());
+    uniform_int_distribution<int> distribution(0, graph.size() - 1);
     while (sampled < sampleSize) {
-        int id1 = distribution(generator);
-        int id2 = distribution(generator);
+        int id1 = airport_ids_[distribution(generator)];
+        int id2 = airport_ids_[distribution(generator)];
         while (id1 == id2) {
-            id2 = distribution(generator);
+            id2 = airport_ids_[distribution(generator)];
         }
         cout << "generating " << id1 << " " << id2 << endl;
         Dijkstras d;
