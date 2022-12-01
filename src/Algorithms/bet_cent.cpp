@@ -1,4 +1,6 @@
 #include "bet_cent.h"
+#include <random>
+#include <ctime>
 
 using namespace std;
 /*
@@ -117,6 +119,34 @@ map<int, int> BetweenessCentrality::getAllScoresDijkstras(const Graph& graph) {
 
     cout << "Total Paths: " << total_paths << endl;
 
+    return airport_scores_dijkstras_;
+}
+
+map<int, int> BetweenessCentrality::getAllScoresDijkstrasProbabilistic(const Graph& graph, int sampleSize, bool skipNoPaths) {
+    vector<int> airport_ids_ = graph.getIDs();
+    for (int id : airport_ids_) {
+        airport_scores_dijkstras_[id] = 0;
+    }
+    int sampled = 0;
+    default_random_engine generator;
+    uniform_int_distribution<int> distribution(0, graph.size());
+    while (sampled < sampleSize) {
+        int id1 = distribution(generator);
+        int id2 = distribution(generator);
+        while (id1 == id2) {
+            id2 = distribution(generator);
+        }
+        cout << "generating " << id1 << " " << id2 << endl;
+        Dijkstras d;
+        vector<int> shortest_path = d.getPath(graph, id1, id2);
+        if (shortest_path.size() > 0) {
+            for (size_t i = 1; i < shortest_path.size() - 1; i++) {
+                int current_airport = shortest_path[i];
+                airport_scores_dijkstras_[current_airport]++;
+            }
+            sampled++;
+        }
+    }
     return airport_scores_dijkstras_;
 }
 

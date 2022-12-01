@@ -151,6 +151,14 @@ public:
     * @return string The airport's longitude
     */
     double getLongitude(int id) const {return nodes_.at(id).longitude_;}
+
+    /**
+    * @brief Checks if an ID is in the graph
+    *
+    * @param id The airport's ID
+    * @return bool Whether the ID is in the graph
+    */
+    bool inGraph(int id) const { return nodes_.find(id) != nodes_.end(); }
 private:
     /**
      * @brief Stores the number of connections made in the graph
