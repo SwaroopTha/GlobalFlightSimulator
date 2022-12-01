@@ -38,7 +38,7 @@ class BetweenessCentrality {
         * @param showProgress Whetehr to show a progress bar
         * @return map<int, int> A map of IDs to betweenness scores
         */
-        map<int, int> getAllScoresDijkstrasProbabilistic(const Graph& graph, int sampleSize, bool skipNonPaths = true, bool showProgress = true);
+        map<int, int> getProbabilisticScoresDijkstras(const Graph& graph, int sampleSize, bool skipNonPaths = true, bool showProgress = true);
 
     private:
         vector<int> airport_ids_; // vector of all airport ids

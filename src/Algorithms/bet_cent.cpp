@@ -122,12 +122,12 @@ map<int, int> BetweenessCentrality::getAllScoresDijkstras(const Graph& graph) {
     return airport_scores_dijkstras_;
 }
 
-map<int, int> BetweenessCentrality::getAllScoresDijkstrasProbabilistic(const Graph& graph, int sampleSize, bool skipNonPaths, bool showProgress) {
+map<int, int> BetweenessCentrality::getProbabilisticScoresDijkstras(const Graph& graph, int sampleSize, bool skipNonPaths, bool showProgress) {
     vector<int> airport_ids_ = graph.getIDs();
     int sampled = 0;
     default_random_engine generator;
     uniform_int_distribution<int> distribution(0, graph.size() - 1);
-    if (showProgress) { ProgressBar pb; }
+    ProgressBar pb;
     while (sampled < sampleSize) {
         if (showProgress) {
             pb.updateProgress((double) sampled / sampleSize);
@@ -152,7 +152,10 @@ map<int, int> BetweenessCentrality::getAllScoresDijkstrasProbabilistic(const Gra
             sampled++;
         }
     }
-    if (showProgress) { cout << pb << endl; }
+    if (showProgress) {
+        pb.updateProgress(1);
+        cout << pb << endl;
+    }
     return airport_scores_dijkstras_;
 }
 
