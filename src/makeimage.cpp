@@ -23,12 +23,12 @@ PNG plotBFS(Graph g, int start, double pointSize, int lineThickness) {
     return worldMap;
 }
 
-PNG plotBetweenness(Graph g, double maxRadius) {
+PNG plotBetweenness(Graph g, int sampleSize, bool skipNonPaths, double maxRadius) {
     PNG worldMap;
     BetweenessCentrality bc;
     worldMap.readFromFile("../Data/map.png");
     // currently the scores take too long to compute so here's an example
-    map<int, int> scores = bc.getAllScoresDijkstrasProbabilistic(g, 100);
+    map<int, int> scores = bc.getAllScoresDijkstrasProbabilistic(g, sampleSize, skipNonPaths);
     int max = 0;
     for (auto it = scores.begin(); it != scores.end(); it++) {
         if (it->second > max) {

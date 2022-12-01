@@ -35,7 +35,7 @@ cs225::PNG plotBFS(Graph g, int start, double pointSize = 6, int lineThickness =
 * @param maxRadius The maximum radius of the points (the most central point will have this radius)
 * @return PNG The map png
 */
-cs225::PNG plotBetweenness(Graph g, double maxRadius = 8);
+cs225::PNG plotBetweenness(Graph g, int sampleSize = 100, bool skipNoPaths = true, double maxRadius = 8);
 
 /**
 * @brief Plots a path on a world map

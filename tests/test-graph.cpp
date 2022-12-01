@@ -28,6 +28,9 @@ TEST_CASE("graph constructor") {
 
 TEST_CASE("adding and accessing nodes") {
     Graph g;
+    REQUIRE(!g.inGraph(12));
+    REQUIRE(!g.inGraph(24));
+
     g.addNode(12, "idk", 30, -30);
     REQUIRE(g.connections() == 0);
     REQUIRE(g.size() == 1);
@@ -35,6 +38,8 @@ TEST_CASE("adding and accessing nodes") {
     REQUIRE(g.getName(12) == "idk");
     REQUIRE(g.getLatitude(12) == 30);
     REQUIRE(g.getLongitude(12) == -30);
+    REQUIRE(g.inGraph(12));
+    REQUIRE(!g.inGraph(24));
 
     g.addNode(24, "smth", 25, -35);
     REQUIRE(g.connections() == 0);
@@ -44,6 +49,8 @@ TEST_CASE("adding and accessing nodes") {
     REQUIRE(g.getName(24) == "smth");
     REQUIRE(g.getLatitude(24) == 25);
     REQUIRE(g.getLongitude(24) == -35);
+    REQUIRE(g.inGraph(12));
+    REQUIRE(g.inGraph(24));
 }
 
 TEST_CASE("connecting nodes") {
