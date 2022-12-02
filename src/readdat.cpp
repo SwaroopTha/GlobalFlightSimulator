@@ -79,8 +79,9 @@ Graph readData(string vertexFile, string edgeFile, vector<int> ids) {
         }
 
         if (validID(id) && validLatitude(latitude) && validLongitude(longitude)) {
-            //add the airport to the graph
+            //add the airport to the graph (if appropriate)
             if (idsGiven) {
+                // check if the ID is in the list
                 for (int givenID : ids) {
                     if (id == givenID) {
                         g.addNode(id, name, latitude, longitude);
@@ -137,6 +138,7 @@ Graph readData(string vertexFile, string edgeFile, vector<int> ids) {
 }
 
 Graph sampleData(std::string vertexFile, std::string edgeFile, int sampleSize) {
+    // used to keep track of read-in data before sampling from it
     struct airport {
         int id_;
         string name_, iata_;

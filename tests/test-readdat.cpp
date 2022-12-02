@@ -1,6 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include "readdat.h"
+#include "Graph.h"
 
 using namespace std;
 
@@ -81,4 +82,28 @@ TEST_CASE("valid longitude and latitude") {
     REQUIRE(validLongitude(val4) == true);
     REQUIRE(validLongitude(val5) == true);
     REQUIRE(validLongitude(val6) == false);
+}
+
+TEST_CASE("readData without ids") {
+    Graph g = readData("../Data/airports.dat",  "../Data/routes.dat");
+    REQUIRE(g.size() == 7698);
+    REQUIRE(g.connections() == 67074);
+}
+
+TEST_CASE("readData with ids") {
+    vector<int> ids = {1, 2, 3, 4};
+    Graph g = readData("../Data/airports.dat",  "../Data/routes.dat", ids);
+    REQUIRE(g.size() == 4);
+    REQUIRE(g.connections() == 12);
+    REQUIRE(g.getIDs() == ids);
+}
+
+TEST_CASE("sampleData") {
+    Graph g = sampleData("../Data/airports.dat",  "../Data/routes.dat", 1000);
+    REQUIRE(g.size() == 1000);
+    REQUIRE(g.connections() < 67074);
+    // this is more than the number of IDs in the data
+    g = sampleData("../Data/airports.dat",  "../Data/routes.dat", 10000);
+    REQUIRE(g.size() == 7698);
+    REQUIRE(g.connections() == 67074);
 }

@@ -5,6 +5,8 @@
 #include <vector>
 #include <string>
 
+// These functions are used for reading in data from .dat files
+
 /**
  * @brief Gets each field in a line separated by a delimiter
  * 
