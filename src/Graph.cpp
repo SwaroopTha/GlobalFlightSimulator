@@ -4,8 +4,8 @@
 
 using namespace std;
 
-double Graph::GraphNode::connectionDistance(int id) const {
-    if (connectedTo(id)) {
+double Graph::GraphNode::_connectionDistance(int id) const {
+    if (_connectedTo(id)) {
         return connections_.at(id);
     }
     return std::numeric_limits<double>::infinity();
@@ -45,7 +45,7 @@ vector<int> Graph::getConnections(int id) const {
 
 bool Graph::connectedTo(int id1, int id2) const {
     if (nodes_.find(id1) != nodes_.end() && nodes_.find(id2) != nodes_.end()) {
-        return nodes_.at(id1).connectedTo(id2);
+        return nodes_.at(id1)._connectedTo(id2);
     }
     return false;
 }

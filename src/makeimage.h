@@ -24,6 +24,7 @@ cs225::PNG plotDijkstra(Graph g, int source, int target, double pointSize = 8, i
 * @param start The start of the BFS algorithm
 * @param pointSize The radius of the points, in pixels
 * @param lineThickness The thickness of the lines, in pixels
+* @return PNG The map png
 */
 cs225::PNG plotBFS(Graph g, int start, double pointSize = 6, int lineThickness = 2);
 
@@ -37,13 +38,15 @@ cs225::PNG plotBFS(Graph g, int start, double pointSize = 6, int lineThickness =
 * @param maxRadius The maximum radius of the points (the most central point will have this radius)
 * @return PNG The map png
 */
-cs225::PNG plotBetweenness(Graph g, int sampleSize = 100, bool skipNoPaths = true, double maxRadius = 8);
+cs225::PNG plotBetweenness(Graph g, int sampleSize = 100, bool skipNoPaths = true, double maxRadius = 10);
 
 /**
 * @brief Plots a path on a world map
+* The path is given as a vector of IDs
 * 
 * @param worldMap The map to plot the path on
 * @param g The graph the path is on
+* @param path The path of IDs to plot
 * @param pointSize The radius of the points
 * @param lineThickness The radius of the lines
 */

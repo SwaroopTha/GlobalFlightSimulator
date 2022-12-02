@@ -7,14 +7,13 @@
 #include <limits>
 
 /**
- * Graph class
- * Stores all airports and their connections
+ * @brief Stores all airports and their connections
+ * This Graph is directional and stores distances
  */
 class Graph {
 private:
     /**
-    * GraphNode struct
-    * Stores the data of an airport and its connections
+    * @brief Stores the data of an airport and its connections
     */
     struct GraphNode {
         int id_; // The airport's unique identifying number
@@ -42,15 +41,16 @@ private:
         * @param id The ID to see if it's connected to
         * @return bool Whether there is a connection
         */
-        bool connectedTo(int id) const { return connections_.find(id) != connections_.end(); }
+        bool _connectedTo(int id) const { return connections_.find(id) != connections_.end(); }
         /**
-        * @brief Gets the connection weight between this and an ID
-        * If not connected returns 0
+        * @brief Gets the connection distance between this and an ID
+        * If not connected returns infinity
         *
         * @param id The ID it's connected to
         */
-        double connectionDistance(int id) const;
+        double _connectionDistance(int id) const;
     };
+
 public:
     /**
      * @brief Constructs a new Graph object with no airports or connections
@@ -100,13 +100,15 @@ public:
     */
     bool connectedTo(int id1, int id2) const;
     /**
-    * @brief Gets the weight of the connection between two airports
+    * @brief Gets the distance of the connection between two airports
+    * (directional, from the first to the second)
+    * If not connected returns infinity
     *
     * @param id1 The first airport's ID
     * @param id2 The second airport's ID
     * @return double The weight
     */
-    double getDistance(int id1, int id2) const { return nodes_.at(id1).connectionDistance(id2); }
+    double getDistance(int id1, int id2) const { return nodes_.at(id1)._connectionDistance(id2); }
 
     /**
     * @brief Gets all connections of an airport (one-way, starting from the given airport)
@@ -145,6 +147,7 @@ public:
     * @return bool Whether the ID is in the graph
     */
     bool inGraph(int id) const { return nodes_.find(id) != nodes_.end(); }
+
 private:
     int numConnections_; // Stores the number of connections made in the grap
     std::map<int, GraphNode> nodes_; // Maps each airport's ID to its GraphNode

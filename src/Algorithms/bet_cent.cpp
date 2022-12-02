@@ -153,7 +153,7 @@ map<int, int> BetweenessCentrality::getProbabilisticScoresDijkstras(const Graph&
         }
     }
     if (showProgress) {
-        pb.updateProgress(1);
+        pb.setProgress(1);
         cout << pb << endl;
     }
     return airport_scores_dijkstras_;
