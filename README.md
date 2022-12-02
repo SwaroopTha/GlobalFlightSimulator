@@ -14,5 +14,5 @@ https://openflights.org/data.html
     * bfs : Breadth-First Search Algorithm
 * readdat : reads the data from the data files and implements data into graph network
 * Graph : class represents attributes of the graph data structure
-* makeimage : Visualizer tool for all algorithms
-
+* makeimage : Visualizer tool for all algorithms (map in Data)
+* ProgressBar : For showing progress on the command line
