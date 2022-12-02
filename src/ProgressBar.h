@@ -4,11 +4,12 @@
 
 /**
 * @brief A progress bar to show whatever progress you want
+* Intended for use in an ostream
 */
 class ProgressBar {
 private:
     int length_; // the length of the printed bar (not including ends)
-    double progress_; // the proportion of progress made
+    double progress_; // the proportion of progress made (between 0 and 1)
 public:
     /**
     * @brief Constructs the ProgressBar class starting at 0 progress
@@ -16,18 +17,44 @@ public:
     * @param length The bar's length
     */
     ProgressBar(int length = 70) : length_(70), progress_(0) {}
+    
     /**
-    * @brief Updates the progress level
+    * @brief Gets the length of the progress bar
     *
-    * @param progress The new progress level
+    * @return int The length
     */
-    void updateProgress(double progress)  { progress_ = progress; }
+    int getLength() const { return length_; }
+
+    /**
+    * @brief Gets the progress of the progress bar
+    *
+    * @return int The progress
+    */
+    double getProgress() const { return progress_; }
+
+    /**
+    * @brief Sets the length
+    *
+    * @param length The new length
+    */
+    void setLength(int length)  { length_ = length; }
+
+    /**
+    * @brief Sets the progress
+    *
+    * @param progress The new progress
+    */
+    void setProgress(double progress)  { progress_ = progress; }
+
     /**
     * @brief Gets a string representing the progress bar
+    * It will have [ and ] as its endpoints and be filled with
+    * An appropriate amount of =
     *
-    * @return string The string
+    * @return string The progress bar string
     */
     std::string toString() const;
+
 };
 
 /**

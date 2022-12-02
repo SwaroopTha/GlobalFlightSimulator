@@ -132,7 +132,7 @@ TEST_CASE("Dijkstra Airport Nearby") {
 
     cout << "starting [Dijkstra Airport Nearby]" << endl;
 
-    Graph g = readData();
+    Graph g = readData("../Data/airports.dat",  "../Data/routes.dat");
 
     cout << g.size() << " airports added" << endl;
 
@@ -173,7 +173,7 @@ TEST_CASE("Dijkstra Airport Complex") {
 
 
     Dijkstras canvas;
-    Graph g = readData();
+    Graph g = readData("../Data/airports.dat",  "../Data/routes.dat");
     Dijkstras dij;
     cout << "starting journey from Champaign to Hong Kong: " << endl;
 
@@ -219,7 +219,7 @@ TEST_CASE("Greenland to Kenya") {
 
     int source = 5438;
     int target = 5695;
-    Graph g = readData();
+    Graph g = readData("../Data/airports.dat",  "../Data/routes.dat");
     Dijkstras dij;
     auto path = dij.getPath(g, source, target);
     auto distance = dij.shortestDistance();

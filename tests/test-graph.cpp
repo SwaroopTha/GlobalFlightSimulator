@@ -90,7 +90,7 @@ TEST_CASE("connecting nodes") {
 }
 
 TEST_CASE("distance function") {
-    Graph g = readData();
+    Graph g = readData("../Data/airports.dat",  "../Data/routes.dat");
     // real-life distances are calculated beforehand
     // some airports aren't automatically connected
     REQUIRE(closeEnough(g.getDistance(1, 2), 106.80));

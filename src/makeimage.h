@@ -29,9 +29,11 @@ cs225::PNG plotBFS(Graph g, int start, double pointSize = 6, int lineThickness =
 
 /**
 * @brief Plots each airport on a plate carrée map projection
-* The size of the point is proportional to its betweenness centrality
+* The size of the point is proportional to its betweenness centrality (determined probabilistically)
 *
 * @param g The graph on which to apply betweenness centrality
+* @param sampleSize How many paths to sample from the graph
+* @param skipNonPaths Whether or not to skip pairs of points with no path
 * @param maxRadius The maximum radius of the points (the most central point will have this radius)
 * @return PNG The map png
 */

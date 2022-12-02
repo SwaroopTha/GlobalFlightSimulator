@@ -4,6 +4,13 @@
 
 using namespace std;
 
+double Graph::GraphNode::connectionDistance(int id) const {
+    if (connectedTo(id)) {
+        return connections_.at(id);
+    }
+    return std::numeric_limits<double>::infinity();
+}
+
 void Graph::addNode(int id, string name, double latitude, double longitude) {
     GraphNode node = GraphNode(id, name, latitude, longitude);
     nodes_[id] = node;
@@ -36,11 +43,18 @@ vector<int> Graph::getConnections(int id) const {
     return ids;
 }
 
+bool Graph::connectedTo(int id1, int id2) const {
+    if (nodes_.find(id1) != nodes_.end() && nodes_.find(id2) != nodes_.end()) {
+        return nodes_.at(id1).connectedTo(id2);
+    }
+    return false;
+}
+
 double Graph::_distance(int id1, int id2) const {
     double PI = 4*atan(1);
     GraphNode a = nodes_.at(id1);
     GraphNode b = nodes_.at(id2);
-    //uses haversine formula
+    //haversine formula
     double EARTH_RADIUS = 6378.1;
     double lat1 = a.latitude_ * PI/180;
     double lat2 = b.latitude_ * PI/180;

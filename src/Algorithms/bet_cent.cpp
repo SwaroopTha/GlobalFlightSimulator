@@ -130,7 +130,7 @@ map<int, int> BetweenessCentrality::getProbabilisticScoresDijkstras(const Graph&
     ProgressBar pb;
     while (sampled < sampleSize) {
         if (showProgress) {
-            pb.updateProgress((double) sampled / sampleSize);
+            pb.setProgress((double) sampled / sampleSize);
             cout << pb;
         }
         int id1 = airport_ids_[distribution(generator)];

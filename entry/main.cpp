@@ -7,7 +7,7 @@
 using namespace std;
 
 int main() {
-    Graph g = readData();
+    Graph g = readData("../Data/airports.dat",  "../Data/routes.dat");
 
     cout << g.size() << " airports and " << g.connections() << " connections" << endl;
 
