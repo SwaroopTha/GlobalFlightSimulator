@@ -46,13 +46,14 @@ bool validLongitude(double longitude);
 
 /**
 * @brief Reads in data to a Graph
+* If a vector of IDs is given, only those IDs will be used
 *
 * @param vertexFile A file of the graph vertices
 * @param edgeFile A file of the graph edges
+* @param ids A vector of the IDs to add (if empty, all IDs found will be used)
 * @return Graph A graph of the data
 */
-Graph readData(std::string vertexFile, std::string edgeFile);
-
+Graph readData(std::string vertexFile, std::string edgeFile, std::vector<int> ids = std::vector<int>());
 
 /**
 * @brief Reads in data to a Graph

@@ -51,7 +51,8 @@ bool validLongitude(double longitude) {
     return longitude >= -180 && longitude <= 180;
 }
 
-Graph readData(std::string vertexFile, std::string edgeFile) {
+Graph readData(string vertexFile, string edgeFile, vector<int> ids) {
+    bool idsGiven = !(ids.size() == 0);
     Graph g;
     ifstream airports(vertexFile);
     ifstream routes(edgeFile);
@@ -79,7 +80,16 @@ Graph readData(std::string vertexFile, std::string edgeFile) {
 
         if (validID(id) && validLatitude(latitude) && validLongitude(longitude)) {
             //add the airport to the graph
-            g.addNode(id, name, latitude, longitude);
+            if (idsGiven) {
+                for (int givenID : ids) {
+                    if (id == givenID) {
+                        g.addNode(id, name, latitude, longitude);
+                        break;
+                    }
+                }
+            } else {
+                g.addNode(id, name, latitude, longitude);
+            }
         }
     }
     airports.close();
