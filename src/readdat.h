@@ -45,10 +45,23 @@ bool validLatitude(double latitude);
 bool validLongitude(double longitude);
 
 /**
-* @brief Reads in the data from the Data folder
+* @brief Reads in data to a Graph
 *
 * @param vertexFile A file of the graph vertices
 * @param edgeFile A file of the graph edges
 * @return Graph A graph of the data
 */
 Graph readData(std::string vertexFile, std::string edgeFile);
+
+
+/**
+* @brief Reads in data to a Graph
+* Only a certain amount of lines will be used, chosen randomly (uniformly)
+* If the sample size is greater than the number of vertices, the number of vertices is used
+*
+* @param vertexFile A file of the graph vertices
+* @param edgeFile A file of the graph edges
+* @param sampleSize The number of lines that will 
+* @return Graph A graph of the data
+*/
+Graph sampleData(std::string vertexFile, std::string edgeFile, int sampleSize);

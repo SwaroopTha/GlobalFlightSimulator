@@ -5,6 +5,7 @@
 #include "makeimage.h"
 
 using namespace std;
+using cs225::PNG;
 
 int main() {
     Graph g = readData("../Data/airports.dat",  "../Data/routes.dat");

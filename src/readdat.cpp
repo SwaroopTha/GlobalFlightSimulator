@@ -1,5 +1,6 @@
 #include "readdat.h"
 #include <iostream>
+#include <random>
 
 using namespace std;
 
@@ -52,14 +53,11 @@ bool validLongitude(double longitude) {
 
 Graph readData(std::string vertexFile, std::string edgeFile) {
     Graph g;
-    ifstream airports("../Data/airports.dat");
-    ifstream routes("../Data/routes.dat");
+    ifstream airports(vertexFile);
+    ifstream routes(edgeFile);
     string line;
     //map from IATA to ID to fix issues later on
     map<string, int> iataToID;
-    int skippedAirports = 0;
-    int skippedRoutes = 0;
-    int fixedRoutes = 0;
 
     //reads in the airports
     while (getline(airports, line)) {
@@ -67,7 +65,6 @@ Graph readData(std::string vertexFile, std::string edgeFile) {
         vector<string> fields = readline(ss);
         //skip if there are not 14 fields
         if (fields.size() != 14) {
-            skippedAirports++;
             continue;
         }
         //we only care about these fields
@@ -83,8 +80,6 @@ Graph readData(std::string vertexFile, std::string edgeFile) {
         if (validID(id) && validLatitude(latitude) && validLongitude(longitude)) {
             //add the airport to the graph
             g.addNode(id, name, latitude, longitude);
-        } else {
-            skippedAirports++;
         }
     }
     airports.close();
@@ -95,21 +90,17 @@ Graph readData(std::string vertexFile, std::string edgeFile) {
         vector<string> fields = readline(ss);
         //skip if there aren't 9 lines
         if (fields.size() != 9) {
-            skippedRoutes++;
             continue;
         }
         int id1, id2;
-        bool fixed = false;
         //the ID will be missing occassionally so we try to use the IATA to figure it out
         //this is for the first airport
         if (fields[3] == "\\N") {
             if (iataToID.find(fields[2]) != iataToID.end()) {
                 //if the IATA is found use the corresponding ID
                 id1 = iataToID[fields[2]];
-                fixed = true;
             } else {
                 //skip it otherwise
-                skippedRoutes++;
                 continue;
             }
         } else {
@@ -119,26 +110,122 @@ Graph readData(std::string vertexFile, std::string edgeFile) {
         if (fields[5] == "\\N") {
             if (iataToID.find(fields[4]) != iataToID.end()) {
                 id2 = iataToID[fields[4]];
-                fixed = true;
             } else {
-                skippedRoutes++;
                 continue;
             }
         } else {
             id2 = stoi(fields[5]);
         }
         if (!(validID(id1) && validID(id2))) {
-            skippedRoutes++;
             continue;
         }
-        //make the connection (or try to)
-        if (!g.connect(id1, id2)) {
-            skippedRoutes++;
+        g.connect(id1, id2);
+    }
+    routes.close();
+
+    return g;
+}
+
+Graph sampleData(std::string vertexFile, std::string edgeFile, int sampleSize) {
+    struct airport {
+        int id_;
+        string name_, iata_;
+        double latitude_, longitude_;
+        airport(int id, string name, string iata, double latitude, double longitude) :
+            id_(id), name_(name), iata_(iata), latitude_(latitude), longitude_(longitude) {}
+    };
+    Graph g;
+    ifstream airports(vertexFile);
+    ifstream routes(edgeFile);
+    string line;
+    //map from IATA to ID to fix issues later on
+    map<string, int> iataToID;
+    // possible airports to sample from
+    vector<airport> airportList;
+
+    //reads in the airports
+    while (getline(airports, line)) {
+        stringstream ss(line);
+        vector<string> fields = readline(ss);
+        //skip if there are not 14 fields
+        if (fields.size() != 14) {
+            continue;
         }
-        //count the number of fixed routes (i.e. routes that use IATA to determine ID)
-        if (fixed) {
-            fixedRoutes++;
+        //we only care about these fields
+        int id = stoi(fields[0]);
+        string name = fields[1];
+        string iata = fields[4];
+        double latitude = stod(fields[6]);
+        double longitude = stod(fields[7]);
+        airportList.push_back(airport(id, name, iata, latitude, longitude));
+        /*
+        if (validID(id) && validIATA(iata)) {
+            iataToID[iata] = id;
         }
+
+        if (validID(id) && validLatitude(latitude) && validLongitude(longitude)) {
+            //add the airport to the graph
+            g.addNode(id, name, latitude, longitude);
+        }
+        */
+    }
+    airports.close();
+
+    // sample
+    if (sampleSize > (int)airportList.size()) {
+        sampleSize = airportList.size();
+    }
+    default_random_engine generator;
+    for (int i = 0; i < sampleSize; i++) {
+        uniform_int_distribution<int> distribution(0, airportList.size() - 1);
+        int index = distribution(generator);
+        airport a = airportList[index];
+        if (validID(a.id_) && validIATA(a.iata_)) {
+            iataToID[a.iata_] = a.id_;
+        }
+        if (validID(a.id_) && validLatitude(a.latitude_) && validLongitude(a.longitude_)) {
+            //add the airport to the graph
+            g.addNode(a.id_, a.name_, a.latitude_, a.longitude_);
+        }
+        airportList.erase(airportList.begin() + index);
+    }
+
+    //reads in the connections
+    while (getline(routes, line)) {
+        stringstream ss(line);
+        vector<string> fields = readline(ss);
+        //skip if there aren't 9 lines
+        if (fields.size() != 9) {
+            continue;
+        }
+        int id1, id2;
+        //the ID will be missing occassionally so we try to use the IATA to figure it out
+        //this is for the first airport
+        if (fields[3] == "\\N") {
+            if (iataToID.find(fields[2]) != iataToID.end()) {
+                //if the IATA is found use the corresponding ID
+                id1 = iataToID[fields[2]];
+            } else {
+                //skip it otherwise
+                continue;
+            }
+        } else {
+            id1 = stoi(fields[3]);
+        }
+        //same thing for the second airport
+        if (fields[5] == "\\N") {
+            if (iataToID.find(fields[4]) != iataToID.end()) {
+                id2 = iataToID[fields[4]];
+            } else {
+                continue;
+            }
+        } else {
+            id2 = stoi(fields[5]);
+        }
+        if (!(validID(id1) && validID(id2))) {
+            continue;
+        }
+        g.connect(id1, id2);
     }
     routes.close();
 

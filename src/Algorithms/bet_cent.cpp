@@ -1,6 +1,5 @@
 #include "bet_cent.h"
 #include <random>
-#include <ctime>
 
 using namespace std;
 /*
