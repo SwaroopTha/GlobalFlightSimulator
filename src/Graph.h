@@ -54,8 +54,10 @@ private:
 public:
     /**
      * @brief Constructs a new Graph object with no airports or connections
+     *
+     * @param spherical Whether the distance calculation should be done on a sphere or 2D plane
      */
-    Graph() : numConnections_(0) {}
+    Graph(bool spherical = true) : spherical_(spherical), numConnections_(0) {}
     /**
      * @brief Adds an airport to the graph without any connections
      * 
@@ -108,7 +110,10 @@ public:
     * @param id2 The second airport's ID
     * @return double The weight
     */
-    double getDistance(int id1, int id2) const { return nodes_.at(id1)._connectionDistance(id2); }
+    double getDistance(int id1, int id2) const { 
+        if (id1 == id2) { return 0; }
+        return nodes_.at(id1)._connectionDistance(id2);
+    }
 
     /**
     * @brief Gets all connections of an airport (one-way, starting from the given airport)
@@ -149,6 +154,7 @@ public:
     bool inGraph(int id) const { return nodes_.find(id) != nodes_.end(); }
 
 private:
+    bool spherical_; // Whether the distance calculation should be done on a sphere or 2D plane
     int numConnections_; // Stores the number of connections made in the grap
     std::map<int, GraphNode> nodes_; // Maps each airport's ID to its GraphNode
     /**

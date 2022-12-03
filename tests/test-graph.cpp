@@ -2,6 +2,7 @@
 
 #include "Graph.h"
 #include "readdat.h"
+#include <cmath>
 
 using namespace std;
 
@@ -24,6 +25,11 @@ TEST_CASE("graph constructor") {
     REQUIRE(g.connections() == 0);
     REQUIRE(g.size() == 0);
     REQUIRE(g.getIDs() == vector<int>());
+
+    Graph g2(false);
+    REQUIRE(g2.connections() == 0);
+    REQUIRE(g2.size() == 0);
+    REQUIRE(g2.getIDs() == vector<int>());
 }
 
 TEST_CASE("adding and accessing nodes") {
@@ -54,9 +60,9 @@ TEST_CASE("adding and accessing nodes") {
 }
 
 TEST_CASE("connecting nodes") {
-    Graph g;
+    Graph g(false);
     g.addNode(12, "idk", 30, -30);
-    g.addNode(24, "smth", 26, -33);
+    g.addNode(24, "smth", 25, -35);
 
     REQUIRE(g.connections() == 0);
     REQUIRE(g.getConnections(12).size() == 0);
@@ -71,7 +77,7 @@ TEST_CASE("connecting nodes") {
     REQUIRE(g.connections() == 1);
     REQUIRE(g.getConnections(12) == vector<int>(1,24));
     REQUIRE(g.getConnections(24).size() == 0);
-    REQUIRE(g.getDistance(12, 24) < inf);
+    REQUIRE(abs(g.getDistance(12, 24) - 5*sqrt(2)) <= 0.0001);
     REQUIRE(g.getDistance(24, 12) == inf);
     REQUIRE(g.connectedTo(12, 24) == true);
     REQUIRE(g.connectedTo(24, 12) == false);
@@ -81,7 +87,8 @@ TEST_CASE("connecting nodes") {
     REQUIRE(g.connections() == 2);
     REQUIRE(g.getConnections(12) == vector<int>(1,24));
     REQUIRE(g.getConnections(24) == vector<int>(1,12));
-    REQUIRE(g.getDistance(12, 24) < inf);
+    REQUIRE(abs(g.getDistance(12, 24) - 5*sqrt(2)) <= 0.0001 );
+    REQUIRE(abs(g.getDistance(24, 12) - 5*sqrt(2)) <= 0.0001 );
     REQUIRE(g.getDistance(24, 12) < inf);
     REQUIRE(g.connectedTo(12, 24) == true);
     REQUIRE(g.connectedTo(24, 12) == true);
@@ -91,7 +98,7 @@ TEST_CASE("connecting nodes") {
 
 TEST_CASE("distance function") {
     Graph g = readData("../Data/airports.dat",  "../Data/routes.dat");
-    // real-life distances are calculated beforehand
+    // real-life distances are looked up beforehand
     // some airports aren't automatically connected
     REQUIRE(closeEnough(g.getDistance(1, 2), 106.80));
     REQUIRE(g.getDistance(26, 41) == inf);
