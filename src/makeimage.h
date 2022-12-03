@@ -12,9 +12,13 @@
 * @param target The target airport ID
 * @param pointSize The radius of the points, in pixels
 * @param lineThickness The thickness of the lines, in pixels
+* @param pointPixel The pixel to be used to fill the points (red by default)
+* @param linePixel The pixel to be used to fill the lines (orange by default)
 * @return PNG The map png
 */
-cs225::PNG plotDijkstra(Graph g, int source, int target, double pointSize = 8, int lineThickness = 4);
+cs225::PNG plotDijkstra(Graph g, int source, int target, double pointSize = 8, int lineThickness = 4, 
+    cs225::HSLAPixel pointPixel = cs225::HSLAPixel(0, 1, 0.5, 1),
+    cs225::HSLAPixel linePixel = cs225::HSLAPixel(20, 1, 0.5, 1));
 
 /**
 * @brief Plots the BFS traversal on a plate carrée map projection
@@ -24,9 +28,13 @@ cs225::PNG plotDijkstra(Graph g, int source, int target, double pointSize = 8, i
 * @param start The start of the BFS algorithm
 * @param pointSize The radius of the points, in pixels
 * @param lineThickness The thickness of the lines, in pixels
+* @param pointPixel The pixel to be used to fill the points (red by default)
+* @param linePixel The pixel to be used to fill the lines (orange by default)
 * @return PNG The map png
 */
-cs225::PNG plotBFS(Graph g, int start, double pointSize = 6, int lineThickness = 2);
+cs225::PNG plotBFS(Graph g, int start, double pointSize = 6, int lineThickness = 2,
+    cs225::HSLAPixel pointPixel = cs225::HSLAPixel(0, 1, 0.5, 1),
+    cs225::HSLAPixel linePixel = cs225::HSLAPixel(20, 1, 0.5, 1));
 
 /**
 * @brief Plots each airport on a plate carrée map projection
@@ -36,9 +44,11 @@ cs225::PNG plotBFS(Graph g, int start, double pointSize = 6, int lineThickness =
 * @param sampleSize How many paths to sample from the graph
 * @param skipNonPaths Whether or not to skip pairs of points with no path
 * @param maxRadius The maximum radius of the points (the most central point will have this radius)
+* @param pointPixel The pixel to be used to fill the points (red by default)
 * @return PNG The map png
 */
-cs225::PNG plotBetweenness(Graph g, int sampleSize = 100, bool skipNoPaths = true, double maxRadius = 10);
+cs225::PNG plotBetweenness(Graph g, int sampleSize = 100, bool skipNoPaths = true, double maxRadius = 10,
+    cs225::HSLAPixel pointPixel = cs225::HSLAPixel(0, 1, 0.5, 1));
 
 /**
 * @brief Plots a path on a world map
@@ -49,21 +59,25 @@ cs225::PNG plotBetweenness(Graph g, int sampleSize = 100, bool skipNoPaths = tru
 * @param path The path of IDs to plot
 * @param pointSize The radius of the points
 * @param lineThickness The radius of the lines
+* @param pointPixel The pixel to be used to fill the points
+* @param linePixel The pixel to be used to fill the lines
 */
-void plotPath(cs225::PNG & worldMap, Graph g, vector<int> path, double pointSize, int lineThickness);
+void plotPath(cs225::PNG & worldMap, Graph g, vector<int> path, double pointSize, int lineThickness,
+    cs225::HSLAPixel pointPixel, cs225::HSLAPixel linePixel);
 
 /**
-* @brief Plots a red point on a map at a given latitude and longitude
+* @brief Plots a point on a map at a given latitude and longitude
 *
 * @param worldMap The map to plot the point on
 * @param lat The point's latitude
 * @param lon The point's longitude
 * @param radius The radius of the point
+* @param pixel The pixel to be used to fill the point
 */
-void plotPoint(cs225::PNG & worldMap, double lat, double lon, double radius);
+void plotPoint(cs225::PNG & worldMap, double lat, double lon, double radius, cs225::HSLAPixel pixel);
 
 /**
-* @brief Plots an orange line on a map between two points
+* @brief Plots a line on a map between two points
 * Uses Bresenham's line algorithm
 * Makes the line thicker along axis where it is most noticable
 *
@@ -73,5 +87,7 @@ void plotPoint(cs225::PNG & worldMap, double lat, double lon, double radius);
 * @param lat2 The latitude of the second point
 * @param lon2 The longitude of the second point
 * @param thickness The thickness of the line in pixels
+* @param pixel The pixel to be used to fill the line
 */
-void plotLine(cs225::PNG & worldMap, double lat1, double lon1, double lat2, double lon2, int thickness);
+void plotLine(cs225::PNG & worldMap, double lat1, double lon1, double lat2, double lon2, int thickness,
+    cs225::HSLAPixel pixel);

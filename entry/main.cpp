@@ -2,6 +2,7 @@
 #include "readdat.h"
 #include "Algorithms/dijkstra.h"
 #include "Algorithms/bfs.h"
+#include "Algorithms/bet_cent.h"
 #include "makeimage.h"
 
 using namespace std;

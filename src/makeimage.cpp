@@ -5,25 +5,25 @@ using namespace std;
 using cs225::PNG;
 using cs225::HSLAPixel;
 
-PNG plotDijkstra(Graph g, int source, int target, double pointSize, int lineThickness) {
+PNG plotDijkstra(Graph g, int source, int target, double pointSize, int lineThickness, HSLAPixel pointPixel, HSLAPixel linePixel) {
     PNG worldMap;
     Dijkstras dij;
     worldMap.readFromFile("../Data/map.png");
     vector<int> path = dij.getPath(g, source, target);
-    plotPath(worldMap, g, path, pointSize, lineThickness);
+    plotPath(worldMap, g, path, pointSize, lineThickness, pointPixel, linePixel);
     return worldMap;
 }
 
-PNG plotBFS(Graph g, int start, double pointSize, int lineThickness) {
+PNG plotBFS(Graph g, int start, double pointSize, int lineThickness, HSLAPixel pointPixel, HSLAPixel linePixel) {
     PNG worldMap;
     BFS bfs;
     worldMap.readFromFile("../Data/map.png");
     vector<int> path = bfs.traversalOfBFS(g, start);
-    plotPath(worldMap, g, path, pointSize, lineThickness);
+    plotPath(worldMap, g, path, pointSize, lineThickness, pointPixel, linePixel);
     return worldMap;
 }
 
-PNG plotBetweenness(Graph g, int sampleSize, bool skipNonPaths, double maxRadius) {
+PNG plotBetweenness(Graph g, int sampleSize, bool skipNonPaths, double maxRadius, HSLAPixel pointPixel) {
     PNG worldMap;
     BetweenessCentrality bc;
     worldMap.readFromFile("../Data/map.png");
@@ -37,12 +37,12 @@ PNG plotBetweenness(Graph g, int sampleSize, bool skipNonPaths, double maxRadius
     }
     for (auto it = scores.begin(); it != scores.end(); it++) {
         double ratio = (double) it->second / max;
-        plotPoint(worldMap, g.getLatitude(it->first), g.getLongitude(it->first), maxRadius * ratio);
+        plotPoint(worldMap, g.getLatitude(it->first), g.getLongitude(it->first), maxRadius * ratio, pointPixel);
     }
     return worldMap;
 }
 
-void plotPath(cs225::PNG & worldMap, Graph g, vector<int> path, double pointSize, int lineThickness) {
+void plotPath(cs225::PNG & worldMap, Graph g, vector<int> path, double pointSize, int lineThickness, HSLAPixel pointPixel, HSLAPixel linePixel) {
     // iterates over every airport in the path
     for (int i = 0; i < (int) path.size() - 1; i++) {
         int id1 = path[i];
@@ -50,14 +50,14 @@ void plotPath(cs225::PNG & worldMap, Graph g, vector<int> path, double pointSize
         // the routes dataset doesn't specify whether the flight is eastward or westward so
         // it is assumed that the line doesn't wrap around the map
         int id2 = path[i+1];
-        plotLine(worldMap, g.getLatitude(id1), g.getLongitude(id1), g.getLatitude(id2), g.getLongitude(id2), lineThickness);
+        plotLine(worldMap, g.getLatitude(id1), g.getLongitude(id1), g.getLatitude(id2), g.getLongitude(id2), lineThickness, linePixel);
     }
     for (int id : path) {
-        plotPoint(worldMap, g.getLatitude(id), g.getLongitude(id), pointSize);
+        plotPoint(worldMap, g.getLatitude(id), g.getLongitude(id), pointSize, pointPixel);
     }
 }
 
-void plotPoint(PNG & worldMap, double lat, double lon, double radius) {
+void plotPoint(PNG & worldMap, double lat, double lon, double radius, HSLAPixel pixel) {
     int halfWidth = worldMap.width() / 2;
     int halfHeight = worldMap.height() / 2;
     int centerX = (halfWidth * lon / 180) + halfWidth;
@@ -72,13 +72,13 @@ void plotPoint(PNG & worldMap, double lat, double lon, double radius) {
             int r2 = pow(x - centerX, 2) + pow(y - centerY, 2);
             // draw if inside the radius
             if (r2 < pow(radius, 2)) {
-                worldMap.getPixel(x, y) = HSLAPixel(0, 1, 0.5, 1);
+                worldMap.getPixel(x, y) = pixel;
             }
         }
     }
 }
 
-void plotLine(PNG & worldMap, double lat1, double lon1, double lat2, double lon2, int thickness) {
+void plotLine(PNG & worldMap, double lat1, double lon1, double lat2, double lon2, int thickness,HSLAPixel pixel) {
     // the documentation for this function is left as an exercise to the reader
     int halfThickness = thickness / 2;
     for (int adj = -halfThickness; adj < -halfThickness + thickness; adj++) {
@@ -108,7 +108,7 @@ void plotLine(PNG & worldMap, double lat1, double lon1, double lat2, double lon2
             int y = y1;
             for (int x = x1; x != x2; x1 < x2 ? x++ : x--) {
                 if (!(x < 0 || y < 0 || x >= (int) worldMap.width() || y >= (int) worldMap.height())) {
-                    worldMap.getPixel(x, y) = HSLAPixel(20, 1, 0.5, 1);
+                    worldMap.getPixel(x, y) = pixel;
                 }
                 if (d > 0) {
                     y += yi;
