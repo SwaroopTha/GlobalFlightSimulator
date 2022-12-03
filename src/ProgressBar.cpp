@@ -1,11 +1,12 @@
 #include "ProgressBar.h"
 #include <sstream>
 #include <iomanip>
+#include <cmath>
 
 using namespace std;
 
 string ProgressBar::toString() const {
-    int progressChars = length_ * progress_;
+    int progressChars = round(length_ * progress_);
     string progressString = "";
     progressString += "[";
     for (int i = 0; i < length_; i++) {

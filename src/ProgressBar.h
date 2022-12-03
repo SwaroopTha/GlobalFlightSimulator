@@ -16,7 +16,7 @@ public:
     *
     * @param length The bar's length
     */
-    ProgressBar(int length = 70) : length_(70), progress_(0) {}
+    ProgressBar(int length = 70) : length_(length), progress_(0) {}
     
     /**
     * @brief Gets the length of the progress bar
