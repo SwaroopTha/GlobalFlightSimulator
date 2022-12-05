@@ -15,7 +15,7 @@ TEST_CASE("Simple Dijkstra") {
 
     cout << "starting [Simple Dijkstra]" << endl;
 
-    Graph g;
+    Graph g(false);
 
     /*
                 |4|
@@ -37,6 +37,8 @@ TEST_CASE("Simple Dijkstra") {
     Dijkstras dij;
     vector<int> actual = dij.getPath(g, 1, 3);
     vector<int> expected = {1, 2, 3};
+
+    cout << dij.shortestDistance() << endl;
 
     REQUIRE(actual == expected);
 }
@@ -85,8 +87,6 @@ TEST_CASE("Complex Dijkstra") {
 }
 
 TEST_CASE("No Path") {
-
-
     cout << "------------------------------------------------" << endl;
 
     /*
@@ -99,8 +99,6 @@ TEST_CASE("No Path") {
 
 
     |1| ------- |2| ------- |3|
-
-
     */
 
     cout << "starting [No Path]" << endl;
@@ -129,11 +127,9 @@ TEST_CASE("Dijkstra Airport Nearby") {
     Dijkstras canvas;
 
     cout << "------------------------------------------------" << endl;
-
     cout << "starting [Dijkstra Airport Nearby]" << endl;
 
     Graph g = readData("../Data/airports.dat",  "../Data/routes.dat");
-
     cout << g.size() << " airports added" << endl;
 
     Dijkstras dij;
@@ -234,4 +230,33 @@ TEST_CASE("Greenland to Kenya") {
 
 
     REQUIRE(distance < 13000);
+}
+
+
+TEST_CASE("Chicago to Namibia") {
+    cout << "------------------------------------------------" << endl;
+    cout << "starting [Chicago to Namibia]" << endl;
+
+
+    int target = 4105; // namibia
+    int source = 3830; // ohare
+
+    // subset of possible airport connections
+    std::vector<int> sub = {3830, 1382, 4049, 1002, 8336, 1003, 4105, 1004, 1059, 5662, 5663, 5664, 13762, 963, 966, 1013, 5613, 799, 1074, 248, 3797, 3576}; // Set Airports
+
+    Graph g = readData("../Data/airports.dat",  "../Data/routes.dat", sub);
+    Dijkstras dij;
+    auto path = dij.getPath(g, source, target);
+    auto distance = dij.shortestDistance();
+
+    for (auto i : path) {
+        if (i == -1) continue;
+        cout << g.getName(i) << " ---> ";
+    }
+    std::cout << "arrived to " << g.getName(target) << std::endl;
+
+    std::vector<int> expected = {3830, 3797, 248, 4105};
+    std::cout << distance << std::endl;
+
+    REQUIRE(path == expected);
 }
