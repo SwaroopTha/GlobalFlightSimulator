@@ -5,6 +5,23 @@
 #include "../lib/cs225/png.h"
 
 /**
+* @brief Plots all vertices (and edges if specified) of a graph onto a plate carrée map projection
+* Warning: this may look very messy
+*
+* @param g The graph to plot
+* @param edges Whether to also plot the edges
+* @param showProgress Whether to show a progress bar for the edges (only matters of edges is true)
+* @param pointSize The radius of the points, in pixels
+* @param lineThickness The thickness of the lines, in pixels
+* @param pointPixel The pixel to be used to fill the points (red by default)
+* @param linePixel The pixel to be used to fill the lines (orange by default)
+* @return PNG The map png
+*/
+cs225::PNG plotGraph(Graph g, bool edges, bool showProgress = true, double pointSize = 4, int lineThickness = 1,
+    cs225::HSLAPixel pointPixel = cs225::HSLAPixel(0, 1, 0.5, 1),
+    cs225::HSLAPixel linePixel = cs225::HSLAPixel(20, 1, 0.5, 1));
+
+/**
 * @brief Plots the Dijkstra path onto a plate carrée map projection
 *
 * @param g The graph on which to apply Dijkstra

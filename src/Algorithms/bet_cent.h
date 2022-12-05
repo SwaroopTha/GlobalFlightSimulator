@@ -34,8 +34,8 @@ class BetweenessCentrality {
         *
         * @param graph The graph on which to apply betweenness centrality
         * @param sampleSize How many paths to sample from the graph
-        * @param skipNonPaths Whether or not to skip pairs of points with no path
-        * @param showProgress Whetehr to show a progress bar
+        * @param skipNonPaths Whether to skip pairs of points with no path
+        * @param showProgress Whether to show a progress bar
         * @return map<int, int> A map of IDs to betweenness scores
         */
         map<int, int> getProbabilisticScoresDijkstras(const Graph& graph, int sampleSize, bool skipNonPaths = true, bool showProgress = true);

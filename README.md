@@ -37,7 +37,7 @@ cmake ..
 Create and run executable:
 
 ```
-make
+make main
 ./main
 ```
 

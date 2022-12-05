@@ -5,6 +5,37 @@ using namespace std;
 using cs225::PNG;
 using cs225::HSLAPixel;
 
+PNG plotGraph(Graph g, bool edges, bool showProgress, double pointSize, int lineThickness, HSLAPixel pointPixel, HSLAPixel linePixel) {
+    PNG worldMap;
+    worldMap.readFromFile("../Data/map.png");
+    vector<int> ids = g.getIDs();
+    if (edges) {
+        ProgressBar pb;
+        cout << pb;
+        for (size_t i = 0; i < ids.size(); i++) {
+            for (size_t j = i + 1; j < ids.size(); j++) {
+                int id1 = ids[i];
+                int id2 = ids[j];
+                if (g.connectedTo(id1, id2) || g.connectedTo(id2, id1)) {
+                    plotLine(worldMap, g.getLatitude(id1), g.getLongitude(id1), g.getLatitude(id2), g.getLongitude(id2), lineThickness, linePixel);
+                }
+            }
+            if (showProgress) {
+                pb.setProgress((double) i / ids.size());
+                cout << pb;
+            }
+        }
+        if (showProgress) {
+            pb.setProgress(1);
+            cout << pb << endl;
+        }
+    }
+    for (int id : ids) {
+        plotPoint(worldMap, g.getLatitude(id), g.getLongitude(id), pointSize, pointPixel);
+    }
+    return worldMap;
+}
+
 PNG plotDijkstra(Graph g, int source, int target, double pointSize, int lineThickness, HSLAPixel pointPixel, HSLAPixel linePixel) {
     PNG worldMap;
     Dijkstras dij;
@@ -44,12 +75,12 @@ PNG plotBetweenness(Graph g, int sampleSize, bool skipNonPaths, double maxRadius
 
 void plotPath(cs225::PNG & worldMap, Graph g, vector<int> path, double pointSize, int lineThickness, HSLAPixel pointPixel, HSLAPixel linePixel) {
     // iterates over every airport in the path
-    for (int i = 0; i < (int) path.size() - 1; i++) {
-        int id1 = path[i];
-        // draw a line between this airport and the next (excludes the last iteration)
+    for (size_t i = 1; i < path.size(); i++) {
+        int id1 = path[i-1];
+        // draw a line between the previous airport and this one (excludes the first iteration)
         // the routes dataset doesn't specify whether the flight is eastward or westward so
         // it is assumed that the line doesn't wrap around the map
-        int id2 = path[i+1];
+        int id2 = path[i];
         plotLine(worldMap, g.getLatitude(id1), g.getLongitude(id1), g.getLatitude(id2), g.getLongitude(id2), lineThickness, linePixel);
     }
     for (int id : path) {
@@ -78,7 +109,7 @@ void plotPoint(PNG & worldMap, double lat, double lon, double radius, HSLAPixel 
     }
 }
 
-void plotLine(PNG & worldMap, double lat1, double lon1, double lat2, double lon2, int thickness,HSLAPixel pixel) {
+void plotLine(PNG & worldMap, double lat1, double lon1, double lat2, double lon2, int thickness, HSLAPixel pixel) {
     // the documentation for this function is left as an exercise to the reader
     int halfThickness = thickness / 2;
     for (int adj = -halfThickness; adj < -halfThickness + thickness; adj++) {
