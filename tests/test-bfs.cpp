@@ -112,3 +112,29 @@ TEST_CASE("All set false") {
 }
 
 
+TEST_CASE("Globe Data") {
+   Graph g(true);
+   BFS bfs;
+   /*
+   *  ID: Number
+   *  SJC: 3748
+   *  SFO: 3469
+   *  ORD: 3830
+   *  LAX: 3484
+   *  NRT: 2279
+   *  CMI: 4049
+   */
+   std::vector<int> ids = {2279, 3484, 3469, 3830, 3748, 4049};
+   g = readData("../Data/airports.dat", "../Data/routes.dat", ids);
+
+   std::vector<int> actual = bfs.traversalOfBFS(g, 4049);
+   // CMI -> ORD -> NRT -> SFO -> LAX -> SJC
+   std::vector<int> expected = {4049, 3830, 2279, 3469, 3484, 3748};
+   REQUIRE(actual == expected);
+
+   ids = {2279, 3484, 3469, 3748, 4049};
+   g = readData("../Data/airports.dat", "../Data/routes.dat", ids);
+   actual = bfs.traversalOfBFS(g, 4049);
+   expected = {4049};
+   REQUIRE(actual == expected);
+}
