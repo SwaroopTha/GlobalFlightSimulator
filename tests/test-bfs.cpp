@@ -9,7 +9,7 @@
 
 TEST_CASE("Disconected Graph") {
  
-   Graph g;
+   Graph g(false);
  
    g.addNode(1, "one", 0, 1);
    g.addNode(2, "two", 0, 2);
@@ -46,7 +46,7 @@ TEST_CASE("Disconected Graph") {
 
 TEST_CASE("Simple traversal") {
  
-   Graph g;
+   Graph g(false);
  
    g.addNode(1, "one", 0, 1);
    g.addNode(2, "two", 0, 2);
@@ -80,7 +80,7 @@ TEST_CASE("Simple traversal") {
 
 TEST_CASE("All set false") {
  
-   Graph g;
+   Graph g(false);
  
    g.addNode(1, "one", 0, 1);
    g.addNode(2, "two", 0, 2);
