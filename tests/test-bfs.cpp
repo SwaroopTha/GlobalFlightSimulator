@@ -3,7 +3,8 @@
 #include "readdat.h"
  
 #include <iostream>
- 
+#include <stdexcept>
+
 #include "Algorithms/bfs.h"
 
 
@@ -114,12 +115,16 @@ TEST_CASE("Globe Data") {
    BFS bfs;
    /*
    *  ID: Number
-   *  SJC: 3748
-   *  SFO: 3469
-   *  ORD: 3830
-   *  LAX: 3484
-   *  NRT: 2279
-   *  CMI: 4049
+   *  SJC: 3748 (San Jose)
+   *  SFO: 3469 (San Francisco)
+   *  ORD: 3830 (Chicago)
+   *  LAX: 3484 (Los Angeles)
+   *  NRT: 2279 (Tokyo)
+   *  CMI: 4049 (Champaign)
+   *  FNJ: 3377 (Pyongyang)
+   *  RGO: 8830 (Chongjin)
+   *  JFK: 3797 (New York)
+   *  
    */
    std::vector<int> ids = {2279, 3484, 3469, 3830, 3748, 4049};
    g = readData("../Data/airports.dat", "../Data/routes.dat", ids);
