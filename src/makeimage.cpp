@@ -9,6 +9,7 @@ PNG plotGraph(Graph g, bool edges, bool showProgress, double pointSize, int line
     PNG worldMap;
     worldMap.readFromFile("../Data/map.png");
     vector<int> ids = g.getIDs();
+    // plot connections
     if (edges) {
         ProgressBar pb;
         cout << pb;
@@ -16,6 +17,7 @@ PNG plotGraph(Graph g, bool edges, bool showProgress, double pointSize, int line
             for (size_t j = i + 1; j < ids.size(); j++) {
                 int id1 = ids[i];
                 int id2 = ids[j];
+                // plot if connected
                 if (g.connectedTo(id1, id2) || g.connectedTo(id2, id1)) {
                     plotLine(worldMap, g.getLatitude(id1), g.getLongitude(id1), g.getLatitude(id2), g.getLongitude(id2), lineThickness, linePixel);
                 }
@@ -30,6 +32,7 @@ PNG plotGraph(Graph g, bool edges, bool showProgress, double pointSize, int line
             cout << pb << endl;
         }
     }
+    // plot airports
     for (int id : ids) {
         plotPoint(worldMap, g.getLatitude(id), g.getLongitude(id), pointSize, pointPixel);
     }
@@ -110,8 +113,8 @@ void plotPoint(PNG & worldMap, double lat, double lon, double radius, HSLAPixel 
 }
 
 void plotLine(PNG & worldMap, double lat1, double lon1, double lat2, double lon2, int thickness, HSLAPixel pixel) {
-    // the documentation for this function is left as an exercise to the reader
     int halfThickness = thickness / 2;
+    // repeats to make the line thicker
     for (int adj = -halfThickness; adj < -halfThickness + thickness; adj++) {
         int halfWidth = worldMap.width() / 2;
         int halfHeight = worldMap.height() / 2;
@@ -121,9 +124,12 @@ void plotLine(PNG & worldMap, double lat1, double lon1, double lat2, double lon2
         int y2 = (halfHeight * -lat2 / 90) + halfHeight;
         int dy = y2 - y1;
         int dx = x2 - x1;
+        // if the line is more flat than steep
         if (abs(dy) < abs(dx)) {
+            // adjust for thickness reasons
             y1 += adj;
             y2 += adj;
+            // make sure the second point is further right than the first
             if (x1 > x2) {
                 swap(x1, x2);
                 swap(y1, y2);
@@ -137,7 +143,8 @@ void plotLine(PNG & worldMap, double lat1, double lon1, double lat2, double lon2
             }
             int d = 2 * dy - dx;
             int y = y1;
-            for (int x = x1; x != x2; x1 < x2 ? x++ : x--) {
+            // iterate over every x between x1 and x2
+            for (int x = x1; x != x2; x++) {
                 if (!(x < 0 || y < 0 || x >= (int) worldMap.width() || y >= (int) worldMap.height())) {
                     worldMap.getPixel(x, y) = pixel;
                 }
@@ -148,6 +155,8 @@ void plotLine(PNG & worldMap, double lat1, double lon1, double lat2, double lon2
                     d += 2 * dy;
                 }
             }
+        // if the line is more steep than flat
+        // this is basically the same as above with x and y swapped in most places
         } else {
             x1 += adj;
             x2 += adj;
@@ -164,9 +173,9 @@ void plotLine(PNG & worldMap, double lat1, double lon1, double lat2, double lon2
             }
             int d = 2 * dx - dy;
             int x = x1;
-            for (int y = y1; y != y2; y1 < y2 ? y++ : y--) {
+            for (int y = y1; y != y2; y++) {
                 if (!(x < 0 || y < 0 || x >= (int) worldMap.width() || y >= (int) worldMap.height())) {
-                    worldMap.getPixel(x, y) = HSLAPixel(20, 1, 0.5, 1);
+                    worldMap.getPixel(x, y) = pixel;
                 }
                 if (d > 0) {
                     x += xi;

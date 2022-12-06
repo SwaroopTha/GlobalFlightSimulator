@@ -59,6 +59,18 @@ public:
      */
     Graph(bool spherical = true) : spherical_(spherical), numConnections_(0) {}
     /**
+    * @brief Getter for the spherical property
+    *
+    * @return bool Whether the distance calculation should be done on a sphere or 2D plane
+    */
+    bool getSpherical() { return spherical_; }
+    /**
+    * @brief Setter for the spherical property
+    *
+    * @param spherical Whether the distance calculation should be done on a sphere or 2D plane
+    */
+    void setSpherical(bool spherical) { spherical_ = spherical; } 
+    /**
      * @brief Adds an airport to the graph without any connections
      * 
      * @param id the unique idenifying number of the airport

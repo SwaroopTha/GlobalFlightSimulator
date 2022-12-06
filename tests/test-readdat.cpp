@@ -94,7 +94,7 @@ TEST_CASE("readData with ids") {
     vector<int> ids = {1, 2, 3, 4};
     Graph g = readData("../Data/airports.dat",  "../Data/routes.dat", ids);
     REQUIRE(g.size() == 4);
-    REQUIRE(g.connections() == 12);
+    REQUIRE(g.connections() == 12); // All these airports are connected to each other, so 3 * 4 = 12
     REQUIRE(g.getIDs() == ids);
 }
 
