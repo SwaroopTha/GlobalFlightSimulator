@@ -8,6 +8,7 @@
 * @brief Plots all vertices (and edges if specified) of a graph onto a plate carrée map projection
 * Warning: this may look very messy
 *
+* @param worldMap The blank plate carrée map projection to use
 * @param g The graph to plot
 * @param edges Whether to also plot the edges
 * @param showProgress Whether to show a progress bar for the edges (only matters of edges is true)
@@ -17,13 +18,14 @@
 * @param linePixel The pixel to be used to fill the lines (orange by default)
 * @return PNG The map png
 */
-cs225::PNG plotGraph(Graph g, bool edges, bool showProgress = true, double pointSize = 4, int lineThickness = 1,
-    cs225::HSLAPixel pointPixel = cs225::HSLAPixel(0, 1, 0.5, 1),
+cs225::PNG plotGraph(cs225::PNG worldMap, Graph g, bool edges, bool showProgress = true, double pointSize = 4,
+    int lineThickness = 1, cs225::HSLAPixel pointPixel = cs225::HSLAPixel(0, 1, 0.5, 1),
     cs225::HSLAPixel linePixel = cs225::HSLAPixel(20, 1, 0.5, 1));
 
 /**
 * @brief Plots the Dijkstra path onto a plate carrée map projection
 *
+* @param worldMap The blank plate carrée map projection to use
 * @param g The graph on which to apply Dijkstra
 * @param source The source airport ID
 * @param target The target airport ID
@@ -33,7 +35,7 @@ cs225::PNG plotGraph(Graph g, bool edges, bool showProgress = true, double point
 * @param linePixel The pixel to be used to fill the lines (orange by default)
 * @return PNG The map png
 */
-cs225::PNG plotDijkstra(Graph g, int source, int target, double pointSize = 8, int lineThickness = 4, 
+cs225::PNG plotDijkstra(cs225::PNG worldMap, Graph g, int source, int target, double pointSize = 6, int lineThickness = 4, 
     cs225::HSLAPixel pointPixel = cs225::HSLAPixel(0, 1, 0.5, 1),
     cs225::HSLAPixel linePixel = cs225::HSLAPixel(20, 1, 0.5, 1));
 
@@ -41,6 +43,7 @@ cs225::PNG plotDijkstra(Graph g, int source, int target, double pointSize = 8, i
 * @brief Plots the BFS traversal on a plate carrée map projection
 * Warning: this may look very messy
 *
+* @param worldMap The blank plate carrée map projection to use
 * @param g The graph on which to apply BFS
 * @param start The start of the BFS algorithm
 * @param pointSize The radius of the points, in pixels
@@ -49,7 +52,7 @@ cs225::PNG plotDijkstra(Graph g, int source, int target, double pointSize = 8, i
 * @param linePixel The pixel to be used to fill the lines (orange by default)
 * @return PNG The map png
 */
-cs225::PNG plotBFS(Graph g, int start, double pointSize = 6, int lineThickness = 2,
+cs225::PNG plotBFS(cs225::PNG worldMap, Graph g, int start, double pointSize = 6, int lineThickness = 2,
     cs225::HSLAPixel pointPixel = cs225::HSLAPixel(0, 1, 0.5, 1),
     cs225::HSLAPixel linePixel = cs225::HSLAPixel(20, 1, 0.5, 1));
 
@@ -57,6 +60,7 @@ cs225::PNG plotBFS(Graph g, int start, double pointSize = 6, int lineThickness =
 * @brief Plots each airport on a plate carrée map projection
 * The size of the point is proportional to its betweenness centrality (determined probabilistically)
 *
+* @param worldMap The blank plate carrée map projection to use
 * @param g The graph on which to apply betweenness centrality
 * @param sampleSize How many paths to sample from the graph
 * @param skipNonPaths Whether or not to skip pairs of points with no path
@@ -64,7 +68,7 @@ cs225::PNG plotBFS(Graph g, int start, double pointSize = 6, int lineThickness =
 * @param pointPixel The pixel to be used to fill the points (red by default)
 * @return PNG The map png
 */
-cs225::PNG plotBetweenness(Graph g, int sampleSize = 100, bool skipNoPaths = true, double maxRadius = 10,
+cs225::PNG plotBetweenness(cs225::PNG worldMap, Graph g, int sampleSize = 100, bool skipNoPaths = true, double maxRadius = 10,
     cs225::HSLAPixel pointPixel = cs225::HSLAPixel(0, 1, 0.5, 1));
 
 /**

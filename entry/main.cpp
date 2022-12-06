@@ -15,6 +15,8 @@ int main() {
 
     int source = 3319;
     int target = 5554;
-    cs225::PNG output = plotDijkstra(g, source, target);
+    PNG worldMap;
+    worldMap.readFromFile("../Data/map.png");
+    cs225::PNG output = plotDijkstra(worldMap, g, source, target);
     output.writeToFile("output.png");
 }

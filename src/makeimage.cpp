@@ -5,9 +5,7 @@ using namespace std;
 using cs225::PNG;
 using cs225::HSLAPixel;
 
-PNG plotGraph(Graph g, bool edges, bool showProgress, double pointSize, int lineThickness, HSLAPixel pointPixel, HSLAPixel linePixel) {
-    PNG worldMap;
-    worldMap.readFromFile("../Data/map.png");
+PNG plotGraph(PNG worldMap, Graph g, bool edges, bool showProgress, double pointSize, int lineThickness, HSLAPixel pointPixel, HSLAPixel linePixel) {
     vector<int> ids = g.getIDs();
     // plot connections
     if (edges) {
@@ -39,28 +37,22 @@ PNG plotGraph(Graph g, bool edges, bool showProgress, double pointSize, int line
     return worldMap;
 }
 
-PNG plotDijkstra(Graph g, int source, int target, double pointSize, int lineThickness, HSLAPixel pointPixel, HSLAPixel linePixel) {
-    PNG worldMap;
+PNG plotDijkstra(PNG worldMap, Graph g, int source, int target, double pointSize, int lineThickness, HSLAPixel pointPixel, HSLAPixel linePixel) {
     Dijkstras dij;
-    worldMap.readFromFile("../Data/map.png");
     vector<int> path = dij.getPath(g, source, target);
     plotPath(worldMap, g, path, pointSize, lineThickness, pointPixel, linePixel);
     return worldMap;
 }
 
-PNG plotBFS(Graph g, int start, double pointSize, int lineThickness, HSLAPixel pointPixel, HSLAPixel linePixel) {
-    PNG worldMap;
+PNG plotBFS(PNG worldMap, Graph g, int start, double pointSize, int lineThickness, HSLAPixel pointPixel, HSLAPixel linePixel) {
     BFS bfs;
-    worldMap.readFromFile("../Data/map.png");
     vector<int> path = bfs.traversalOfBFS(g, start);
     plotPath(worldMap, g, path, pointSize, lineThickness, pointPixel, linePixel);
     return worldMap;
 }
 
-PNG plotBetweenness(Graph g, int sampleSize, bool skipNonPaths, double maxRadius, HSLAPixel pointPixel) {
-    PNG worldMap;
+PNG plotBetweenness(PNG worldMap, Graph g, int sampleSize, bool skipNonPaths, double maxRadius, HSLAPixel pointPixel) {
     BetweenessCentrality bc;
-    worldMap.readFromFile("../Data/map.png");
     // currently the scores take too long to compute so here's an example
     map<int, int> scores = bc.getProbabilisticScoresDijkstras(g, sampleSize, skipNonPaths);
     int max = 0;
