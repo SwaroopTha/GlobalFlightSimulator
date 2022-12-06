@@ -26,9 +26,6 @@ TEST_CASE("Disconected Graph") {
    g.connect(5, 6);
    g.connect(6, 5);
 
-
-
- 
    BFS bfs;
    std::vector<int> actual = bfs.traversalOfBFS(g, 5);
    std::vector<int> expected = {5, 6};
