@@ -112,6 +112,63 @@ TEST_CASE("Betweenness Centrality Dijkstra Simple") {
 
 }
 
+TEST_CASE("Min Frequency Simple") {
+
+    Graph g;
+
+    g.addNode(1, "air1", 0, 1);
+    g.addNode(2, "air2", 0, 2);
+    g.addNode(3, "air3", 0, 3);
+    g.addNode(4, "air4", 0, 4);
+
+    g.connect(1, 3);
+    g.connect(3, 2);
+    g.connect(2, 3);
+    g.connect(3, 1);
+    g.connect(2, 4);
+
+    BetweenessCentrality betcent;
+
+    map<int, int> test = betcent.getAllScoresDijkstras(g);
+
+    // Min Frequency = 2
+    set<int> airport_freq_test1 = betcent.getAirportsWithMinFrequencyDijkstras(2);
+
+    REQUIRE((int) airport_freq_test1.size() == 2);
+    REQUIRE(airport_freq_test1.find(2) != airport_freq_test1.end());
+    REQUIRE(airport_freq_test1.find(3) != airport_freq_test1.end());
+    REQUIRE(airport_freq_test1.find(1) == airport_freq_test1.end());
+    REQUIRE(airport_freq_test1.find(4) == airport_freq_test1.end());
+
+    // Min Frequency = 3
+    set<int> airport_freq_test2 = betcent.getAirportsWithMinFrequencyDijkstras(3);
+
+    REQUIRE((int) airport_freq_test2.size() == 1);
+    REQUIRE(airport_freq_test2.find(2) == airport_freq_test2.end());
+    REQUIRE(airport_freq_test2.find(3) != airport_freq_test2.end());
+    REQUIRE(airport_freq_test2.find(1) == airport_freq_test2.end());
+    REQUIRE(airport_freq_test2.find(4) == airport_freq_test2.end());
+
+    // // Min Frequency = 0 (Include all airports)
+    // set<int> airport_freq_test3 = betcent.getAirportsWithMinFrequencyDijkstras(0);
+
+    // REQUIRE((int) airport_freq_test3.size() == 4);
+    // REQUIRE(airport_freq_test3.find(2) != airport_freq_test3.end());
+    // REQUIRE(airport_freq_test3.find(3) != airport_freq_test3.end());
+    // REQUIRE(airport_freq_test3.find(1) != airport_freq_test3.end());
+    // REQUIRE(airport_freq_test3.find(4) != airport_freq_test3.end());
+
+    // // Min Frequency = 5 (Include no airports)
+    // set<int> airport_freq_test4 = betcent.getAirportsWithMinFrequencyDijkstras(5);
+
+    // REQUIRE((int) airport_freq_test4.size() == 0);
+    // REQUIRE(airport_freq_test4.find(2) == airport_freq_test4.end());
+    // REQUIRE(airport_freq_test4.find(3) == airport_freq_test4.end());
+    // REQUIRE(airport_freq_test4.find(1) == airport_freq_test4.end());
+    // REQUIRE(airport_freq_test4.find(4) == airport_freq_test4.end());
+
+}
+
 TEST_CASE("Betweeness Centrality Dijkstra Complex") {
 
     /*

@@ -13,6 +13,7 @@
 #include <fstream>
 #include <queue>
 #include <stack>
+#include <set>
 
 using namespace std;
 
@@ -27,7 +28,7 @@ class BetweenessCentrality {
 
         // DIJKSTRAS
         map<int, int> getAllScoresDijkstras(const Graph& graph, bool showProgress = true);
-        vector<int> getAirportsWithMinFrequencyDijkstras(int frequency);
+        set<int> getAirportsWithMinFrequencyDijkstras(int frequency);
         /**
         * @brief Applies the betweenness centrality algorithm with a probabilistic approach
         * Instead of considering all pairs of distinct points, uniformly samples a given
@@ -44,7 +45,7 @@ class BetweenessCentrality {
     private:
         vector<int> airport_ids_; // vector of all airport ids
         
-        map<int, int> airport_scores_; // Maps all the airports (id - int) to their Betweeness Centrality Frequency
+        // map<int, int> airport_scores_; // Maps all the airports (id - int) to their Betweeness Centrality Frequency
 
         map<int, int> airport_scores_dijkstras_;
 
