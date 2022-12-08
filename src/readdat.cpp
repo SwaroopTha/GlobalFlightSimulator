@@ -239,7 +239,9 @@ Graph sampleData(string vertexFile, string edgeFile, int sampleSize) {
         if (!(validID(id1) && validID(id2))) {
             continue;
         }
-        g.connect(id1, id2);
+        if (g.inGraph(id1) && g.inGraph(id2)) {
+            g.connect(id1, id2);
+        }   
     }
     routes.close();
 
