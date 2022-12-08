@@ -18,36 +18,38 @@ In this project we designed multiple algorithms and visualization tools implemen
 * lib : cs225 color space
 * src
     * Algorithms
-        * bet_cent : Determines which airports are "popular"
-            * bet_cent.cpp
-            * bet_cent.h
         * dijkstra : Dijkstra's Algorithm for shortest path between two airports
             * dijkstra.cpp
             * dijkstra.h
         * bfs : Breadth-First Search Algorithm traverses every single pathway from a given airport
             * bfs.cpp
             * bfs.h
+        * bet_cent : Determines the "popularity" of airports by how often they appear a shortest path
+            * bet_cent.cpp
+            * bet_cent.h
+        * makeimage : Plots points and lines on a map to visualize data and algorithms
+            * makeimage.cpp
+            * makeimage.h
     * CMakeLists.txt
     * Graph.cpp
     * Graph.h
-    * makeimage.cpp
-    * makeimage.h
     * ProgressBar.cpp
     * ProgressBar.h
     * readdat.cpp
     * readdat.h
         
-* readdat : reads the data from the data files and implements data into graph network
-* Graph : class represents attributes of the graph data structure
-* makeimage : Visualizer tool for all algorithms (map in Data)
+* readdat : Reads data from files and creates graphs from it
+* Graph : A class to represent a network of airports
 * ProgressBar : For showing progress on the command line
-* tests : runs all test cases
+* tests : runs test cases
 * Dockerfile : cs225 Dockerfile is used
-* README.md
+* CMakeLists.txt : CMake configuration
+* .gitignore : The files that GitHub should ignore
+* README.md : What you're reading right now!
 
 ## File Interaction
 
-The `Graph` class and `readdat` files interact to construct a graph network of airports. The algorithm classes utilize instances of `Graph` to operate on with respective traversals.
+The `readdat` functions read in data to construct a `Graph` network of airports. The algorithm classes utilize instances of `Graph` to operate on with respective traversals.
 
 
 
@@ -79,7 +81,7 @@ make test
 
 ## How to Generate Visualization
 1) Read in datasets to graph in `entry/main.cpp`
-2) Use functions from `makeimage`to generate a plot of Dijkstra, Centrality or Betweenness. 
+2) Use functions from `makeimage`to generate a plot of the Graph, Dijkstra, Centrality or Betweenness. 
 3) Call function in `entry/main.cpp` and write to a file.
 
 
