@@ -270,3 +270,5 @@ TEST_CASE("Min Frequency Unconnected") {
     REQUIRE(hubs.find(6) == hubs.end());
     REQUIRE(hubs.find(7) == hubs.end());
 }
+
+TEST_CASE()

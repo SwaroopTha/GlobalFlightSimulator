@@ -8,6 +8,8 @@ map<int, int> BetweenessCentrality::getAllScores(const Graph& graph, bool showPr
 
     Dijkstras d;
 
+    int total_paths = 0;
+
     ProgressBar pb;
     double numerator = 0;
     double total_size = airport_ids_.size() * airport_ids_.size();
@@ -18,6 +20,7 @@ map<int, int> BetweenessCentrality::getAllScores(const Graph& graph, bool showPr
                 cout << pb;
             }
             if (airport_ids_[id1] != airport_ids_[id2]) {
+                total_paths++;
                 vector<int> shortest_path = d.getPath(graph, airport_ids_[id1], airport_ids_[id2]);
                 if (shortest_path.size() > 2) {
                     for (size_t i = 1; i < shortest_path.size() - 1; i++) {
@@ -28,14 +31,31 @@ map<int, int> BetweenessCentrality::getAllScores(const Graph& graph, bool showPr
                             airport_scores_[current_airport] = 1;
                     }
                 }
+            } else {
+                if (airport_scores_.find(airport_ids_[id1]) == airport_scores_.end())
+                    airport_scores_[airport_ids_[id1]] = 0;
+                if (airport_scores_.find(airport_ids_[id2]) == airport_scores_.end())
+                    airport_scores_[airport_ids_[id2]] = 0;
             }
             numerator++;
         }
     }
+
     if (showProgress) {
         pb.setProgress(1);
         cout << pb << endl;
     }
+
+    cout << "Total Paths: " << total_paths << endl;
+
+    cout << "Betweeness Scores:" << endl;
+    
+    for (auto i : airport_scores_) {
+        cout << "Airport " << i.first << ": " << i.second << endl;
+    }
+
+    cout << "-------------" << endl;
+
     return airport_scores_;
 }
 
