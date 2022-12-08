@@ -55,17 +55,12 @@ PNG plotBFS(PNG worldMap, Graph g, int start, double pointSize, int lineThicknes
 
 PNG plotBetweenness(PNG worldMap, Graph g, bool showProgress, int sampleSize, bool skipNonPaths, double maxRadius, HSLAPixel pointPixel) {
     BetweenessCentrality bc;
-<<<<<<< HEAD:src/makeimage.cpp
-    // currently the scores take too long to compute so here's an example
-    map<int, int> scores = bc.getProbabilisticScores(g, sampleSize, skipNonPaths);
-=======
     map<int, int> scores;
     if (sampleSize != 0) {
-        scores = bc.getProbabilisticScoresDijkstras(g, sampleSize, skipNonPaths, showProgress);
+        scores = bc.getProbabilisticScores(g, sampleSize, skipNonPaths, showProgress);
     } else {
-        scores = bc.getAllScoresDijkstras(g, showProgress);
+        scores = bc.getAllScores(g, showProgress);
     }
->>>>>>> 12e6ddd9761fe0df345c7a03147805f9edd39da4:src/Algorithms/makeimage.cpp
     int max = 0;
     for (auto it = scores.begin(); it != scores.end(); it++) {
         if (it->second > max) {
