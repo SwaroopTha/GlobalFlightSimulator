@@ -10,41 +10,6 @@ using namespace std;
 
 // IF THERE ARE NO ARROW SIGNS (-> or <-) ASSUME NODES ARE CONNECTED IN BOTH DIRECTIONS
 
-/*
-TEST_CASE("Betweenness Centrality Simple") {
-
-    Graph g;
-
-    g.addNode(1, "air1", 0, 1);
-    g.addNode(2, "air2", 0, 2);
-    g.addNode(3, "air3", 0, 3);
-
-    g.connect(1, 3);
-    g.connect(3, 2);
-
-    g.connect(2, 3);
-    g.connect(3, 1);
-
-    BetweenessCentrality betcent;
-
-    map<int, int> test = betcent.getAllScores(g);
-
-    // map<int, int> expected;
-    // expected[1] = 0;
-    // expected[2] = 0;
-    // expected[3] = 2;
-
-    REQUIRE(test[1] == 0);
-    REQUIRE(test[2] == 0);
-    REQUIRE(test[3] == 2);
-
-    // REQUIRE(test == expected);
-
-}
-*/
-
-//---------------------------------------- WITH DIJKSTRA--------------------------------------------
-
 TEST_CASE("Betweenness Centrality Dijkstra Simple") {
 
     /*
@@ -68,7 +33,7 @@ TEST_CASE("Betweenness Centrality Dijkstra Simple") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScoresDijkstras(g);
+    map<int, int> test = betcent.getAllScores(g);
 
     // map<int, int> expected;
     // expected[1] = 0;
@@ -79,36 +44,6 @@ TEST_CASE("Betweenness Centrality Dijkstra Simple") {
     REQUIRE(test[2] == 2);
     REQUIRE(test[3] == 3);
     REQUIRE(test[4] == 0);
-
-    // REQUIRE(test == expected);
-
-    /*
-    vector<int> all = betcent.getAirportsWithMinFrequencyDijkstras(0);
-    map<int, int> all_map;
-    int count = 1;
-    for (int i : all) {
-        if (all_map.find(i) != all_map.end()) all_map[i]++;
-        else all_map[i] = 1;
-
-        count++;
-    }
-    cout << "count: " << count << endl;
-    REQUIRE(all.size() == 3);
-    REQUIRE(all_map[0] == 2);
-    REQUIRE(all_map[2] == 1);
-
-    vector<int> only_2 = betcent.getAirportsWithMinFrequencyDijkstras(2);
-    map<int, int> map_2;
-    for (int i : only_2) {
-        if (map_2.find(i) != map_2.end()) map_2[i]++;
-        else map_2[i] = 1;
-    }
-    REQUIRE(all.size() == 1);
-    REQUIRE(all_map[2] == 1);
-    */
-
-    // REQUIRE(all == {0, 0, 2});
-    // REQUIRE(only_2 == {2});
 
 }
 
@@ -129,10 +64,10 @@ TEST_CASE("Min Frequency Simple") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScoresDijkstras(g);
+    map<int, int> test = betcent.getAllScores(g);
 
     // Min Frequency = 2
-    set<int> airport_freq_test1 = betcent.getAirportsWithMinFrequencyDijkstras(2);
+    set<int> airport_freq_test1 = betcent.getAirportsWithMinFrequency(2);
 
     REQUIRE((int) airport_freq_test1.size() == 2);
     REQUIRE(airport_freq_test1.find(2) != airport_freq_test1.end());
@@ -141,7 +76,7 @@ TEST_CASE("Min Frequency Simple") {
     REQUIRE(airport_freq_test1.find(4) == airport_freq_test1.end());
 
     // Min Frequency = 3
-    set<int> airport_freq_test2 = betcent.getAirportsWithMinFrequencyDijkstras(3);
+    set<int> airport_freq_test2 = betcent.getAirportsWithMinFrequency(3);
 
     REQUIRE((int) airport_freq_test2.size() == 1);
     REQUIRE(airport_freq_test2.find(2) == airport_freq_test2.end());
@@ -150,7 +85,7 @@ TEST_CASE("Min Frequency Simple") {
     REQUIRE(airport_freq_test2.find(4) == airport_freq_test2.end());
 
     // // Min Frequency = 0 (Include all airports)
-    // set<int> airport_freq_test3 = betcent.getAirportsWithMinFrequencyDijkstras(0);
+    // set<int> airport_freq_test3 = betcent.getAirportsWithMinFrequency(0);
 
     // REQUIRE((int) airport_freq_test3.size() == 4);
     // REQUIRE(airport_freq_test3.find(2) != airport_freq_test3.end());
@@ -159,7 +94,7 @@ TEST_CASE("Min Frequency Simple") {
     // REQUIRE(airport_freq_test3.find(4) != airport_freq_test3.end());
 
     // // Min Frequency = 5 (Include no airports)
-    // set<int> airport_freq_test4 = betcent.getAirportsWithMinFrequencyDijkstras(5);
+    // set<int> airport_freq_test4 = betcent.getAirportsWithMinFrequency(5);
 
     // REQUIRE((int) airport_freq_test4.size() == 0);
     // REQUIRE(airport_freq_test4.find(2) == airport_freq_test4.end());
@@ -215,7 +150,7 @@ TEST_CASE("Betweeness Centrality Dijkstra Complex") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScoresDijkstras(g);
+    map<int, int> test = betcent.getAllScores(g);
 
     REQUIRE(test[1] == 0);
     REQUIRE(test[2] == 12);
@@ -264,7 +199,7 @@ TEST_CASE("Betweeness Centrality Dijkstra Unconnected") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScoresDijkstras(g);
+    map<int, int> test = betcent.getAllScores(g);
 
     REQUIRE(test[1] == 0);
     REQUIRE(test[2] == 2);
