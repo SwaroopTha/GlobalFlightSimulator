@@ -52,7 +52,7 @@ bool validLongitude(double longitude) {
 }
 
 Graph readData(string vertexFile, string edgeFile, vector<int> ids) {
-    bool idsGiven = !(ids.size() == 0);
+    bool idsGiven = !ids.empty();
     Graph g;
     ifstream airports(vertexFile);
     ifstream routes(edgeFile);

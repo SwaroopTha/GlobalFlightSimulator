@@ -58,17 +58,19 @@ cs225::PNG plotBFS(cs225::PNG worldMap, Graph g, int start, double pointSize = 6
 
 /**
 * @brief Plots each airport on a plate carrée map projection
-* The size of the point is proportional to its betweenness centrality (determined probabilistically)
+* The size of the point is proportional to its betweenness centrality
+* (can be determined probabilistically, see sampleSize)
 *
 * @param worldMap The blank plate carrée map projection to use
 * @param g The graph on which to apply betweenness centrality
-* @param sampleSize How many paths to sample from the graph
-* @param skipNonPaths Whether or not to skip pairs of points with no path
+* @param showProgress Whether to show a progress bar
+* @param sampleSize How many paths to sample from the graph; if 0, the non-probabilistic method will be used
+* @param skipNonPaths Whether or not to skip pairs of points with no path (if using probabilistic methods)
 * @param maxRadius The maximum radius of the points (the most central point will have this radius)
 * @param pointPixel The pixel to be used to fill the points (red by default)
 * @return PNG The map png
 */
-cs225::PNG plotBetweenness(cs225::PNG worldMap, Graph g, int sampleSize = 100, bool skipNoPaths = true, double maxRadius = 10,
+cs225::PNG plotBetweenness(cs225::PNG worldMap, Graph g, bool showProgress = true, int sampleSize = 0, bool skipNoPaths = true, double maxRadius = 10,
     cs225::HSLAPixel pointPixel = cs225::HSLAPixel(0, 1, 0.5, 1));
 
 /**
