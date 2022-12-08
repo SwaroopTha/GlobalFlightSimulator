@@ -12,6 +12,7 @@ vector<int> neighbors = graph.getConnections(id - int);
 getDistance() -> returns double representing distance between 2 airport IDs (RETURNS INFINITY IF NOT CONNECTED)
 */
 
+/*
 map<int, int> BetweenessCentrality::getAllScores(const Graph& graph) {
     airport_ids_ = graph.getIDs(); 
 
@@ -85,19 +86,25 @@ map<int, int> BetweenessCentrality::getAllScores(const Graph& graph) {
     return airport_scores_;
 
 }
+*/
 
-map<int, int> BetweenessCentrality::getAllScoresDijkstras(const Graph& graph) {
+map<int, int> BetweenessCentrality::getAllScoresDijkstras(const Graph& graph, bool showProgress) {
     airport_ids_ = graph.getIDs(); 
 
     Dijkstras d;
 
     int total_paths = 0;
 
-    for (int id1 : airport_ids_) {
-        for (int id2 : airport_ids_) {
+    ProgressBar pb;
+    for (size_t id1 = 0; id1 < airport_ids_.size(); id1++) { // int id1 : airport_ids_
+        for (size_t id2 = 0; id2 < airport_ids_.size(); id2++) { // int id2 : airport_ids_
             // cout << "id1: " << id1 << " id2: " << id2 << endl;
-            if (id1 != id2) {
-                vector<int> shortest_path = d.getPath(graph, id1, id2);
+            if (showProgress) {
+                pb.setProgress((double) (id1 + id2) / (double) (airport_ids_.size() * airport_ids_.size()));
+                cout << pb;
+            }
+            if (airport_ids_[id1] != airport_ids_[id2]) {
+                vector<int> shortest_path = d.getPath(graph, airport_ids_[id1], airport_ids_[id2]);
 
                 if (shortest_path.size() > 2) {
                     for (size_t i = 1; i < shortest_path.size() - 1; i++) {
@@ -114,6 +121,11 @@ map<int, int> BetweenessCentrality::getAllScoresDijkstras(const Graph& graph) {
                 total_paths++;
             }
         }
+    }
+
+    if (showProgress) {
+        pb.setProgress(1);
+        cout << pb << endl;
     }
 
     cout << "Total Paths: " << total_paths << endl;
@@ -158,10 +170,7 @@ map<int, int> BetweenessCentrality::getProbabilisticScoresDijkstras(const Graph&
     return airport_scores_dijkstras_;
 }
 
-// map<int, int> BetweenessCentrality::getAllScores() {
-//     return airport_scores_;
-// }
-
+/*
 vector<int> BetweenessCentrality::getAirportsWithMinFrequency(int frequency) {
     vector<int> score_vector;
     for (auto i : airport_scores_) {
@@ -171,6 +180,7 @@ vector<int> BetweenessCentrality::getAirportsWithMinFrequency(int frequency) {
     }
     return score_vector;
 }
+*/
 
 vector<int> BetweenessCentrality::getAirportsWithMinFrequencyDijkstras(int frequency) {
     vector<int> score_vector;

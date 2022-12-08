@@ -21,11 +21,12 @@ class BetweenessCentrality {
         // BetweenessCentrality();
         // O(|n|^2 log|n| + |n||m|) time 
         // O(n^2) space
-        map<int, int> getAllScores(const Graph& graph);
-        // map<int, int> getAllScores();
-        vector<int> getAirportsWithMinFrequency(int frequency);
 
-        map<int, int> getAllScoresDijkstras(const Graph& graph);
+        // map<int, int> getAllScores(const Graph& graph);
+        // vector<int> getAirportsWithMinFrequency(int frequency);
+
+        // DIJKSTRAS
+        map<int, int> getAllScoresDijkstras(const Graph& graph, bool showProgress = true);
         vector<int> getAirportsWithMinFrequencyDijkstras(int frequency);
         /**
         * @brief Applies the betweenness centrality algorithm with a probabilistic approach
