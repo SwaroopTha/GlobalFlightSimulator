@@ -80,7 +80,7 @@ public:
      */
     void addNode(int id, std::string name, double latitude, double longitude);
     /**
-    * @brief Removes a node an all its connections
+    * @brief Removes a node and all its connections
     *
     * @param id The ID to remove
     */

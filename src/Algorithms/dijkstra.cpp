@@ -18,7 +18,7 @@ vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
     auto comp = [](DijNode a, DijNode b) {
         return a.second > b.second;
     };
-    std::priority_queue<DijNode, vector<DijNode>, decltype(comp)> qu(comp);
+    priority_queue<DijNode, vector<DijNode>, decltype(comp)> qu(comp);
     map<int, double> ports_;
     map<int, int> prev_;
 
@@ -29,9 +29,9 @@ vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
             qu.push(node);
             ports_[id] = 0;
         } else {
-            DijNode node(id, std::numeric_limits<double>::infinity());
+            DijNode node(id, numeric_limits<double>::infinity());
             qu.push(node);
-            ports_[id] = std::numeric_limits<double>::infinity();
+            ports_[id] = numeric_limits<double>::infinity();
         }
         prev_[id] = -1;
     }
@@ -58,14 +58,14 @@ vector<int> Dijkstras::getPath(const Graph& g, int source, int target) {
     }
     // adds previous paths to vector
     int temp = target;
-    std::vector<int> paths;
+    vector<int> paths;
     while (temp != -1) {
         paths.push_back(prev_[temp]);
         temp = prev_.at(temp);
     }
 
     // reverses path to        
-    std::reverse(paths.begin(), paths.end());
+    reverse(paths.begin(), paths.end());
     paths.push_back(target);
 
     shortestDistance_ = ports_[target];

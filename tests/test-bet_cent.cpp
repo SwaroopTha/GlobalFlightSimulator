@@ -33,7 +33,7 @@ TEST_CASE("Betweenness Centrality Dijkstra Simple") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g);
+    map<int, int> test = betcent.getAllScores(g, false);
 
     REQUIRE(test[1] == 0);
     REQUIRE(test[2] == 2);
@@ -59,7 +59,7 @@ TEST_CASE("Min Frequency Simple") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g);
+    map<int, int> test = betcent.getAllScores(g, false);
 
     // Min Frequency = 2
     set<int> airport_freq_test1 = betcent.getAirportsWithMinFrequency(2);
@@ -128,7 +128,7 @@ TEST_CASE("Betweeness Centrality Dijkstra Complex") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g);
+    map<int, int> test = betcent.getAllScores(g, false);
 
     REQUIRE(test[1] == 0);
     REQUIRE(test[2] == 12);
@@ -222,7 +222,7 @@ TEST_CASE("Betweeness Centrality Dijkstra Unconnected") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g);
+    map<int, int> test = betcent.getAllScores(g, false);
 
     REQUIRE(test[1] == 0);
     REQUIRE(test[2] == 2);

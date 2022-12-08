@@ -31,7 +31,7 @@ bool validID(int id) {
     return id > 0;
 }
 
-bool validIATA(std::string iata) {
+bool validIATA(string iata) {
     for (char c : iata) {
         if (!isalpha(c)) {
             return false;
@@ -137,7 +137,7 @@ Graph readData(string vertexFile, string edgeFile, vector<int> ids) {
     return g;
 }
 
-Graph sampleData(std::string vertexFile, std::string edgeFile, int sampleSize) {
+Graph sampleData(string vertexFile, string edgeFile, int sampleSize) {
     // used to keep track of read-in data before sampling from it
     struct airport {
         int id_;
