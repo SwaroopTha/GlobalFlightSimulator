@@ -80,6 +80,12 @@ public:
      */
     void addNode(int id, std::string name, double latitude, double longitude);
     /**
+    * @brief Removes a node an all its connections
+    *
+    * @param id The ID to remove
+    */
+    void removeNode(int id);
+    /**
      * @brief Makes a connection from one airport to another (does not go both ways)
      * 
      * @param id1 The ID of the starting airport
@@ -87,6 +93,14 @@ public:
      * @return bool Whether a successful connection was made (i.e. both airports exist)
      */
     bool connect(int id1, int id2);
+    /**
+     * @brief Removes a connection from one airport to another (does not go both ways)
+     * 
+     * @param id1 The ID of the starting airport
+     * @param id2 The ID of the ending airport
+     * @return bool Whether a successful disconnection was made (i.e. both such a connection existed)
+     */
+    bool disconnect(int id1, int id2);
     /**
      * @brief Gets the number of airports in the graph
      * 

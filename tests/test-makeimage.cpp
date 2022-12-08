@@ -1,6 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include "makeimage.h"
+#include "Algorithms/makeimage.h"
 #include "readdat.h"
 
 using namespace std;
