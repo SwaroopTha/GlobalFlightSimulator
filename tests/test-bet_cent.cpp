@@ -172,7 +172,7 @@ TEST_CASE("Min Frequency Complex") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g);
+    map<int, int> test = betcent.getAllScores(g, false);
 
     set<int> hubs = betcent.getAirportsWithMinFrequency(12);
 
@@ -258,7 +258,7 @@ TEST_CASE("Min Frequency Unconnected") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g);
+    map<int, int> test = betcent.getAllScores(g, false);
 
     set<int> hubs = betcent.getAirportsWithMinFrequency(2);
 

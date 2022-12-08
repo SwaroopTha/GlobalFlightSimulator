@@ -140,7 +140,6 @@ TEST_CASE("Dijkstra Airport Nearby") {
     int ohare = 3830;
 
     vector<int> vec1 = dij.getPath(g, champ, ohare);
-
     double minDist = dij.shortestDistance();
     double expec1 = g.getDistance(4049, 3830);
 
