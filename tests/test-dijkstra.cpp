@@ -206,11 +206,11 @@ TEST_CASE("Dijkstra Airport Complex") {
 }
 
 
-TEST_CASE("Greenland to Kenya") {
+TEST_CASE("Alluitsup Paa, Greenland to Nanyuki, Kenya") {
 
     cout << "------------------------------------------------" << endl;
 
-    cout << "starting [Greenland to Kenya]" << endl;
+    cout << "starting [LLU to NYK]" << endl;
 
 
     int source = 5438;
@@ -233,16 +233,19 @@ TEST_CASE("Greenland to Kenya") {
 }
 
 
-TEST_CASE("Chicago to Namibia") {
+TEST_CASE("Chicago,Illinois to Windohek,Namibia") {
     cout << "------------------------------------------------" << endl;
-    cout << "starting [Chicago to Namibia]" << endl;
+    cout << "starting [ORD to WDH]" << endl;
 
 
     int target = 4105; // namibia
-    int source = 3830; // ohare
+    int source = 3830; // IL, USA
 
     // subset of possible airport connections
-    std::vector<int> sub = {3830, 1382, 4049, 1002, 8336, 1003, 4105, 1004, 1059, 5662, 5663, 5664, 13762, 963, 966, 1013, 5613, 799, 1074, 248, 3797, 3576}; // Set Airports
+    std::vector<int> sub = {3830, 1382, 4049, 1002, 8336, 
+                            1003, 4105, 1004, 1059, 5662, 5663, 
+                            5664, 13762, 963, 966, 1013, 5613, 
+                            799, 1074, 248, 3797, 3576}; // Set Airports
 
     Graph g = readData("../Data/airports.dat",  "../Data/routes.dat", sub);
     Dijkstras dij;
@@ -259,4 +262,7 @@ TEST_CASE("Chicago to Namibia") {
     std::cout << distance << std::endl;
 
     REQUIRE(path == expected);
+    cout << "------------------------------------------------" << endl;
+    cout << "End of Dijkstra Test Cases" << endl;
+
 }
