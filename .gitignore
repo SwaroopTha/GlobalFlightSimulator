@@ -1,6 +1,4 @@
-bin/
-a.out
-exec
 .vscode
 build/
 entry/mainpersonal.cpp
+.devcontainer/
