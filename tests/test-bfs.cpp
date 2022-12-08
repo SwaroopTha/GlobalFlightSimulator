@@ -28,8 +28,8 @@ TEST_CASE("Disconected Graph") {
    g.connect(6, 5);
 
    BFS bfs;
-   std::vector<int> actual = bfs.traversalOfBFS(g, 5);
-   std::vector<int> expected = {5, 6};
+   vector<int> actual = bfs.traversalOfBFS(g, 5);
+   vector<int> expected = {5, 6};
  
    REQUIRE(actual == expected);
 
@@ -65,8 +65,8 @@ TEST_CASE("Simple traversal") {
    g.connect(5, 3);
  
    BFS bfs;
-   std::vector<int> actual = bfs.traversalOfBFS(g, 1);
-   std::vector<int> expected = {1, 2, 3, 4, 5};
+   vector<int> actual = bfs.traversalOfBFS(g, 1);
+   vector<int> expected = {1, 2, 3, 4, 5};
  
    REQUIRE(actual == expected);
 
@@ -94,9 +94,9 @@ TEST_CASE("All set false") {
    g.connect(3, 5);
  
    BFS bfs;
-   std::vector<int> actual = bfs.traversalOfBFS(g, 1);
+   vector<int> actual = bfs.traversalOfBFS(g, 1);
 
-   std::vector<int> expected = {1, 2, 3, 4, 5};
+   vector<int> expected = {1, 2, 3, 4, 5};
 
    REQUIRE(actual == expected);
 
@@ -126,12 +126,12 @@ TEST_CASE("Globe Data") {
    *  JFK: 3797 (New York)
    *  
    */
-   std::vector<int> ids = {2279, 3484, 3469, 3830, 3748, 4049};
+   vector<int> ids = {2279, 3484, 3469, 3830, 3748, 4049};
    g = readData("../Data/airports.dat", "../Data/routes.dat", ids);
 
-   std::vector<int> actual = bfs.traversalOfBFS(g, 4049);
+   vector<int> actual = bfs.traversalOfBFS(g, 4049);
    // CMI -> ORD -> NRT -> SFO -> LAX -> SJC
-   std::vector<int> expected = {4049, 3830, 2279, 3469, 3484, 3748};
+   vector<int> expected = {4049, 3830, 2279, 3469, 3484, 3748};
    REQUIRE(actual == expected);
 
    ids = {2279, 3484, 3469, 3748, 4049};

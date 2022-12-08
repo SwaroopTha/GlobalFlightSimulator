@@ -22,13 +22,11 @@ void Graph::removeNode(int id) {
     }
     GraphNode toRemove = nodes_[id];
     numConnections_ -= toRemove.connections_.size();
-    cout << toRemove.connections_.size() << endl;
     nodes_.erase(id);
     for (auto it = nodes_.begin(); it != nodes_.end(); it++) {
         GraphNode node = it->second;
         if (node.connections_.find(id) != node.connections_.end()) {
             node.connections_.erase(id);
-            cout << node.id_ << endl;
             numConnections_--;
         }
     }

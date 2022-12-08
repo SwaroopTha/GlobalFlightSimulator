@@ -38,7 +38,7 @@ TEST_CASE("Simple Dijkstra") {
     vector<int> actual = dij.getPath(g, 1, 3);
     vector<int> expected = {1, 2, 3};
 
-    cout << dij.shortestDistance() << endl;
+    cout << "Distance: " << dij.shortestDistance() << endl;
 
     REQUIRE(actual == expected);
 }
@@ -119,7 +119,7 @@ TEST_CASE("No Path") {
     // vector<int> expected = {1, 2, 3};
 
     REQUIRE(actual == vector<int>());
-    REQUIRE(dij.shortestDistance() == std::numeric_limits<double>::infinity());
+    REQUIRE(dij.shortestDistance() == numeric_limits<double>::infinity());
 }
 
 TEST_CASE("Dijkstra Airport Nearby") {
@@ -148,11 +148,11 @@ TEST_CASE("Dijkstra Airport Nearby") {
         if (i == -1) continue;
         cout << g.getName(i) << " ---> ";
     }
-    std::cout << "arrived to " << g.getName(ohare) << std::endl;
+    cout << "arrived to " << g.getName(ohare) << endl;
 
     vector<int> expected = {4049, 3830};
 
-    cout << dij.shortestDistance() << endl;
+    cout << "Distance: " << dij.shortestDistance() << endl;
 
     REQUIRE(vec1 == expected);
 
@@ -192,13 +192,13 @@ TEST_CASE("Dijkstra Airport Complex") {
         if (i == -1) continue;
         cout << g.getName(i) << " ---> ";
     }
-    std::cout << "arrived to " << g.getName(hgk) << std::endl;
+    cout << "arrived to " << g.getName(hgk) << endl;
 
     REQUIRE(alt_path > shortest);
 
     vector<int> expected = {4049, 3830, 3077};
 
-    cout << dij.shortestDistance() << endl;
+    cout << "Distance: " << dij.shortestDistance() << endl;
 
     REQUIRE(dij.shortestDistance() == shortest);
 
@@ -224,9 +224,10 @@ TEST_CASE("Alluitsup Paa, Greenland to Nanyuki, Kenya") {
         if (i == -1) continue;
         cout << g.getName(i) << " ---> ";
     }
-    std::cout << "arrived to " << g.getName(target) << std::endl;
 
-    std::cout << distance << std::endl;
+    cout << "arrived to " << g.getName(target) << endl;
+
+    cout << "Distance: " << distance << endl;
 
 
     REQUIRE(distance < 13000);
@@ -242,7 +243,7 @@ TEST_CASE("Chicago,Illinois to Windohek,Namibia") {
     int source = 3830; // IL, USA
 
     // subset of possible airport connections
-    std::vector<int> sub = {3830, 1382, 4049, 1002, 8336, 
+    vector<int> sub = {3830, 1382, 4049, 1002, 8336, 
                             1003, 4105, 1004, 1059, 5662, 5663, 
                             5664, 13762, 963, 966, 1013, 5613, 
                             799, 1074, 248, 3797, 3576}; // Set Airports
@@ -256,10 +257,10 @@ TEST_CASE("Chicago,Illinois to Windohek,Namibia") {
         if (i == -1) continue;
         cout << g.getName(i) << " ---> ";
     }
-    std::cout << "arrived to " << g.getName(target) << std::endl;
+    cout << "arrived to " << g.getName(target) << endl;
 
-    std::vector<int> expected = {3830, 3797, 248, 4105};
-    std::cout << distance << std::endl;
+    vector<int> expected = {3830, 3797, 248, 4105};
+    cout << "Distance: " << distance << endl;
 
     REQUIRE(path == expected);
     cout << "------------------------------------------------" << endl;

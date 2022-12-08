@@ -1,4 +1,4 @@
-# WBLR
+# WBLR Airport Algorithms
 
 ## Developers: Tyler Hecht, Will Otani, Swaroop Thammineni, Rohan Gudipaty
 
@@ -52,7 +52,6 @@ In this project we designed multiple algorithms and visualization tools implemen
 The `readdat` functions read in data to construct a `Graph` network of airports. The algorithm classes utilize instances of `Graph` to operate on with respective traversals.
 
 
-
 ## Set Up
 Clone the repository:
 ```
@@ -68,12 +67,12 @@ cmake ..
 
 Create and run executable:
 ```
-make
+make main
 ./main
 ```
 
 Testing:
-* For specic test follow ./test with specific test 
+* For specifics test follow ./test with the test name
 ```
 make test
 ./test
