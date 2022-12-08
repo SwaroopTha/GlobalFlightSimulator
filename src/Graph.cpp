@@ -5,10 +5,7 @@
 using namespace std;
 
 double Graph::GraphNode::_connectionDistance(int id) const {
-    if (_connectedTo(id)) {
-        return connections_.at(id);
-    }
-    return std::numeric_limits<double>::infinity();
+    return _connectedTo(id) ? connections_.at(id) : numeric_limits<double>::infinity();
 }
 
 void Graph::addNode(int id, string name, double latitude, double longitude) {
@@ -17,10 +14,7 @@ void Graph::addNode(int id, string name, double latitude, double longitude) {
 }
 
 void Graph::removeNode(int id) {
-    if (!inGraph(id)) {
-        return;
-    }
-    GraphNode toRemove = nodes_[id];
+    GraphNode toRemove = nodes_.at(id);
     numConnections_ -= toRemove.connections_.size();
     nodes_.erase(id);
     for (auto it = nodes_.begin(); it != nodes_.end(); it++) {
@@ -32,28 +26,14 @@ void Graph::removeNode(int id) {
     }
 }
 
-bool Graph::connect(int id1, int id2) {
-    if (nodes_.find(id1) == nodes_.end() || nodes_.find(id2) == nodes_.end()) {
-        //if either node doesn't exist
-        return false;
-    }
+void Graph::connect(int id1, int id2) {
     nodes_[id1].connections_[id2] = _distance(id1, id2);
     numConnections_++;
-    return true;
 }
 
-bool Graph::disconnect(int id1, int id2) {
-    if (nodes_.find(id1) == nodes_.end() || nodes_.find(id2) == nodes_.end()) {
-        //if either node doesn't exist
-        return false;
-    }
-    if (nodes_[id1].connections_.find(id2) != nodes_[id1].connections_.end()) {
-        nodes_[id1].connections_.erase(id2);
-        numConnections_--;
-        return true;
-    } else {
-        return false;
-    }
+void Graph::disconnect(int id1, int id2) {
+    nodes_[id1].connections_.erase(id2);
+    numConnections_--;
 }
 
 vector<int> Graph::getIDs() const {
@@ -65,9 +45,6 @@ vector<int> Graph::getIDs() const {
 }
 
 vector<int> Graph::getConnections(int id) const {
-    if (!inGraph(id)) {
-        return vector<int>();
-    }
     vector<int> ids;
     GraphNode gn = nodes_.at(id);
     for (auto it = gn.connections_.begin(); it != gn.connections_.end(); it++) {
@@ -77,16 +54,10 @@ vector<int> Graph::getConnections(int id) const {
 }
 
 bool Graph::connectedTo(int id1, int id2) const {
-    if (nodes_.find(id1) != nodes_.end() && nodes_.find(id2) != nodes_.end()) {
-        return nodes_.at(id1)._connectedTo(id2);
-    }
-    return false;
+    return nodes_.at(id1)._connectedTo(id2);
 }
 
 double Graph::_distance(int id1, int id2) const {
-    if (!inGraph(id1) || !inGraph(id2)) {
-        return numeric_limits<double>::infinity();
-    }
     GraphNode a = nodes_.at(id1);
     GraphNode b = nodes_.at(id2);
     if (spherical_) {

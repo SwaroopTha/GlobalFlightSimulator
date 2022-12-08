@@ -82,25 +82,24 @@ public:
     /**
     * @brief Removes a node and all its connections
     *
-    * @param id The ID to remove
+    * @param id The airport ID to remove (must be in graph)
     */
     void removeNode(int id);
     /**
      * @brief Makes a connection from one airport to another (does not go both ways)
      * 
-     * @param id1 The ID of the starting airport
-     * @param id2 The ID of the ending airport
-     * @return bool Whether a successful connection was made (i.e. both airports exist)
+     * @param id1 The ID of the starting airport (must be in graph)
+     * @param id2 The ID of the ending airport (must be in graph)
      */
-    bool connect(int id1, int id2);
+    void connect(int id1, int id2);
     /**
      * @brief Removes a connection from one airport to another (does not go both ways)
+     * The airports must be connected in the first place
      * 
-     * @param id1 The ID of the starting airport
-     * @param id2 The ID of the ending airport
-     * @return bool Whether a successful disconnection was made (i.e. both such a connection existed)
+     * @param id1 The ID of the starting airport (must be in graph)
+     * @param id2 The ID of the ending airport (must be in graph)
      */
-    bool disconnect(int id1, int id2);
+    void disconnect(int id1, int id2);
     /**
      * @brief Gets the number of airports in the graph
      * 
@@ -122,8 +121,8 @@ public:
     /**
     * @brief Determines if the the first airport is connected to the second
     *
-    * @param id1 The first airport's ID
-    * @param id2 The second airport's ID
+    * @param id1 The first airport's ID (must be in graph)
+    * @param id2 The second airport's ID (must be in graph)
     * @return bool Whether there is a connection
     */
     bool connectedTo(int id1, int id2) const;
@@ -132,8 +131,8 @@ public:
     * (directional, from the first to the second)
     * If not connected returns infinity
     *
-    * @param id1 The first airport's ID
-    * @param id2 The second airport's ID
+    * @param id1 The first airport's ID (must be in graph)
+    * @param id2 The second airport's ID (must be in graph)
     * @return double The weight
     */
     double getDistance(int id1, int id2) const { 

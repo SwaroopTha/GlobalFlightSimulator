@@ -98,7 +98,7 @@ TEST_CASE("connecting/disconnecting nodes") {
     REQUIRE(!g.connectedTo(24, 12));
     
     // connect 12 to 24
-    REQUIRE(g.connect(12, 24));
+    g.connect(12, 24);
 
     REQUIRE(g.connections() == 1);
     REQUIRE(g.getConnections(12) == vector<int>(1,24));
@@ -109,7 +109,7 @@ TEST_CASE("connecting/disconnecting nodes") {
     REQUIRE(!g.connectedTo(24, 12));
 
     // connected 24 to 12
-    REQUIRE(g.connect(24, 12));
+    g.connect(24, 12);
 
     REQUIRE(g.connections() == 2);
     REQUIRE(g.getConnections(12) == vector<int>(1,24));
@@ -120,11 +120,8 @@ TEST_CASE("connecting/disconnecting nodes") {
     REQUIRE(g.connectedTo(12, 24));
     REQUIRE(g.connectedTo(24, 12));
 
-    REQUIRE(!g.connect(12, 25));
-    REQUIRE(!g.disconnect(12, 25));
-
     // disconnect 24 to 12
-    REQUIRE(g.disconnect(24, 12));
+    g.disconnect(24, 12);
 
     REQUIRE(g.connections() == 1);
     REQUIRE(g.getConnections(12) == vector<int>(1,24));
@@ -134,9 +131,8 @@ TEST_CASE("connecting/disconnecting nodes") {
     REQUIRE(g.connectedTo(12, 24));
     REQUIRE(!g.connectedTo(24, 12));
 
-    REQUIRE(!g.disconnect(24, 12));
     // disconnect 12 to 24
-    REQUIRE(g.disconnect(12, 24));
+    g.disconnect(12, 24);
 
     REQUIRE(g.connections() == 0);
     REQUIRE(g.getConnections(12).size() == 0);
@@ -159,7 +155,7 @@ TEST_CASE("complex removing nodes") {
 
     REQUIRE(g.connectedTo(1, 3));
     // disconnect 1 to 3
-    REQUIRE(g.disconnect(1, 3));
+    g.disconnect(1, 3);
     REQUIRE(!g.connectedTo(1, 3));
     REQUIRE(g.connectedTo(3, 1));
 
