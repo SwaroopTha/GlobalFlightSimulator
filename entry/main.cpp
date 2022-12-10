@@ -3,22 +3,30 @@
 #include "Algorithms/dijkstra.h"
 #include "Algorithms/bfs.h"
 #include "Algorithms/bet_cent.h"
-#include "Algorithms/makeimage.h"
+// #include "Algorithms/makeimage.h"
 
 using namespace std;
-using cs225::PNG;
+//using cs225::PNG;
 
 int main() {
     // example usage
-    Graph g = readData("../Data/airports.dat",  "../Data/routes.dat");
+    // Graph g = readData("../Data/airports.dat",  "../Data/routes.dat");
 
-    cout << g.size() << " airports and " << g.connections() << " connections" << endl;
+    // cout << g.size() << " airports and " << g.connections() << " connections" << endl;
 
-    int source = 3319;
-    int target = 5554;
-    PNG worldMap;
-    worldMap.readFromFile("../Data/map.png");
+    // int source = 3319;
+    // int target = 5554;
+    // PNG worldMap;
+    // worldMap.readFromFile("../Data/map.png");
 
-    cs225::PNG output = plotDijkstra(worldMap, g, source, target);
-    output.writeToFile("output.png");
+    // cs225::PNG output = plotDijkstra(worldMap, g, source, target);
+    // output.writeToFile("output.png");
+
+    cout << "[] 0%" << endl;
+
+    cout << "[======================================================================] 100.00%" << endl;
+
+    cout << "[                                                                      ] 0.00%" << endl;
+
+    return 0;
 }

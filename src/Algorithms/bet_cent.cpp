@@ -49,7 +49,7 @@ map<int, int> BetweenessCentrality::getAllScores(const Graph& graph, bool showPr
     cout << "Total Paths: " << total_paths << endl;
 
     cout << "Betweeness Scores:" << endl;
-    
+
     for (auto i : airport_scores_) {
         cout << "Airport " << i.first << ": " << i.second << endl;
     }
@@ -61,10 +61,14 @@ map<int, int> BetweenessCentrality::getAllScores(const Graph& graph, bool showPr
 
 map<int, int> BetweenessCentrality::getProbabilisticScores(const Graph& graph, int sampleSize, bool skipNonPaths, bool showProgress) {
     vector<int> airport_ids_ = graph.getIDs();
+
     int sampled = 0;
+
     default_random_engine generator;
     uniform_int_distribution<int> distribution(0, graph.size() - 1);
+
     ProgressBar pb;
+
     while (sampled < sampleSize) {
         if (showProgress) {
             pb.setProgress((double) sampled / sampleSize);
@@ -89,10 +93,22 @@ map<int, int> BetweenessCentrality::getProbabilisticScores(const Graph& graph, i
             sampled++;
         }
     }
+
     if (showProgress) {
         pb.setProgress(1);
         cout << pb << endl;
     }
+
+    cout << "Total Paths: " << sampled << endl;
+
+    cout << "Betweeness Scores:" << endl;
+
+    for (auto i : airport_scores_) {
+        cout << "Airport " << i.first << ": " << i.second << endl;
+    }
+
+    cout << "-------------" << endl;
+
     return airport_scores_;
 }
 

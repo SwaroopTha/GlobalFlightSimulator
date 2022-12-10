@@ -33,7 +33,7 @@ TEST_CASE("Betweenness Centrality Dijkstra Simple") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g, false);
+    map<int, int> test = betcent.getAllScores(g);
 
     REQUIRE(test[1] == 0);
     REQUIRE(test[2] == 2);
@@ -59,7 +59,7 @@ TEST_CASE("Min Frequency Simple") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g, false);
+    map<int, int> test = betcent.getAllScores(g);
 
     // Min Frequency = 2
     set<int> airport_freq_test1 = betcent.getAirportsWithMinFrequency(2);
@@ -128,7 +128,7 @@ TEST_CASE("Betweeness Centrality Dijkstra Complex") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g, false);
+    map<int, int> test = betcent.getAllScores(g);
 
     REQUIRE(test[1] == 0);
     REQUIRE(test[2] == 12);
@@ -172,7 +172,7 @@ TEST_CASE("Min Frequency Complex") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g, false);
+    map<int, int> test = betcent.getAllScores(g);
 
     set<int> hubs = betcent.getAirportsWithMinFrequency(12);
 
@@ -222,7 +222,7 @@ TEST_CASE("Betweeness Centrality Dijkstra Unconnected") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g, false);
+    map<int, int> test = betcent.getAllScores(g);
 
     REQUIRE(test[1] == 0);
     REQUIRE(test[2] == 2);
@@ -258,7 +258,7 @@ TEST_CASE("Min Frequency Unconnected") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g, false);
+    map<int, int> test = betcent.getAllScores(g);
 
     set<int> hubs = betcent.getAirportsWithMinFrequency(2);
 
@@ -271,4 +271,19 @@ TEST_CASE("Min Frequency Unconnected") {
     REQUIRE(hubs.find(7) == hubs.end());
 }
 
-TEST_CASE()
+TEST_CASE("Betweeness Centrality Probabilistic") {
+
+    Graph g = readData("../Data/airports.dat",  "../Data/routes.dat");
+
+    cout << g.size() << " airports added" << endl;
+
+    BetweenessCentrality betcent;
+
+    map<int, int> probabilistic_map = betcent.getProbabilisticScores(g, 25);
+
+    set<int> probabilistic_set = betcent.getAirportsWithMinFrequency(2);
+
+    for (auto i : probabilistic_set) {
+        cout << i << endl;
+    }
+}
