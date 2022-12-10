@@ -3,6 +3,7 @@
 #include "Graph.h"
 #include "readdat.h"
 #include <cmath>
+#include <algorithm>
 
 using namespace std;
 
@@ -55,7 +56,9 @@ TEST_CASE("adding/removing/accessing nodes") {
     REQUIRE(g.connections() == 0);
     REQUIRE(g.size() == 2);
     vector<int> expected = {12, 24};
-    REQUIRE(g.getIDs() == expected);
+    vector<int> actual = g.getIDs();
+    sort(actual.begin(), actual.end());
+    REQUIRE(actual == expected);
     REQUIRE(g.getName(24) == "smth");
     REQUIRE(g.getLatitude(24) == 25);
     REQUIRE(g.getLongitude(24) == -35);

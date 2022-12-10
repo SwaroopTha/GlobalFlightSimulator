@@ -1,6 +1,7 @@
 #include "Graph.h"
 #include <cmath>
 #include <map>
+#include <algorithm>
 
 using namespace std;
 
@@ -9,7 +10,7 @@ double Graph::GraphNode::_connectionDistance(int id) const {
 }
 
 void Graph::addNode(int id, string name, double latitude, double longitude) {
-    GraphNode node = GraphNode(id, name, latitude, longitude);
+    GraphNode node = GraphNode(name, latitude, longitude);
     nodes_[id] = node;
 }
 
@@ -36,20 +37,22 @@ void Graph::disconnect(int id1, int id2) {
     numConnections_--;
 }
 
-vector<int> Graph::getIDs() const {
+vector<int> Graph::getIDs(bool sorted) const {
     vector<int> ids;
     for (auto it = nodes_.begin(); it != nodes_.end(); it++) {
         ids.push_back(it->first);
     }
+    if (sorted) { sort(ids.begin(), ids.end()); }
     return ids;
 }
 
-vector<int> Graph::getConnections(int id) const {
+vector<int> Graph::getConnections(int id, bool sorted) const {
     vector<int> ids;
     GraphNode gn = nodes_.at(id);
     for (auto it = gn.connections_.begin(); it != gn.connections_.end(); it++) {
         ids.push_back(it->first);
     }
+    if (sorted) { sort(ids.begin(), ids.end()); }
     return ids;
 }
 

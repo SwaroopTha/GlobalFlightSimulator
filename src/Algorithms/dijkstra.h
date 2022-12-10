@@ -2,15 +2,13 @@
 
 #include "Graph.h"
 
-
+#include <map>
 #include <vector>
 #include <utility>
 #include <algorithm>
 #include <string>
 
 #include "readdat.h"
-
-#include <fstream>
 
 using namespace std;
 
@@ -46,7 +44,7 @@ class Dijkstras {
         /**
         * @brief maps source airport connections to its distance
         */
-        map<int, double> ports_;
+        unordered_map<int, double> ports_;
         /**
         * @brief maps airport's previous airport
         */
