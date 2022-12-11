@@ -28,9 +28,10 @@ class BetweenessCentrality {
         *
         * @param graph The graph on which to apply betweenness centrality
         * @param showProgress Whether to show a progress bar
+        * @param displayResults Whether to print number of airports added and betweeness scores 
         * @return map<int, int> A map of Airport IDs to betweenness scores
         */
-        map<int, int> getAllScores(const Graph& graph, bool showProgress = true);
+        map<int, int> getAllScores(const Graph& graph, bool showProgress = true, bool displayResults = true);
 
         /**
         * @brief Finds the airports with a min betweeness centrality score
@@ -50,9 +51,10 @@ class BetweenessCentrality {
         * @param sampleSize How many paths to sample from the graph
         * @param skipNonPaths Whether to skip pairs of points with no path
         * @param showProgress Whether to show a progress bar
+        * @param displayResults Whether to print number of airports added and betweeness scores 
         * @return map<int, int> A map of Airport IDs to betweenness scores
         */
-        map<int, int> getProbabilisticScores(const Graph& graph, int sampleSize, bool skipNonPaths = true, bool showProgress = true);
+        map<int, int> getProbabilisticScores(const Graph& graph, int sampleSize, bool skipNonPaths = true, bool showProgress = true, bool displayResults = true);
 
     private:
         vector<int> airport_ids_; // vector of all airport ids

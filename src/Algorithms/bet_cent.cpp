@@ -3,7 +3,7 @@
 
 using namespace std;
 
-map<int, int> BetweenessCentrality::getAllScores(const Graph& graph, bool showProgress) {
+map<int, int> BetweenessCentrality::getAllScores(const Graph& graph, bool showProgress, bool displayResults) {
     airport_ids_ = graph.getIDs(); 
 
     Dijkstras d;
@@ -46,20 +46,26 @@ map<int, int> BetweenessCentrality::getAllScores(const Graph& graph, bool showPr
         cout << pb << endl;
     }
 
-    cout << "Total Paths: " << total_paths << endl;
+    if (displayResults) {
 
-    cout << "Betweeness Scores:" << endl;
+        cout << "Total Paths: " << total_paths << endl;
 
-    for (auto i : airport_scores_) {
-        cout << "Airport " << i.first << ": " << i.second << endl;
+        cout << "Betweeness Scores:" << endl;
+
+        for (auto i : airport_scores_) {
+            cout << "Airport " << i.first << ": " << i.second << endl;
+        }
+
+        cout << "-------------" << endl;
+
     }
-
-    cout << "-------------" << endl;
 
     return airport_scores_;
 }
 
-map<int, int> BetweenessCentrality::getProbabilisticScores(const Graph& graph, int sampleSize, bool skipNonPaths, bool showProgress) {
+map<int, int> BetweenessCentrality::getProbabilisticScores(const Graph& graph, int sampleSize, bool skipNonPaths, 
+    bool showProgress, bool displayResults) {
+
     vector<int> airport_ids_ = graph.getIDs();
 
     int sampled = 0;
@@ -99,15 +105,19 @@ map<int, int> BetweenessCentrality::getProbabilisticScores(const Graph& graph, i
         cout << pb << endl;
     }
 
-    cout << "Total Paths: " << sampled << endl;
+    if (displayResults) {
 
-    cout << "Betweeness Scores:" << endl;
+        cout << "Number Samples: " << sampled  << " Airports Added: " << airport_scores_.size() << endl;
 
-    for (auto i : airport_scores_) {
-        cout << "Airport " << i.first << ": " << i.second << endl;
+        cout << "Betweeness Scores:" << endl;
+
+        for (auto i : airport_scores_) {
+            cout << "Airport " << i.first << ": " << i.second << endl;
+        }
+
+        cout << "-------------" << endl;
+
     }
-
-    cout << "-------------" << endl;
 
     return airport_scores_;
 }

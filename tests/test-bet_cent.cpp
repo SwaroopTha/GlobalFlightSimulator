@@ -33,7 +33,7 @@ TEST_CASE("Betweenness Centrality Dijkstra Simple") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g);
+    map<int, int> test = betcent.getAllScores(g, false, false);
 
     REQUIRE(test[1] == 0);
     REQUIRE(test[2] == 2);
@@ -59,7 +59,7 @@ TEST_CASE("Min Frequency Simple") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g);
+    map<int, int> test = betcent.getAllScores(g, false, false);
 
     // Min Frequency = 2
     set<int> airport_freq_test1 = betcent.getAirportsWithMinFrequency(2);
@@ -128,7 +128,7 @@ TEST_CASE("Betweeness Centrality Dijkstra Complex") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g);
+    map<int, int> test = betcent.getAllScores(g, false, false);
 
     REQUIRE(test[1] == 0);
     REQUIRE(test[2] == 12);
@@ -172,7 +172,7 @@ TEST_CASE("Min Frequency Complex") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g);
+    map<int, int> test = betcent.getAllScores(g, false, false);
 
     set<int> hubs = betcent.getAirportsWithMinFrequency(12);
 
@@ -222,7 +222,7 @@ TEST_CASE("Betweeness Centrality Dijkstra Unconnected") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g);
+    map<int, int> test = betcent.getAllScores(g, false, false);
 
     REQUIRE(test[1] == 0);
     REQUIRE(test[2] == 2);
@@ -258,7 +258,7 @@ TEST_CASE("Min Frequency Unconnected") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> test = betcent.getAllScores(g);
+    map<int, int> test = betcent.getAllScores(g, false, false);
 
     set<int> hubs = betcent.getAirportsWithMinFrequency(2);
 
@@ -273,13 +273,50 @@ TEST_CASE("Min Frequency Unconnected") {
 
 TEST_CASE("Betweeness Centrality Probabilistic") {
 
-    Graph g = readData("../Data/airports.dat",  "../Data/routes.dat");
+    cout << "Starting Probabilistic Test Case..." << endl;
+
+    vector<int> ids;
+
+    for (int i = 0; i <= 100; i += 1) {
+        ids.push_back(i);
+    }
+
+    Graph g = readData("../Data/airports.dat",  "../Data/routes.dat", ids);
 
     cout << g.size() << " airports added" << endl;
 
     BetweenessCentrality betcent;
 
-    map<int, int> probabilistic_map = betcent.getProbabilisticScores(g, 25);
+    map<int, int> probabilistic_map = betcent.getProbabilisticScores(g, 35, true, true, true);
+
+    REQUIRE(probabilistic_map.size() <= 35);
+
+    set<int> probabilistic_set = betcent.getAirportsWithMinFrequency(2);
+
+    for (auto i : probabilistic_set) {
+        cout << i << endl;
+    }
+}
+
+TEST_CASE ("Betweeness Centrality Probabilistic (Skip non-Paths False) ") {
+
+    cout << "Starting Probabilistic Test Case (Skip non-Paths False)..." << endl;
+
+    vector<int> ids;
+
+    for (int i = 0; i <= 100; i += 1) {
+        ids.push_back(i);
+    }
+
+    Graph g = readData("../Data/airports.dat",  "../Data/routes.dat", ids);
+
+    cout << g.size() << " airports added" << endl;
+
+    BetweenessCentrality betcent;
+
+    map<int, int> probabilistic_map = betcent.getProbabilisticScores(g, 35, false, true, true);
+
+    REQUIRE(probabilistic_map.size() <= 35);
 
     set<int> probabilistic_set = betcent.getAirportsWithMinFrequency(2);
 
