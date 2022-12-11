@@ -28,9 +28,11 @@ TEST_CASE("graph constructor") {
     REQUIRE(g.getIDs() == vector<int>());
 
     Graph g2(false);
-    REQUIRE(g2.connections() == 0);
-    REQUIRE(g2.size() == 0);
     REQUIRE(g2.getIDs() == vector<int>());
+
+    REQUIRE(!g2.getSpherical());
+    g2.setSpherical(true);
+    REQUIRE(g2.getSpherical());
 }
 
 TEST_CASE("adding/removing/accessing nodes") {
