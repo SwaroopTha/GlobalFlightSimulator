@@ -49,6 +49,8 @@ bool validLongitude(double longitude);
 /**
 * @brief Reads in data to a Graph
 * If a vector of IDs is given, only those IDs will be used
+* This function assumes that the data fields are formatted like on https://openflights.org/data.html
+* Where the vertex file is formatted like airports.dat, and the edges, like routes.dat
 *
 * @param vertexFile A file of the graph vertices
 * @param edgeFile A file of the graph edges

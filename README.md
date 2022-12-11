@@ -49,7 +49,7 @@ In this project we designed multiple algorithms and visualization tools implemen
 
 ## File Interaction
 
-The `readdat` functions read in data to construct a `Graph` network of airports. The algorithm classes utilize instances of `Graph` to operate on with respective traversals.
+The `readdat` functions read in data to construct a `Graph` network of airports. The algorithm classes utilize instances of `Graph` to operate on with respective traversals. The `makeimage` functions use the other algorithms and to visualize them on a map.
 
 
 ## Set Up
