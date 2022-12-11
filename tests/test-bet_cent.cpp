@@ -277,7 +277,7 @@ TEST_CASE("Betweeness Centrality Probabilistic") {
 
     vector<int> ids;
 
-    for (int i = 0; i <= 100; i += 1) {
+    for (int i = 0; i <= 1000; i += 1) {
         ids.push_back(i);
     }
 
@@ -289,13 +289,9 @@ TEST_CASE("Betweeness Centrality Probabilistic") {
 
     map<int, int> probabilistic_map = betcent.getProbabilisticScores(g, 35, true, true, true);
 
-    REQUIRE(probabilistic_map.size() <= 35);
+    REQUIRE((int)probabilistic_map.size() <= g.size());
 
     set<int> probabilistic_set = betcent.getAirportsWithMinFrequency(2);
-
-    for (auto i : probabilistic_set) {
-        cout << i << endl;
-    }
 }
 
 TEST_CASE ("Betweeness Centrality Probabilistic (Skip non-Paths False) ") {
@@ -304,7 +300,7 @@ TEST_CASE ("Betweeness Centrality Probabilistic (Skip non-Paths False) ") {
 
     vector<int> ids;
 
-    for (int i = 0; i <= 100; i += 1) {
+    for (int i = 0; i <= 1000; i += 1) {
         ids.push_back(i);
     }
 
@@ -316,11 +312,7 @@ TEST_CASE ("Betweeness Centrality Probabilistic (Skip non-Paths False) ") {
 
     map<int, int> probabilistic_map = betcent.getProbabilisticScores(g, 35, false, true, true);
 
-    REQUIRE(probabilistic_map.size() <= 35);
+    REQUIRE((int)probabilistic_map.size() <= g.size());
 
     set<int> probabilistic_set = betcent.getAirportsWithMinFrequency(2);
-
-    for (auto i : probabilistic_set) {
-        cout << i << endl;
-    }
 }
