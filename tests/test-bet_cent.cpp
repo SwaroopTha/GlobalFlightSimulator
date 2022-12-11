@@ -287,7 +287,7 @@ TEST_CASE("Betweeness Centrality Probabilistic") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> probabilistic_map = betcent.getProbabilisticScores(g, 35, true, true, true);
+    map<int, int> probabilistic_map = betcent.getProbabilisticScores(g, 35, true, true, false);
 
     REQUIRE((int)probabilistic_map.size() <= g.size());
 
@@ -310,7 +310,7 @@ TEST_CASE ("Betweeness Centrality Probabilistic (Skip non-Paths False) ") {
 
     BetweenessCentrality betcent;
 
-    map<int, int> probabilistic_map = betcent.getProbabilisticScores(g, 35, false, true, true);
+    map<int, int> probabilistic_map = betcent.getProbabilisticScores(g, 35, false, true, false);
 
     REQUIRE((int)probabilistic_map.size() <= g.size());
 
