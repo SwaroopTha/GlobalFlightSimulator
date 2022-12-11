@@ -70,7 +70,7 @@ cs225::PNG plotBFS(cs225::PNG worldMap, Graph g, int start, double pointSize = 6
 * @param pointPixel The pixel to be used to fill the points (red by default)
 * @return PNG The map png
 */
-cs225::PNG plotBetweenness(cs225::PNG worldMap, Graph g, bool showProgress = true, int sampleSize = 0, bool skipNoPaths = true, double maxRadius = 10,
+cs225::PNG plotBetweenness(cs225::PNG worldMap, Graph g, bool showProgress = true, int sampleSize = 0, bool skipNonPaths = true, double maxRadius = 10,
     cs225::HSLAPixel pointPixel = cs225::HSLAPixel(0, 1, 0.5, 1));
 
 /**

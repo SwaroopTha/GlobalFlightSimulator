@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <utility>
 #include <iostream>
@@ -16,24 +16,22 @@ private:
     * @brief Stores the data of an airport and its connections
     */
     struct GraphNode {
-        int id_; // The airport's unique identifying number
         std::string name_; // The airport's name
         double latitude_, longitude_; // The airport's longitude and latitude
 
-        std::map<int, double> connections_; // A map between the connection's ID and distance
+        std::unordered_map<int, double> connections_; // A map between the connection's ID and distance
         /**
         * @brief Construct a GraphNode with default parameters
         */
-        GraphNode() : id_(0), name_(""), latitude_(0), longitude_(0) {}
+        GraphNode() : name_(""), latitude_(0), longitude_(0) {}
         /**
          * @brief Constructs a new GraphNode object with the given specifications
          * 
-         * @param id The airport's ID
          * @param name The name of the airport
          * @param lat The latitude of the airport
          * @param long The longitude of the airport
          */
-        GraphNode(int id, std::string name, double lat, double lon) : id_(id),
+        GraphNode(std::string name, double lat, double lon) :
             name_(name), latitude_(lat), longitude_(lon) {}
         /**
         * @brief Determines if this GraphNode is connected to another.
@@ -115,9 +113,10 @@ public:
     /**
      * @brief Gets the IDs of all airports that were added
      * 
+     * @param sorted Whether to sort the IDs
      * @return vector<int> A vector contains all airport IDs
      */
-    std::vector<int> getIDs() const; 
+    std::vector<int> getIDs(bool sorted = true) const; 
     /**
     * @brief Determines if the the first airport is connected to the second
     *
@@ -144,9 +143,10 @@ public:
     * @brief Gets all connections of an airport (one-way, starting from the given airport)
     *
     * @param id The airport's ID
-    *
+    * @param sorted Whether to sort the IDs
+    * @return vector<int> The list of connections
     */
-    std::vector<int> getConnections(int id) const;
+    std::vector<int> getConnections(int id, bool sorted = true) const;
 
     /**
     * @brief: Gets the name of an airport from its ID
@@ -181,7 +181,7 @@ public:
 private:
     bool spherical_; // Whether the distance calculation should be done on a sphere or 2D plane
     int numConnections_; // Stores the number of connections made in the grap
-    std::map<int, GraphNode> nodes_; // Maps each airport's ID to its GraphNode
+    std::unordered_map<int, GraphNode> nodes_; // Maps each airport's ID to its GraphNode
     /**
      * @brief Calculates the great circle distance between two airports using the haversine formula
      * This technically assumes the Earth is a sphere but is easier to calculate

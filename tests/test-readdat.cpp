@@ -2,6 +2,7 @@
 
 #include "readdat.h"
 #include "Graph.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -95,7 +96,9 @@ TEST_CASE("readData with ids") {
     Graph g = readData("../Data/airports.dat",  "../Data/routes.dat", ids);
     REQUIRE(g.size() == 4);
     REQUIRE(g.connections() == 12); // All these airports are connected to each other, so 3 * 4 = 12
-    REQUIRE(g.getIDs() == ids);
+    vector<int> actual = g.getIDs();
+    sort(actual.begin(), actual.end());
+    REQUIRE(actual == ids);
 }
 
 TEST_CASE("sampleData") {
