@@ -80,14 +80,20 @@ map<int, int> BetweenessCentrality::getProbabilisticScores(const Graph& graph, i
             pb.setProgress((double) sampled / sampleSize);
             cout << pb;
         }
+
         int id1 = airport_ids_[distribution(generator)];
         int id2 = airport_ids_[distribution(generator)];
-        while (id1 == id2) {
+
+        while (id1 == id2 || airport_scores_.find(id2) != airport_scores_.end())
             id2 = airport_ids_[distribution(generator)];
-        }
+
         Dijkstras d;
         vector<int> shortest_path = d.getPath(graph, id1, id2);
-        if (shortest_path.size() > 0) {
+        if (shortest_path.size() == 0/* && skipNonPaths == false*/) {
+            if (airport_scores_.find(id1) == airport_scores_.end()) airport_scores_[id1] = 0;
+            if (airport_scores_.find(id2) == airport_scores_.end()) airport_scores_[id2] = 0;
+        }
+        else if (shortest_path.size() > 0) {
             for (size_t i = 1; i < shortest_path.size() - 1; i++) {
                 int current_airport = shortest_path[i];
                 if (airport_scores_.find(current_airport) != airport_scores_.end()) {
