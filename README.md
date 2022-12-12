@@ -46,6 +46,7 @@ In this project we designed multiple algorithms and visualization tools implemen
 * CMakeLists.txt : CMake configuration
 * .gitignore : The files that GitHub should ignore
 * README.md : What you're reading right now!
+* results.md : A report explaining our goals and algorithms
 
 ## File Interaction
 
