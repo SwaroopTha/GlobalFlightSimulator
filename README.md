@@ -16,7 +16,7 @@ Video: https://www.youtube.com/watch?v=ZVbzeZWpgCo
     * map.png : world map basis
     * routes.dat : routes info
 * entry
-    * main.cpp
+    * main.cpp : Where you can try out the algorithms yourself
 * lib : cs225 color space
 * src
     * Algorithms
