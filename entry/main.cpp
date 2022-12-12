@@ -20,6 +20,9 @@ int main() {
     worldMap.readFromFile("../Data/map.png");
 
     cs225::PNG output = plotDijkstra(worldMap, g, source, target, 8.5, 6, HSLAPixel(100, 0.5, 0.5), HSLAPixel(300, 0.7, 0.3));
-    output.writeToFile("output.png");
-    return 0;
+    output.writeToFile("../entry/dij_example.png");
+
+    cs225::PNG bfs = plotBFS(worldMap, g, source);
+    bfs.writeToFile("../entry/bfs_example.png");
+
 }
