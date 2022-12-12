@@ -37,6 +37,9 @@ Breadth-First Search is an algorithm that traverses nodes at each level before i
 
 Similar to Dijkstra’s Algorithm, BFS was contained in class `BFS`. The function that used BFS’s implementation was `vector<int> traversalOfBFS(const Graph& g, int startID)`, which took in a graph of the airport networks, and a starting airport ID. As a result, the output is a vector of all ids visited from the airport in the order that they are visited. The pseudocode that was used to generate this function was adapted from CS225 lecture notes. The use of this function allows one to see all possible destinations from a given airport.
 
+<img width="372" alt="Screen Shot 2022-12-12 at 3 46 51 PM" src="https://user-images.githubusercontent.com/71199424/207161622-7fd29f51-6151-4eb1-8089-dc64e02ecb6c.png">
+
+
 ## Betweenness Centrality <br>
 
 Given the airport data structured as a weighted and directed graph, The Betweenness Centrality algorithm was able to detect which airports had a higher betweenness centrality score, or in other words had the most connections. For every pair of airports A and B, this algorithm took the shortest path between them and counted the number of times an airport that is neither A nor B appeared in the path, and a higher count meant that an airport was considered a “hub”. We outputted the results from the betweenness centrality algorithm in an std::map, where the airport ID’s represented the keys and the scores represented the values. A visual representation with size of dots representing airports proportional to their betweenness scores is shown below.
