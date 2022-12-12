@@ -62,6 +62,7 @@ The makeimage functions are used to visualize the graph and its algorithms on a 
 
 To draw the lines, Bresenham's line algorithm with the extension to support all slopes was used. The color of the points and lines, was well as the radius and thickness, respectively, can be specified. For example, here is a customized Dijkstra’s algorithm output:
 
+<img width="431" alt="Screen Shot 2022-12-12 at 3 48 57 PM" src="https://user-images.githubusercontent.com/71199424/207162334-bac2227b-0ffc-4f61-b3c5-3d9b85d058f5.png">
 
 One assumption that the functions make is that a line never wraps around the map projection. While this is not always true in real life, the routes dataset doesn’t specify whether the flight goes east or west, and so we assumed the direction that makes plotting simplest.
 
