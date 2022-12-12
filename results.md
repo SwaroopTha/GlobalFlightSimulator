@@ -58,6 +58,7 @@ Finally, we also included another function to create a set of airports with a mi
 
 The makeimage functions are used to visualize the graph and its algorithms on a map projection. Because latitude and longitude are given, a plate carrée projection is used, as shown in the maps above. There are four main functions: one to plot Dijkstra’s algorithm, breadth-first search, betweenness centrality, and the graph in general. The last one simply plots the airports on a graph, with or without edges. A plot with edges is shown below on a subset of the airports:
 
+<img width="364" alt="Screen Shot 2022-12-12 at 3 48 25 PM" src="https://user-images.githubusercontent.com/71199424/207162003-3fceff29-7fce-4308-a6d8-6672a95a6ede.png">
 
 To draw the lines, Bresenham's line algorithm with the extension to support all slopes was used. The color of the points and lines, was well as the radius and thickness, respectively, can be specified. For example, here is a customized Dijkstra’s algorithm output:
 
