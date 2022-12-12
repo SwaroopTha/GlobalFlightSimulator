@@ -26,7 +26,10 @@ For example, `vector<int> airports_` was created as a private variable to mainta
 
 To achieve the desired time and space complexity, `vector<int> getPath(const Graph& g, int source, int target)` made use of a modified version `std::priority_queue`, which essentially maintains a min heap through a passed in lambda function that serves as comparator. The implementation of this container adaptor was critical in achieving better run time.
 
-To test Dijkstra’s Algorithm, two types of test cases were created. One type of test case dealt with creating arbitrary nodes with arbitrary IDs and coordinates to test `Graph` functionality and `Dijkstras` functionality. The other type of test cases were ones that used the airport network, in which real airport IDs are used as inputs to generate the expected output. For example, as a sample, one of the test cases tests if the shortest path from Champaign, Illinois “CMI” to Chicago, Illinois “ORD”. The expected shortest path for this journey would be a single direct flight, in which we would expect a vector containing simply the integer IDs for CMI and ORD, exclusively in that order. In a more complex path, a test ran between an airport in Greenland to Kenya. The output is depicted is as the following: ![Dijkstra Example](/WBLR-CS-225-Project/entry/dij_example.png) <br>
+To test Dijkstra’s Algorithm, two types of test cases were created. One type of test case dealt with creating arbitrary nodes with arbitrary IDs and coordinates to test `Graph` functionality and `Dijkstras` functionality. The other type of test cases were ones that used the airport network, in which real airport IDs are used as inputs to generate the expected output. For example, as a sample, one of the test cases tests if the shortest path from Champaign, Illinois “CMI” to Chicago, Illinois “ORD”. The expected shortest path for this journey would be a single direct flight, in which we would expect a vector containing simply the integer IDs for CMI and ORD, exclusively in that order. In a more complex path, a test ran between an airport in Greenland to Kenya. The output is depicted is as the following: 
+
+<img width="252" alt="Screen Shot 2022-12-12 at 3 44 52 PM" src="https://user-images.githubusercontent.com/71199424/207161305-e9363553-1077-48c4-bf35-4f60925f3c4f.png">
+
 
 ## Breadth-First Search <br>
 
